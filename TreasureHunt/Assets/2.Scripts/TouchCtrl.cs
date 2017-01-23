@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Vuforia;
+using UnityEngine;
 using System.Collections;
 
 public class TouchCtrl : MonoBehaviour {
@@ -8,6 +9,9 @@ public class TouchCtrl : MonoBehaviour {
     void Update()
     {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		//HYUN: set Camera Auto-Focus mode
+		CameraDevice.Instance.SetFocusMode (CameraDevice.FocusMode.FOCUS_MODE_CONTINUOUSAUTO);
+
         //Debug.Log(ray);
         if (Physics.Raycast(ray, out hit))
         {

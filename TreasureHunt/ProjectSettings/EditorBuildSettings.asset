@@ -13,3 +13,5 @@ EditorBuildSettings:
     path: Assets/1.Scenes/Main.unity
   - enabled: 1
     path: Assets/1.Scenes/VuforiaTest.unity
+  - enabled: 1
+    path: Assets/1.Scenes/HunterCamera.unity

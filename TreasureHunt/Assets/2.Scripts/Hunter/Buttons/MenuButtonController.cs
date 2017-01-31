@@ -9,20 +9,16 @@ public class MenuButtonController : MonoBehaviour {
 
 	Button myButton;
 
-	// Use this for initialization
 	void Awake(){
 		myButton = GetComponent<Button> ();
-		myButton.onClick.AddListener (Gotit);
+		myButton.onClick.AddListener (GotIt);
 	}
+
 	void Start(){
 		target.SetActive (false);
 	}
-	// Update is called once per frame
-	void Update () {
 
-	}
-
-	void Gotit(){
+	void GotIt(){
 		if (flag) {
 			target.SetActive (false);
 			flag = false;
@@ -31,5 +27,5 @@ public class MenuButtonController : MonoBehaviour {
 			flag = true;
 		}
 	}
-}
 
+}

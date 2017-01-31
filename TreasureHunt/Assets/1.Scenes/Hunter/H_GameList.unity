@@ -215,7 +215,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1116101538}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcc25b90aa4f4204983b60709796f13d, type: 3}
+  m_Script: {fileID: 11500000, guid: 57cebb4bbad879d4f84b09175dc2789d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1258488079
@@ -629,7 +629,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11467434, guid: 99fee5e8a3e5754409e3468cdcc11609, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 11467434, guid: 99fee5e8a3e5754409e3468cdcc11609, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -641,11 +641,15 @@ Prefab:
       objectReference: {fileID: 1116101544}
     - target: {fileID: 11467434, guid: 99fee5e8a3e5754409e3468cdcc11609, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Click
+      value: moveSene
       objectReference: {fileID: 0}
     - target: {fileID: 11467434, guid: 99fee5e8a3e5754409e3468cdcc11609, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 11467434, guid: 99fee5e8a3e5754409e3468cdcc11609, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: H_Field
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 99fee5e8a3e5754409e3468cdcc11609, type: 2}

@@ -16,9 +16,6 @@ public class MakerSceneManager: MonoBehaviour {
 
 	public void uploadToCloud()
 	{
-		/*TODO(hyunSo): works on my laptop but not on my phone. Guess I should have change the camera methad as WebCam
-						also, add rating feature if possible
-		*/
 		camera = Camera.main;
 		if (camera == null) {
 			Debug.Log("Null Camera");
@@ -26,12 +23,21 @@ public class MakerSceneManager: MonoBehaviour {
 		}
 		width = camera.pixelWidth;
 		height = camera.pixelHeight;
-		Texture2D tex = new Texture2D((int)width, (int)height, TextureFormat.RGB24, false);
+		Texture2D tex = new Texture2D((int)width, (int)width, TextureFormat.RGB24, false);
 		RenderTexture rt = new RenderTexture((int)width, (int)height, 24);
 		camera.targetTexture = rt;
 		camera.Render();
 		RenderTexture.active = rt;
-		tex.ReadPixels(camera.pixelRect, 0, 0);
+
+		/* hyunSo
+		 * Note that Vuforia has a 2MB limit on the image to be uploaded.
+		 * The image is cropped here to ensure we don't exceed that limit.
+		 * TODO: know the size before upload for notification
+		 * 		 (user for restrict the size within the 2MB limit)
+		 */
+		Rect cropImageRect = new Rect (0, (height - width)/2, width, width);
+		tex.ReadPixels(cropImageRect, 0, 0);
+
 		camera.targetTexture = null;
 		RenderTexture.active = null;
 		GameObject.DestroyImmediate(rt);

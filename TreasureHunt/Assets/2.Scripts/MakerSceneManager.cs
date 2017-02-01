@@ -28,8 +28,13 @@ public class MakerSceneManager: MonoBehaviour {
 		camera.targetTexture = rt;
 		camera.Render();
 		RenderTexture.active = rt;
-		Rect temp = new Rect (0, (height - width)/2, width, width);
-		tex.ReadPixels(temp, 0, 0);
+
+		/* hyunSo
+		 * variable cropImageRect for cropping image boundary
+		 * for reducing image file size and decrease useless recognition features
+		 */
+		Rect cropImageRect = new Rect (0, (height - width)/2, width, width);
+		tex.ReadPixels(cropImageRect, 0, 0);
 
 		camera.targetTexture = null;
 		RenderTexture.active = null;

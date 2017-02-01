@@ -448,7 +448,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Cloud Recognition Test
+  m_Text: Hunter View
 --- !u!222 &1418121894
 CanvasRenderer:
   m_ObjectHideFlags: 0

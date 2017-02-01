@@ -3,11 +3,9 @@
  * reference: https://github.com/tompuz/magistrinis
  */
 
-
 using System;
 using UnityEngine;
 using Vuforia;
-using UnityEngine.UI;
 
 namespace Assets.Scripts.CloudRecognition
 {

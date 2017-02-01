@@ -16,6 +16,9 @@ public class MakerSceneManager: MonoBehaviour {
 
 	public void uploadToCloud()
 	{
+		/*TODO(hyunSo): works on my laptop but not on my phone. Guess I should have change the camera methad as WebCam
+						also, add rating feature if possible
+		*/
 		camera = Camera.main;
 		if (camera == null) {
 			Debug.Log("Null Camera");

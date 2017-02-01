@@ -35,9 +35,6 @@ public class CloudUpLoadManager : MonoBehaviour
 	}
 
 	/// Makes the post request to upload a new image target to the cloud database
-	/// <param name="texture">image target</param>
-	/// <param name="targetName">target name</param>
-	/// <returns></returns>
 	public static IEnumerator PostNewTarget(Texture2D texture, string targetName)
 	{
 		Debug.Log("<color=red>Posting target: " + targetName + "</color>");
@@ -53,11 +50,11 @@ public class CloudUpLoadManager : MonoBehaviour
 		tex.Apply();
 		byte[] image = tex.EncodeToPNG();
 
-		string metadataStr = "Vuforia metadata";//May use for key,name...in game
+		string metadataStr = "Vuforia metadata";
 		byte[] metadata = System.Text.ASCIIEncoding.ASCII.GetBytes(metadataStr);
 		PostNewTrackableRequest model = new PostNewTrackableRequest();
 		model.name = targetName;
-		model.width = 100.0f; // don't need same as width of texture
+		model.width = 100.0f;
 		model.image = System.Convert.ToBase64String(image);
 
 		model.application_metadata = System.Convert.ToBase64String(metadata);

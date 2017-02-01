@@ -26,12 +26,16 @@ public class MakerSceneManager: MonoBehaviour {
 		}
 		width = camera.pixelWidth;
 		height = camera.pixelHeight;
-		Texture2D tex = new Texture2D((int)width, (int)height, TextureFormat.RGB24, false);
+		Texture2D tex = new Texture2D((int)width, (int)width, TextureFormat.RGB24, false);
 		RenderTexture rt = new RenderTexture((int)width, (int)height, 24);
 		camera.targetTexture = rt;
 		camera.Render();
 		RenderTexture.active = rt;
-		tex.ReadPixels(camera.pixelRect, 0, 0);
+		Rect temp = new Rect (0, (height - width)/2, width, width);
+		tex.ReadPixels(temp, 0, 0);
+//		tex.ReadPixels(camera.pixelRect, 0, 0);
+
+
 		camera.targetTexture = null;
 		RenderTexture.active = null;
 		GameObject.DestroyImmediate(rt);

@@ -5,16 +5,17 @@ using UnityEditor;
 [CustomEditor(typeof(UserMovementController))]
 public class UserMovementControllerEditor : Editor 
 {
-	Vector3 newLocation;
+	string newLocation;
 
 	public override void OnInspectorGUI()
 	{
 		UserMovementController myCon = (UserMovementController) target;
 
-		newLocation = EditorGUILayout.Vector3Field("Position", newLocation);
+		newLocation = EditorGUILayout.TextField("Position", newLocation);
+		EditorGUILayout.LabelField ("Location", newLocation);
 		if(GUILayout.Button("Send Position"))
 		{
-			myCon.ToNewSpot(newLocation);
+			myCon.ToNewStringSpot(newLocation);
 		}
 	}
 			

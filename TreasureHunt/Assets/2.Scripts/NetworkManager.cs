@@ -5,105 +5,113 @@ using System.Collections.Generic;
 using SimpleJSON;
 
 public class NetworkManager : MonoBehaviour {
-    WebSocket ws;
-    public static NetworkManager instance = new NetworkManager();
-    public static List<string> m_Data = new List<string>();
-    public string WSAddress;
+	WebSocket ws;
+	public static NetworkManager instance = new NetworkManager();
+	public static List<string> m_Data = new List<string>();
+	public string WSAddress;
 
 
-    void Awake()
-    {
-        if (instance == null)
+	void Awake()
+	{
+		if (instance == null)
 
-            instance = this;
+			instance = this;
 
-        else if (instance != this)
+		else if (instance != this)
 
-            Destroy(gameObject);
+			Destroy(gameObject);
 
-    }
+	}
 
-    void Start()
-    {
+	void Start()
+	{
 
-        Connect();
-        StartCoroutine(RecieveData());
-        //초기 불러올 디비들
-    }
-    void OnApplicationQuit()
-    {
-        Disconnect();
-    }
+		Connect();
+		StartCoroutine(RecieveData());
+		//초기 불러올 디비들
 
-    void Connect()
-    {
-        ws = new WebSocket(WSAddress);
-        Debug.Log("ws : " + ws);
-        ws.OnOpen += (sender, e) =>
-        {
-            Debug.Log("WebSocket Open");
-        };
-        ws.OnMessage += (sender, e) =>
-        {
-            Debug.Log("데이터를 받았어요!");
-            Debug.Log("WebSocket Message Type: " + e.Type + ", Data: " + e.Data);
-            m_Data.Add(e.Data);
-        };
-        ws.OnError += (sender, e) =>
-        {
-        };
-        ws.OnClose += (sender, e) =>
-        {
-            Debug.Log("WebSocket Close");
-        };
+		TreasureSetupController.instance.GetGameTreasure ("ab");
+	}
+	void OnApplicationQuit()
+	{
+		Disconnect();
+	}
 
-        ws.Connect();
-    }
+	void Connect()
+	{
+		ws = new WebSocket(WSAddress, "echo-protocol");
+		Debug.Log("ws : " + ws);
+		ws.OnOpen += (sender, e) =>
+		{
+			Debug.Log("WebSocket Open");
+		};
+		ws.OnMessage += (sender, e) =>
+		{
+			Debug.Log("데이터를 받았어요!");
+			Debug.Log("WebSocket Message Type: " + e.Type + ", Data: " + e.Data);
+			m_Data.Add(e.Data);
+		};
+		ws.OnError += (sender, e) =>
+		{
+		};
+		ws.OnClose += (sender, e) =>
+		{
+			Debug.Log("WebSocket Close");
+		};
 
-    void Disconnect()
-    {
-        Debug.Log("disconnect");
-        ws.Close();
-        ws = null;
-    }
+		ws.Connect();
+	}
 
-    public void SendData(string message)
-    {
-        Debug.Log(message);
-        Debug.Log("데이터 보냈어요!");
-        ws.Send(message);
-      
-    }
+	void Disconnect()
+	{
+		Debug.Log("disconnect");
+		ws.Close();
+		ws = null;
+	}
 
-    IEnumerator RecieveData()
-    {
-        while (m_Data != null)
-        {
-            
-            string data = "";
-            foreach (string info in m_Data)
-            {
-                
-                if (info != null)
-                {
-                    data = info;
-                    m_Data.Remove(info);
-                    break;
-                }
-            }
+	public void SendData(string message)
+	{
+		Debug.Log(message);
+		Debug.Log("데이터 보냈어요!");
+		ws.Send(message);
 
-            if (data.Length != 0)
-            {
-                var jsonData = JSON.Parse(data);
-                int flag = jsonData["flag"].AsInt;
-                //Debug.Log(flag);
-                switch (flag)
-                {
-                    
-                }
-                data = "";
-            }
-            yield return null;
-        }
-    }
+	}
+
+	IEnumerator RecieveData()
+	{
+		while (m_Data != null)
+		{
+
+			string data = "";
+			foreach (string info in m_Data)
+			{
+
+				if (info != null)
+				{
+					data = info;
+					m_Data.Remove(info);
+					break;
+				}
+			}
+
+			if (data.Length != 0)
+			{
+
+				var jsonData = JSON.Parse(data);
+				int flag = jsonData["flag"].AsInt;
+				//Debug.Log(flag);
+				switch (flag)
+				{
+
+				case 3 :
+					//TreasureSetupController obj = GameObject.FindGameObjectWithTag ("obj").GetComponent<TreasureSetupController> ();
+					//	obj.ForEachGame ();
+					TreasureSetupController.instance.ForEachGame (data);
+					break;
+				}
+				data = "";
+			}
+			yield return null;
+		}
+	}
 }

@@ -30,8 +30,10 @@ public class MakerSceneManager: MonoBehaviour {
 		RenderTexture.active = rt;
 
 		/* hyunSo
-		 * variable cropImageRect for cropping image boundary
-		 * for reducing image file size and decrease useless recognition features
+		 * Note that Vuforia has a 2MB limit on the image to be uploaded.
+		 * The image is cropped here to ensure we don't exceed that limit.
+		 * TODO: know the size before upload for notification
+		 * 		 (user for restrict the size within the 2MB limit)
 		 */
 		Rect cropImageRect = new Rect (0, (height - width)/2, width, width);
 		tex.ReadPixels(cropImageRect, 0, 0);

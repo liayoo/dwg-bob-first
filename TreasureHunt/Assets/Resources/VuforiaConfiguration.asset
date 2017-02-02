@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: VuforiaConfiguration
   m_EditorClassIdentifier: 
   vuforia:
-    vuforiaLicenseKey: 
+    vuforiaLicenseKey: AQ/Qbiz/////AAAAGRVUd/+hIUl0uhzLQapm/8YyDW+Y4wNbGOi72xB7g5vpi2NHbi5Z4ltubW1yVsk0VOcEMSJ5qkEV12rGeGw4dSe1Qr5a0sWiz1w5mVkiURk6tdFczPnED81VRtsxaLk/KHq9/yBZMha3w9p5WLJCazsPOSmE3ISyNAAX3WPxt3KcQfT491/vKDIKVv8NL6v1OB3pHjzXQHcNJA6bgn+l4ts+a8Nlr0IARdvvQOdcTkEQRlEyrS5umISpKg2+00/J0A3oFd3a/k9dj9/YIE9pcIUybPyvJWgHwNkAnlHBBVCvs4gTjfQhtVMw8W1dotGwD+aZSp8qmSJ7WUzL6qwLmJIUzDk4xOm83L6Xbo0Wx/eM
     delayedInitialization: 0
     cameraDeviceModeSetting: -1
     maxSimultaneousImageTargets: 1

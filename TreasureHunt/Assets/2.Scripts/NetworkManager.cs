@@ -103,10 +103,13 @@ public class NetworkManager : MonoBehaviour {
 				switch (flag)
 				{
 
-				case 3 :
+				case 3:
+					//The other way to do it:
 					//TreasureSetupController obj = GameObject.FindGameObjectWithTag ("obj").GetComponent<TreasureSetupController> ();
 					//	obj.ForEachGame ();
+					// Now it's implemented using Singleton
 					TreasureSetupController.instance.ForEachGame (data);
+					ScrollBarContentSetup.instance.ForEachGame (data);
 					break;
 				}
 				data = "";

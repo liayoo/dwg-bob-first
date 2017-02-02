@@ -10,36 +10,41 @@ public class TreasureSetupController : MonoBehaviour {
 
 	void Awake()
 	{
-		if (instance == null)
-
+		if (instance == null) 
+		{
 			instance = this;
-
-		else if (instance != this)
-
-			Destroy(gameObject);
-
+		} 
+		else if (instance != this) 
+		{
+			Destroy (gameObject);
+		}
 		DontDestroyOnLoad (gameObject);
 
 	}
 
-	void Start(){
-		if (!gameObject.GetComponent<NetworkManager> ().enabled) {
+	void Start()
+	{
+		if (!gameObject.GetComponent<NetworkManager> ().enabled)
+		{
+			// Todo: get user id and pass it as an argument, instead of gg
 			GetGameTreasure ("gg");		
 		}
 	}
 
-	public void GetGameTreasure(string userName){
-
+	public void GetGameTreasure(string userName)
+	{
 		string str = "{\"flag\":3, \"usn\":\"" + userName + "\"}";
-		if (!gameObject.GetComponent<NetworkManager> ().enabled) {
+		if (!gameObject.GetComponent<NetworkManager> ().enabled) 
+		{
 			TextAsset jsonData = Resources.Load<TextAsset> ("TestForTreasureSetup");
 			var strJsonData = jsonData.text;
 			Debug.Log (strJsonData);
 			ForEachGame (strJsonData);
-		} else {
+		}
+		else 
+		{
 			NetworkManager.instance.SendData (str);
 		}
-
 	}
 
 	//infos included in json:
@@ -50,8 +55,8 @@ public class TreasureSetupController : MonoBehaviour {
 	public GameObject treasure;
 	public static List<string> m_Data = new List<string>();
 
-	public GameObject ForEachGame(string data){
-
+	public GameObject ForEachGame(string data)
+	{
 		var jsonData = JSON.Parse (data);
 
 		var games = jsonData ["Games"];
@@ -59,7 +64,8 @@ public class TreasureSetupController : MonoBehaviour {
 		GameObject gameTreasurePanel = new GameObject();
 		gameTreasurePanel.tag = "GameTreasurePanel";
 
-		for (int i = 0; i < games.Count; i++) {
+		for (int i = 0; i < games.Count; i++) 
+		{
 			//make new game panel
 			GameObject newGame = (GameObject) Instantiate (game, new Vector3(0,0,0), Quaternion.identity);
 			GameAttributes ga = newGame.GetComponent<GameAttributes> ();
@@ -75,7 +81,8 @@ public class TreasureSetupController : MonoBehaviour {
 				Debug.Log ("something wrong with treasure_count");
 			}
 			// make treasures
-			for (int j = 0; j < treasures.Count; j++) {
+			for (int j = 0; j < treasures.Count; j++) 
+			{
 				string treasure_id = treasures [j] ["treasure_id"];
 				MakeNewTreasure (newGame, treasures[j]["treasure_id"], treasures[j]["treasure_name"], treasures[j]["destination"],
 					treasures[j]["game_id"], treasures[j]["location"], treasures[j]["point"].AsInt, treasures[j]["catchgame_cat"].AsInt, treasures[j]["target_img_url"]);

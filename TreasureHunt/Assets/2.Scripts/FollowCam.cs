@@ -19,7 +19,7 @@ public class FollowCam : MonoBehaviour {
 	
 	void LateUpdate () {
         
-        targetTr = GameObject.FindGameObjectWithTag("TreasureBox").GetComponent<Transform>();
+        targetTr = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         tr.position = Vector3.Lerp(tr.position, targetTr.position - (targetTr.forward * dist) + (Vector3.up * height), Time.deltaTime * dampTrace);
         tr.LookAt(targetTr.position);
         

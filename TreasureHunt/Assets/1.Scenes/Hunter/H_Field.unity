@@ -650,6 +650,7 @@ GameObject:
   - 4: {fileID: 716606900}
   - 114: {fileID: 716606901}
   - 114: {fileID: 716606902}
+  - 114: {fileID: 716606903}
   m_Layer: 0
   m_Name: Network Manager
   m_TagString: Untagged
@@ -695,6 +696,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   game: {fileID: 156938, guid: e6250dc09b9f1d44897e076a22c4d70a, type: 2}
   treasure: {fileID: 156098, guid: cda5c0598e678b249a31524daa477be2, type: 2}
+--- !u!114 &716606903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 716606899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 761ff4184f4f05f468943224ff1c3852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 324506499}
 --- !u!1 &903468386
 GameObject:
   m_ObjectHideFlags: 0
@@ -1035,6 +1048,14 @@ Prefab:
     - target: {fileID: 402660, guid: a052566e208d66b478f85379abd816e7, type: 2}
       propertyPath: m_RootOrder
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 190436, guid: a052566e208d66b478f85379abd816e7, type: 2}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 13731208, guid: a052566e208d66b478f85379abd816e7, type: 2}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a052566e208d66b478f85379abd816e7, type: 2}

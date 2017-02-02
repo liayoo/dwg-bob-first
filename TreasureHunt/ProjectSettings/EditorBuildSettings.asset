@@ -21,3 +21,7 @@ EditorBuildSettings:
     path: Assets/1.Scenes/Hunter/H_Inventory.unity
   - enabled: 1
     path: Assets/1.Scenes/Maker/M_GameList.unity
+  - enabled: 1
+    path: Assets/1.Scenes/HunterCamera.unity
+  - enabled: 1
+    path: Assets/1.Scenes/MakerCamera.unity

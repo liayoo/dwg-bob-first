@@ -11,6 +11,6 @@ public class LogoSceneManager : MonoBehaviour {
 	IEnumerator MoveNextScene()
     {
         yield return new WaitForSeconds(4f);
-        GameManager.instance.MoveScene("Login");
+        GameManager.instance.MoveScene("Main");
     }
 }

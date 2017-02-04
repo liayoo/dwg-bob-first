@@ -1,0 +1,112 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion '25.0.2'
+    sourceSets {
+        main {
+            java {
+                srcDir 'src/main/java'
+            }
+        }
+    }
+    def apiKey = project.properties['indoorAtlasApiKey'] ?: "api-key-not-set";
+    def apiSecret = project.properties['indoorAtlasApiSecret'] ?: "api-secret-not-set";
+
+    defaultConfig {
+        minSdkVersion 23
+        targetSdkVersion 25
+
+        //testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        resValue "string", "indooratlas_api_key", apiKey
+        resValue "string", "indooratlas_api_secret", apiSecret.replaceAll("%", "\\\\u0025")
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+        //    proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile files('libs/indooratlas-android-sdk-2.3.1.jar')
+    //compile 'com.indooratlas.android:indooratlas-android-sdk:2.3.1@aar'
+    compile 'com.android.support:appcompat-v7:25.1.1'
+    compile 'com.google.android.gms:play-services:8.1.0'
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    testCompile 'junit:junit:4.12'
+    provided files('libs/classes.jar')
+    //provided files('./libs/classes.jar')
+    //releaseJars 'com.indooratlas.android:indooratlas-android-sdk:2.3.1@aar'
+    //configurations.compile.extendsFrom(configurations.releaseJars)
+    //compile { extendsFrom releaseJars }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+/* Export Jar Option 1 */
+//task deleteOldJar(type: Delete) {
+//    delete 'release/IAPlugin.jar'
+//}
+//
+//task exportJar(type: Copy) {
+//    from('build/intermediates/bundles/release/')
+//    into('release/')
+//    include('classes.jar')
+//    rename('classes.jar', 'IAPlugin.jar')
+//}
+//
+//exportJar.dependsOn(deleteOldJar, build)
+
+/* Export Jar Option 2 */
+//task jarTask(type: Jar) {
+//    baseName="IAPlugin"
+//    //from 'src/main/java'
+//    //from 'build/intermediates/classes/release'
+//    from 'build/classes/main'
+//}
+//
+//task createJarWithDependencies(type: Jar) {
+//    baseName="IAPlugin-with-dependencies"
+//    from {
+//        configurations.compile.collect {
+//
+//            print 'it: ' + it + '\n'
+//            it.isDirectory() ? it : zipTree(it)
+////            if (it.toString().equals("/Users/liayoo/IndoorAtlas/IAPlugin/iaplugin/libs/iaclasses.jar")) // ||
+////            {
+////                print 'it is : ' + it + '\n'
+////                zipTree(it)
+////            } //else {
+//          //      ""
+//          //  }
+//            //it.isDirectory() ? it : zipTree(it)
+////                   it.equals("/Users/liayoo/.gradle/caches/modules-2/files-2.1/com.indooratlas.android/indooratlas-android-sdk/2.3.1/7e2415f20f58660d37405856a7f0c8cde8f9d096/indooratlas-android-sdk-2.3.1.aar")) {
+//            //    print 'it is: ' + it + '\n'
+//            //    zipTree(it)
+//            //}
+//        }
+//    }
+//    with jarTask
+//}
+//
+//configurations {
+//    jarConfiguration
+//}
+//
+////configurations {
+////    releaseJars {
+////        extendsFrom compile
+////    }
+////}
+//
+//artifacts {
+//    jarConfiguration jarTask
+//}

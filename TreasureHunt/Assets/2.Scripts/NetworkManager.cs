@@ -13,14 +13,13 @@ public class NetworkManager : MonoBehaviour {
 
 	void Awake()
 	{
-		if (instance == null)
-
+		if (instance == null) {
 			instance = this;
-
-		else if (instance != this)
-
-			Destroy(gameObject);
-
+		}
+		else if (instance != this) 
+		{
+			Destroy (gameObject);
+		}
 	}
 
 	void Start()
@@ -109,7 +108,6 @@ public class NetworkManager : MonoBehaviour {
 					//	obj.ForEachGame ();
 					// Now it's implemented using Singleton
 					TreasureSetupController.instance.ForEachGame (data);
-					ScrollBarContentSetup.instance.ForEachGame (data);
 					break;
 				}
 				data = "";

@@ -904,8 +904,9 @@ GameObject:
   - 4: {fileID: 1852684036}
   - 114: {fileID: 1852684035}
   - 114: {fileID: 1852684037}
+  - 114: {fileID: 1852684038}
   m_Layer: 0
-  m_Name: NetworkManager
+  m_Name: Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -948,7 +949,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1128054ec628dc24dbee819036c1d7b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WSAddress: 
+  WSAddress: ws://104.132.152.98:8081
+--- !u!114 &1852684038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1852684034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d8c3d309ada3e74d9bb74446760adcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2031846890
 Prefab:
   m_ObjectHideFlags: 0

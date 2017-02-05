@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using System.Globalization;
 using SimpleJSON;
 
-public class TreasureSetupController : MonoBehaviour {
-
+public class TreasureSetupController : MonoBehaviour 
+{
 	public static TreasureSetupController instance = null;
+	public static string userGameTreasureData = "";
 
 	void Awake()
 	{
@@ -18,7 +19,7 @@ public class TreasureSetupController : MonoBehaviour {
 		{
 			Destroy (gameObject);
 		}
-		DontDestroyOnLoad (gameObject);
+		//DontDestroyOnLoad (gameObject);
 
 	}
 
@@ -49,7 +50,7 @@ public class TreasureSetupController : MonoBehaviour {
 
 	//infos included in json:
 	//	flag,
-	//	game_id, game_name, treasure_count, maker_id, status,
+	//	game_id, game_name, treasure_count, maker_id, status, participant
 	//	treasure_id, treasure_name, description, game_id, location, point, catchgame_cat, target_img_url
 	public GameObject game;
 	public GameObject treasure;
@@ -57,13 +58,19 @@ public class TreasureSetupController : MonoBehaviour {
 
 	public GameObject ForEachGame(string data)
 	{
-		var jsonData = JSON.Parse (data);
+		// save data at static variable to use later for GameList View...
+		userGameTreasureData = data;
 
+		// parsing json data using SimpleJSON
+		var jsonData = JSON.Parse (data);
 		var games = jsonData ["Games"];
 
+		// Make the root object to save all game & treasure objects
 		GameObject gameTreasurePanel = new GameObject();
 		gameTreasurePanel.tag = "GameTreasurePanel";
+		DontDestroyOnLoad (gameTreasurePanel);
 
+		// Make game objects
 		for (int i = 0; i < games.Count; i++) 
 		{
 			//make new game panel
@@ -74,20 +81,20 @@ public class TreasureSetupController : MonoBehaviour {
 			ga.SetAttributes(games[i]["game_id"], games[i]["game_name"], games[i]["treasure_count"].AsInt, games[i]["maker_id"], games[i]["status"].AsInt);
 			newGame.name = games [i] ["game_id"];
 			newGame.tag = "Games";
+			DontDestroyOnLoad (newGame);
 			// parse treasures
 			var treasures = games [i] ["Treasures"];
 			// check if there is an error
 			if (games[i]["treasure_count"].AsInt != treasures.Count) {
 				Debug.Log ("something wrong with treasure_count");
 			}
-			// make treasures
+			// make treasure objects 
 			for (int j = 0; j < treasures.Count; j++) 
 			{
 				string treasure_id = treasures [j] ["treasure_id"];
 				MakeNewTreasure (newGame, treasures[j]["treasure_id"], treasures[j]["treasure_name"], treasures[j]["destination"],
 					treasures[j]["game_id"], treasures[j]["location"], treasures[j]["point"].AsInt, treasures[j]["catchgame_cat"].AsInt, treasures[j]["target_img_url"]);
 			}
-				
 		}
 
 		return gameTreasurePanel;
@@ -104,6 +111,7 @@ public class TreasureSetupController : MonoBehaviour {
 		tr.setAsChildOf (parent);
 		newTreasure.name = trName;
 		newTreasure.tag = "Treasures";
+		DontDestroyOnLoad (newTreasure);
 		return newTreasure; 
 	}
 

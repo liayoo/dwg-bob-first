@@ -81,10 +81,14 @@ public class PopupController : MonoBehaviour {
 				newPopup.transform.FindChild ("Changing Objects/howManyPart").GetComponent<Text>().text = curr ["participant"];
 				newPopup.transform.FindChild ("Changing Objects/howManyTrea").GetComponent<Text>().text = curr ["treasure_count"];
 				newPopup.transform.tag = "Popup";
-				// attach script to BackButton
+				// assign onClick event to BackButton
 				Transform backButton = newPopup.transform.FindChild("BackButton");
-				Button btn = backButton.GetComponent<Button> ();
-				btn.onClick.AddListener (TurnDownPopup);
+				Button backB = backButton.GetComponent<Button> ();
+				backB.onClick.AddListener (TurnDownPopup);
+				// assign onClick event to DropOutButton
+				Transform dropOutbutton = newPopup.transform.FindChild("DropOutButton");
+				Button dropB = dropOutbutton.GetComponent<Button> ();
+				dropB.onClick.AddListener (() => DropOut("gg", curr["game_id"])); // todo: put valid usn instead of "gg"
 				// attach treasure list
 				// parse treasures
 				var treasures = curr ["Treasures"];
@@ -105,6 +109,24 @@ public class PopupController : MonoBehaviour {
 		Debug.Log ("called");
 		Destroy(GameObject.FindWithTag("Popup"));
 		Debug.Log ("turned down popup");
+	}
+
+	public void DropOut(string userName, string gameID){
+		// inform server that this user drops out of the game
+		string str = "{\"flag\":16, \"usn\":\"" + userName + "\", \"game_id\":" + gameID + "\"}";
+		if (!gameObject.GetComponent<NetworkManager> ().enabled) 
+		{
+			Debug.Log ("NetworkManager not enabled");
+		}
+		else 
+		{
+			NetworkManager.instance.SendData (str);
+		}
+		// reset data so that if you go back to Field View, treasure setup would start again
+		data = ""; // needed if we use cache flush
+		// close popup and delete this gamelist from scroll view
+		Destroy(GameObject.Find("Canvas/Scroll View/Viewport/Content/" + gameID));
+		TurnDownPopup();
 	}
 
 	/*

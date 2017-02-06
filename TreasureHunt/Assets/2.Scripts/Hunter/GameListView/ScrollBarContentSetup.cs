@@ -21,12 +21,8 @@ public class ScrollBarContentSetup : MonoBehaviour
 
 	void Start()
 	{
-		if (!gameObject.GetComponent<NetworkManager> ().enabled)
-		{
-			Debug.Log ("i'm in here!");
-			// Todo: get user id and pass it as an argument, instead of gg
-			GetContent ("gg");		
-		}
+		// Todo: get user id and pass it as an argument, instead of gg
+		GetContent ("gg");		
 	}
 
 	public void GetContent(string userName)

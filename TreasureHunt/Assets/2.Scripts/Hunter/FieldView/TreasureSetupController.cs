@@ -19,17 +19,12 @@ public class TreasureSetupController : MonoBehaviour
 		{
 			Destroy (gameObject);
 		}
-		//DontDestroyOnLoad (gameObject);
-
 	}
 
 	void Start()
 	{
-		if (!gameObject.GetComponent<NetworkManager> ().enabled)
-		{
-			// Todo: get user id and pass it as an argument, instead of gg
-			GetGameTreasure ("gg");		
-		}
+		// Todo: get user id and pass it as an argument, instead of gg
+		GetGameTreasure ("gg");
 	}
 
 	public void GetGameTreasure(string userName)

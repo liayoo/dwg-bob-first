@@ -37,20 +37,14 @@ public class SearchButtonController : MonoBehaviour {
 		}
 		else 
 		{
-			string str = "{\"flag\":6, \"usn\":\"" + userName + "\"}";
+			string str = "{\"flag\":7, \"usn\":\"" + userName + "\"}";
 			NetworkManager.instance.SendData (str);
 		}
 	}
 
 	public void SetupScrollBar(string data)
 	{
-		// delete old ones, that is, my game lists
-		GameObject content = GameObject.Find("Canvas/Scroll View/Viewport/Content");
-		for (int i = 0; i < content.transform.childCount; i++) 
-		{
-			Destroy (content.transform.GetChild (i).gameObject);
-		}
-		// make new ones, that is, search game lists
+		// call ForEachGame of ScrollBarContentSetup
 		ScrollBarContentSetup.instance.ForEachGame (data, false);
 	}
 }

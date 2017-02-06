@@ -27,12 +27,6 @@ public class UsedButtonController : MonoBehaviour {
 
 	public void SetupScrollBar(string userName)
 	{
-		// delete old ones, that is, my game lists
-		GameObject content = GameObject.Find("Canvas/Scroll View/Viewport/Content");
-		for (int i = 0; i < content.transform.childCount; i++) 
-		{
-			Destroy (content.transform.GetChild (i).gameObject);
-		}
 		// make new ones, that is, search game lists
 		InventorySetupController.instance.ForEachItem (userName, true);
 	}

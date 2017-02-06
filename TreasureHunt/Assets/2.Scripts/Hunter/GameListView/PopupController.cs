@@ -83,12 +83,14 @@ public class PopupController : MonoBehaviour {
 			popup = (GameObject)Resources.Load ("SearchGamePopup");
 			Debug.Log ("wow");
 		}
+		// set attributes
 		GameObject newPopup = (GameObject) Instantiate (popup);
 		newPopup.transform.SetParent (GameObject.Find ("Canvas").transform);
 		newPopup.transform.localScale = Vector3.one;
 		newPopup.transform.localPosition = new Vector3(0, 0, 0); 
 		newPopup.transform.tag = "Popup";
 		Debug.Log ("yes");
+		// find the right match for the game popup is called for
 		// parse data
 		var jsonData = JSON.Parse (data);
 		var games = jsonData ["Games"];

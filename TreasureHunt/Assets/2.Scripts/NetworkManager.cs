@@ -114,7 +114,7 @@ public class NetworkManager : MonoBehaviour {
 					// save data at static variable
 					TreasureSetupController.userGameTreasureData = data;
 					break;
-				case 6:
+				case 7:
 					SearchButtonController.instance.SetupScrollBar (data);
 					// save data at static variable
 					SearchButtonController.searchGameData = data;

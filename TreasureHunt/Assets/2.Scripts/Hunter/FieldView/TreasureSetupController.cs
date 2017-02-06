@@ -60,25 +60,24 @@ public class TreasureSetupController : MonoBehaviour
 		// Make the root object to save all game & treasure objects
 		GameObject gameTreasurePanel = new GameObject();
 		gameTreasurePanel.tag = "GameTreasurePanel";
-		DontDestroyOnLoad (gameTreasurePanel);
 
 		// Make game objects
 		for (int i = 0; i < games.Count; i++) 
 		{
 			//make new game panel
-			GameObject newGame = (GameObject) Instantiate (game, new Vector3(0,0,0), Quaternion.identity);
+			GameObject newGame = (GameObject) Instantiate (game);
 			GameAttributes ga = newGame.GetComponent<GameAttributes> ();
 			// attach game attributes
 			ga.SetAsChildOf(gameTreasurePanel);
 			ga.SetAttributes(games[i]["game_id"], games[i]["game_name"], games[i]["treasure_count"].AsInt, games[i]["maker_id"], games[i]["status"].AsInt);
 			newGame.name = games [i] ["game_id"];
 			newGame.tag = "Games";
-			DontDestroyOnLoad (newGame);
 			// parse treasures
 			var treasures = games [i] ["Treasures"];
 			// check if there is an error
 			if (games[i]["treasure_count"].AsInt != treasures.Count) {
 				Debug.Log ("something wrong with treasure_count");
+				return gameTreasurePanel;
 			}
 			// make treasure objects 
 			for (int j = 0; j < treasures.Count; j++) 
@@ -101,7 +100,7 @@ public class TreasureSetupController : MonoBehaviour
 		TreasureAttributes tr = newTreasure.GetComponent<TreasureAttributes> ();
 		tr.setAttributes (trId, trName, trDes, gameId, StringToVector3(trLoc), trPoint, trCatchGame, trTargetImg);
 		tr.setAsChildOf (parent);
-		newTreasure.name = trName;
+		newTreasure.name = trId;
 		newTreasure.tag = "Treasures";
 		DontDestroyOnLoad (newTreasure);
 		return newTreasure; 

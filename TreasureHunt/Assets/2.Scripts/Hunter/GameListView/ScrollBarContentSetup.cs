@@ -59,20 +59,21 @@ public class ScrollBarContentSetup : MonoBehaviour
 
 	public void ForEachGame(string data, bool isMyGame)
 	{
-		// Destroy old game lists, that is, searchGameLists or old myGameLists
+		// Destroy old game lists
 		GameObject content = GameObject.Find("Canvas/Scroll View/Viewport/Content");
 		for (int i = 0; i < content.transform.childCount; i++) 
 		{
 			Destroy (content.transform.GetChild (i).gameObject);
 		}
-		// make new game lists, that is, myGameLists
+		// make new game lists
+		// parse data
 		var jsonData = JSON.Parse (data);
 		var games = jsonData ["Games"];
-
+		// iterate through
 		for (int i = 0; i < games.Count; i++) 
 		{
 			// make new game list
-			GameObject newGame = (GameObject) Instantiate (gameList, new Vector3(0,0,0), Quaternion.identity);
+			GameObject newGame = (GameObject) Instantiate (gameList);
 			// attach attributes
 			newGame.transform.parent = scrollbar.transform.FindChild ("Viewport/Content");
 			newGame.transform.localScale = Vector3.one;

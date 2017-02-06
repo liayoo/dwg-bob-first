@@ -24,7 +24,7 @@ public class ScrollBarContentSetup : MonoBehaviour
 		// Todo: get user id and pass it as an argument, instead of gg
 		GetContent ("gg");		
 	}
-
+		
 	public void GetContent(string userName)
 	{
 		if (!gameObject.GetComponent<NetworkManager> ().enabled) 
@@ -32,13 +32,13 @@ public class ScrollBarContentSetup : MonoBehaviour
 			TextAsset jsonData = Resources.Load<TextAsset> ("TestForTreasureSetup");
 			var strJsonData = jsonData.text;
 			Debug.Log (strJsonData);
-			ForEachGame (strJsonData);
+			ForEachGame (strJsonData, true);
 		}
 		else 
 		{
 			if (TreasureSetupController.userGameTreasureData != "") 
 			{
-				ForEachGame (TreasureSetupController.userGameTreasureData);
+				ForEachGame (TreasureSetupController.userGameTreasureData, true);
 			} 
 			else
 			{
@@ -52,7 +52,7 @@ public class ScrollBarContentSetup : MonoBehaviour
 	public GameObject scrollbar;
 	public GameObject gameList;
 
-	public void ForEachGame(string data)
+	public void ForEachGame(string data, bool isMyGame)
 	{
 		var jsonData = JSON.Parse (data);
 		var games = jsonData ["Games"];
@@ -87,7 +87,7 @@ public class ScrollBarContentSetup : MonoBehaviour
 			(
 				delegate
 				{
-					PopupController.instance.SetupPopup(newGame.name);
+					PopupController.instance.SetupPopup(newGame.name, isMyGame);
 				}
 			);
 		}

@@ -22,18 +22,26 @@ public class PopupController : MonoBehaviour {
 		
 	string data;
 
-	public void GetContent(string userName)
+	public void GetContent(string userName, bool isMyGame)
 	{
 		if (!gameObject.GetComponent<NetworkManager> ().enabled) 
 		{
-			TextAsset jsonData = Resources.Load<TextAsset> ("TestForTreasureSetup");
+			TextAsset jsonData = null;
+			if (isMyGame) 
+			{
+				jsonData = Resources.Load<TextAsset> ("TestForTreasureSetup");
+			} 
+			else 
+			{
+				jsonData = Resources.Load<TextAsset> ("TestForSearch");
+			}
 			var strJsonData = jsonData.text;
 			Debug.Log (strJsonData);
 			data = strJsonData;
 		}
 		else 
 		{
-			if (TreasureSetupController.userGameTreasureData != "") 
+			if (isMyGame && (TreasureSetupController.userGameTreasureData != "")) 
 			{
 				data = TreasureSetupController.userGameTreasureData;
 			} 
@@ -46,7 +54,7 @@ public class PopupController : MonoBehaviour {
 		}
 	}
 
-	public void SetupPopup(string gameID)
+	public void SetupPopup(string gameID, bool isMyGame)
 	{
 		// if there is already a popup, do not open another one
 		if (GameObject.FindWithTag("Popup") != null) 
@@ -58,10 +66,19 @@ public class PopupController : MonoBehaviour {
 		if (!gameObject.GetComponent<NetworkManager> ().enabled)
 		{
 			// Todo: get user id and pass it as an argument, instead of gg
-			GetContent ("gg");		
+			GetContent ("gg", isMyGame);		
 		}
 		// make popup
-		GameObject popup = (GameObject) Resources.Load("popup");
+		GameObject popup = null;
+		if (isMyGame) 
+		{
+			popup = (GameObject)Resources.Load ("MyGamePopup");
+		} 
+		else 
+		{
+			popup = (GameObject)Resources.Load ("SearchGamePopup");
+			Debug.Log ("wow");
+		}
 		GameObject newPopup = (GameObject) Instantiate (popup);
 		newPopup.transform.SetParent (GameObject.Find ("Canvas").transform);
 		newPopup.transform.localScale = Vector3.one;
@@ -72,7 +89,6 @@ public class PopupController : MonoBehaviour {
 		var games = jsonData ["Games"];
 		for (int i = 0; i < games.Count; i++) {
 			var curr = games [i];
-			Debug.Log (curr ["game_id"]);
 			if (String.Compare(curr ["game_id"], gameID)==0) {
 				Debug.Log ("I'm in if");
 				// attach popup attributes
@@ -85,10 +101,19 @@ public class PopupController : MonoBehaviour {
 				Transform backButton = newPopup.transform.FindChild("BackButton");
 				Button backB = backButton.GetComponent<Button> ();
 				backB.onClick.AddListener (TurnDownPopup);
-				// assign onClick event to DropOutButton
-				Transform dropOutbutton = newPopup.transform.FindChild("DropOutButton");
-				Button dropB = dropOutbutton.GetComponent<Button> ();
-				dropB.onClick.AddListener (() => DropOut("gg", curr["game_id"])); // todo: put valid usn instead of "gg"
+				// assign onClick event to DropOutButton/JoinButton
+				if(isMyGame)
+				{
+					Transform dropOutButton = newPopup.transform.FindChild("DropOutButton");
+					Button dropB = dropOutButton.GetComponent<Button> ();
+					dropB.onClick.AddListener (() => DropOrJoin(true, "gg", curr["game_id"])); // todo: put valid usn instead of "gg"
+				}
+				else
+				{
+					Transform joinButton = newPopup.transform.FindChild ("JoinButton");
+					Button joinB = joinButton.GetComponent<Button> ();
+					joinB.onClick.AddListener (() => DropOrJoin (false, "gg", curr ["game_id"])); // todo: same as above
+				}
 				// attach treasure list
 				// parse treasures
 				var treasures = curr ["Treasures"];
@@ -111,19 +136,27 @@ public class PopupController : MonoBehaviour {
 		Debug.Log ("turned down popup");
 	}
 
-	public void DropOut(string userName, string gameID){
+	public void DropOrJoin(bool isDrop, string userName, string gameID){
 		// inform server that this user drops out of the game
-		string str = "{\"flag\":16, \"usn\":\"" + userName + "\", \"game_id\":" + gameID + "\"}";
 		if (!gameObject.GetComponent<NetworkManager> ().enabled) 
 		{
-			Debug.Log ("NetworkManager not enabled");
+			Debug.Log ("DropOrJoin called when NetworkManager is enabled");
 		}
 		else 
 		{
+			string str = "";
+			if (isDrop) 
+			{
+				str = "{\"flag\":16, \"usn\":\"" + userName + "\", \"game_id\":" + gameID + "\"}";
+			} 
+			else 
+			{
+				str = "{\"flag\":14, \"usn\":\"" + userName + "\", \"game_id\":" + gameID + "\"}";
+			}
 			NetworkManager.instance.SendData (str);
 		}
 		// reset data so that if you go back to Field View, treasure setup would start again
-		data = ""; // needed if we use cache flush
+		TreasureSetupController.userGameTreasureData = ""; // needed if we use cache flush
 		// close popup and delete this gamelist from scroll view
 		Destroy(GameObject.Find("Canvas/Scroll View/Viewport/Content/" + gameID));
 		TurnDownPopup();

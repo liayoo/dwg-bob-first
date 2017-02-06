@@ -13,7 +13,8 @@ public class NetworkManager : MonoBehaviour {
 
 	void Awake()
 	{
-		if (instance == null) {
+		if (instance == null) 
+		{
 			instance = this;
 		}
 		else if (instance != this) 
@@ -95,7 +96,6 @@ public class NetworkManager : MonoBehaviour {
 
 			if (data.Length != 0)
 			{
-
 				var jsonData = JSON.Parse(data);
 				int flag = jsonData["flag"].AsInt;
 				//Debug.Log(flag);
@@ -108,6 +108,9 @@ public class NetworkManager : MonoBehaviour {
 					//	obj.ForEachGame ();
 					// Now it's implemented using Singleton
 					TreasureSetupController.instance.ForEachGame (data);
+					break;
+				case 6:
+					SearchButtonController.instance.SetupScrollBar (data);
 					break;
 				}
 				data = "";

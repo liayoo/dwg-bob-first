@@ -29,7 +29,6 @@ public class TreasureSetupController : MonoBehaviour
 
 	public void GetGameTreasure(string userName)
 	{
-		string str = "{\"flag\":3, \"usn\":\"" + userName + "\"}";
 		if (!gameObject.GetComponent<NetworkManager> ().enabled) 
 		{
 			TextAsset jsonData = Resources.Load<TextAsset> ("TestForTreasureSetup");
@@ -39,6 +38,7 @@ public class TreasureSetupController : MonoBehaviour
 		}
 		else 
 		{
+			string str = "{\"flag\":3, \"usn\":\"" + userName + "\"}";
 			NetworkManager.instance.SendData (str);
 		}
 	}

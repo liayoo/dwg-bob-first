@@ -19,8 +19,13 @@ public class ScrollBarContentSetup : MonoBehaviour
 		}
 	}
 
+	public GameObject myGameButton;
+
 	void Start()
 	{
+		// assign onClick event to myGameButton
+		Button myGameB = myGameButton.GetComponent<Button> ();
+		myGameB.onClick.AddListener (() => GetContent ("gg"));
 		// Todo: get user id and pass it as an argument, instead of gg
 		GetContent ("gg");		
 	}
@@ -54,6 +59,13 @@ public class ScrollBarContentSetup : MonoBehaviour
 
 	public void ForEachGame(string data, bool isMyGame)
 	{
+		// Destroy old game lists, that is, searchGameLists or old myGameLists
+		GameObject content = GameObject.Find("Canvas/Scroll View/Viewport/Content");
+		for (int i = 0; i < content.transform.childCount; i++) 
+		{
+			Destroy (content.transform.GetChild (i).gameObject);
+		}
+		// make new game lists, that is, myGameLists
 		var jsonData = JSON.Parse (data);
 		var games = jsonData ["Games"];
 

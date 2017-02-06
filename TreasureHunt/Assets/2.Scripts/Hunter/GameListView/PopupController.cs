@@ -41,11 +41,11 @@ public class PopupController : MonoBehaviour {
 		}
 		else 
 		{
-			if (isMyGame && (TreasureSetupController.userGameTreasureData != "")) 
+			if (isMyGame && TreasureSetupController.userGameTreasureData != "") 
 			{
 				data = TreasureSetupController.userGameTreasureData;
 			} 
-			else if(!isMyGame && SearchButtonController.searchGameData != ""))
+			else if(!isMyGame && SearchButtonController.searchGameData != "")
 			{
 				data = SearchButtonController.searchGameData;
 			}

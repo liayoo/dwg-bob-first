@@ -53,9 +53,6 @@ public class TreasureSetupController : MonoBehaviour
 
 	public GameObject ForEachGame(string data)
 	{
-		// save data at static variable to use later for GameList View...
-		userGameTreasureData = data;
-
 		// parsing json data using SimpleJSON
 		var jsonData = JSON.Parse (data);
 		var games = jsonData ["Games"];

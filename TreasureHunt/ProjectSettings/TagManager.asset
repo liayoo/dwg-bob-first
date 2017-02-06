@@ -10,6 +10,7 @@ TagManager:
   - GameTreasurePanel
   - GameList
   - Popup
+  - TreasureList
   layers:
   - Default
   - TransparentFX

@@ -87,6 +87,7 @@ public class PopupController : MonoBehaviour {
 		newPopup.transform.SetParent (GameObject.Find ("Canvas").transform);
 		newPopup.transform.localScale = Vector3.one;
 		newPopup.transform.localPosition = new Vector3(0, 0, 0); 
+		newPopup.transform.tag = "Popup";
 		Debug.Log ("yes");
 		// parse data
 		var jsonData = JSON.Parse (data);
@@ -99,8 +100,7 @@ public class PopupController : MonoBehaviour {
 				newPopup.transform.FindChild ("Changing Objects/GameName").GetComponent<Text>().text = curr ["game_name"];
 				newPopup.transform.FindChild ("Changing Objects/Whom").GetComponent<Text>().text = curr ["maker_id"];
 				newPopup.transform.FindChild ("Changing Objects/howManyPart").GetComponent<Text>().text = curr ["participant"];
-				newPopup.transform.FindChild ("Changing Objects/howManyTrea").GetComponent<Text>().text = curr ["treasure_count"];
-				newPopup.transform.tag = "Popup";
+				newPopup.transform.FindChild ("Changing Objects/howManyTrea").GetComponent<Text> ().text = curr ["treasure_count"];
 				// assign onClick event to BackButton
 				Transform backButton = newPopup.transform.FindChild("BackButton");
 				Button backB = backButton.GetComponent<Button> ();
@@ -144,7 +144,7 @@ public class PopupController : MonoBehaviour {
 		// inform server that this user drops out of the game
 		if (!gameObject.GetComponent<NetworkManager> ().enabled) 
 		{
-			Debug.Log ("DropOrJoin called when NetworkManager is enabled");
+			Debug.Log ("DropOrJoin called when NetworkManager is not enabled");
 		}
 		else 
 		{

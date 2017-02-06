@@ -71,9 +71,9 @@ public class ScrollBarContentSetup : MonoBehaviour
 
 		for (int i = 0; i < games.Count; i++) 
 		{
-			// make new game button
+			// make new game list
 			GameObject newGame = (GameObject) Instantiate (gameList, new Vector3(0,0,0), Quaternion.identity);
-			// attach button attributes
+			// attach attributes
 			newGame.transform.parent = scrollbar.transform.FindChild ("Viewport/Content");
 			newGame.transform.localScale = Vector3.one;
 			newGame.transform.FindChild("GameName").GetComponent<Text>().text = games[i]["game_name"];

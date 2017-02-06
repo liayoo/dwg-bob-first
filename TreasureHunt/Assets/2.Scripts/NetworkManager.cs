@@ -101,16 +101,23 @@ public class NetworkManager : MonoBehaviour {
 				//Debug.Log(flag);
 				switch (flag)
 				{
-
+				case 1:
+					InventorySetupController.instance.ForEachItem (data, false);
+					InventorySetupController.inventoryData = data;
+					break;
 				case 3:
 					//The other way to do it:
 					//TreasureSetupController obj = GameObject.FindGameObjectWithTag ("obj").GetComponent<TreasureSetupController> ();
 					//	obj.ForEachGame ();
 					// Now it's implemented using Singleton
 					TreasureSetupController.instance.ForEachGame (data);
+					// save data at static variable
+					TreasureSetupController.userGameTreasureData = data;
 					break;
 				case 6:
 					SearchButtonController.instance.SetupScrollBar (data);
+					// save data at static variable
+					SearchButtonController.searchGameData = data;
 					break;
 				}
 				data = "";

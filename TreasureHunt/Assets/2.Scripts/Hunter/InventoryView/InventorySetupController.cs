@@ -27,9 +27,9 @@ public class InventorySetupController : MonoBehaviour
 	{
 		// assign onClick event to myGameButton
 		Button unusedB = unusedButton.GetComponent<Button> ();
-		unusedB.onClick.AddListener (() => GetContent ("gg"));
+		unusedB.onClick.AddListener (() => ForEachItem ("gg", false));
 		// Todo: get user id and pass it as an argument, instead of gg
-		GetContent ("gg");		
+		ForEachItem ("gg", false);		
 	}
 
 	public void GetContent(string userName)
@@ -38,14 +38,15 @@ public class InventorySetupController : MonoBehaviour
 		{
 			TextAsset jsonData = Resources.Load<TextAsset> ("TestForInventory");
 			var strJsonData = jsonData.text;
-			Debug.Log (strJsonData);
-			ForEachItem (strJsonData, false);
+			inventoryData = strJsonData;
+			Debug.Log ("GetContent: "+strJsonData);
+			//ForEachItem (strJsonData, false);
 		}
 		else 
 		{
 			if (inventoryData != "") 
 			{
-				ForEachItem (inventoryData, false);
+				//ForEachItem (inventoryData, false);
 			} 
 			else
 			{
@@ -58,13 +59,17 @@ public class InventorySetupController : MonoBehaviour
 	public GameObject scrollbar;
 	public GameObject treasureList;
 
-	public void ForEachItem (string data, bool isUsed)
+	public void ForEachItem (string userName, bool isUsed)
 	{
 		// Destroy old treasure lists, that is, usedLists or old unusedists
 		GameObject content = GameObject.Find ("Canvas/Scroll View/Viewport/Content");
 		for (int i = 0; i < content.transform.childCount; i++) {
 			Destroy (content.transform.GetChild (i).gameObject);
 		}
+		// get data
+		GetContent(userName);
+		string data = inventoryData;
+		Debug.Log ("came back: "+data);
 		// make new treasure lists, that is, myGameLists
 		var jsonData = JSON.Parse (data);
 		var treasures = jsonData ["Treasures"];

@@ -26,7 +26,8 @@ public class SearchButtonController : MonoBehaviour {
 		searchB.onClick.AddListener(() => GetData("gg"));// todo: usn instead of "gg"
  	}
 
-	public void GetData(string userName){
+	public void GetData(string userName)
+	{
 		if (!gameObject.GetComponent<NetworkManager> ().enabled) 
 		{
 			TextAsset jsonData = Resources.Load<TextAsset> ("TestForSearch");
@@ -41,7 +42,8 @@ public class SearchButtonController : MonoBehaviour {
 		}
 	}
 
-	public void SetupScrollBar(string data){
+	public void SetupScrollBar(string data)
+	{
 		// delete old ones, that is, my game lists
 		GameObject content = GameObject.Find("Canvas/Scroll View/Viewport/Content");
 		for (int i = 0; i < content.transform.childCount; i++) 

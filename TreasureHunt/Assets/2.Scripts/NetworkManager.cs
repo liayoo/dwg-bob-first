@@ -102,7 +102,7 @@ public class NetworkManager : MonoBehaviour {
 				switch (flag)
 				{
 				case 1:
-					InventorySetupController.instance.ForEachItem (data, false);
+					//InventorySetupController.instance.ForEachItem (data, false);
 					InventorySetupController.inventoryData = data;
 					break;
 				case 3:

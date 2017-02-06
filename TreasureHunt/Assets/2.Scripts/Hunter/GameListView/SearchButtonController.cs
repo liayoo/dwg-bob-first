@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class SearchButtonController : MonoBehaviour {
 
 	public static SearchButtonController instance = null;
+	public static string searchGameData = "";
 
 	void Awake()
 	{
@@ -41,6 +42,8 @@ public class SearchButtonController : MonoBehaviour {
 	}
 
 	public void SetupScrollBar(string data){
+		// save data at static variable
+		searchGameData = data;
 		// delete old ones, that is, my game lists
 		GameObject content = GameObject.Find("Canvas/Scroll View/Viewport/Content");
 		for (int i = 0; i < content.transform.childCount; i++) 

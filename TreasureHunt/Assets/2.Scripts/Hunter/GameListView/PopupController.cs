@@ -45,6 +45,10 @@ public class PopupController : MonoBehaviour {
 			{
 				data = TreasureSetupController.userGameTreasureData;
 			} 
+			else if(!isMyGame && SearchButtonController.searchGameData != ""))
+			{
+				data = SearchButtonController.searchGameData;
+			}
 			else 
 			{
 				Debug.Log ("userGameTreasureData not initiated in TreasureSetupController. error.");

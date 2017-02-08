@@ -1,3 +1,7 @@
+/*
+ * build.gradle for IA_Plugin module
+ */
+
 apply plugin: 'com.android.library'
 
 android {
@@ -8,13 +12,14 @@ android {
             java {
                 srcDir 'src/main/java'
             }
+            //jniLibs.srcDir = 'jniLibs'
         }
     }
     def apiKey = project.properties['indoorAtlasApiKey'] ?: "api-key-not-set";
     def apiSecret = project.properties['indoorAtlasApiSecret'] ?: "api-secret-not-set";
 
     defaultConfig {
-        minSdkVersion 23
+        minSdkVersion 16
         targetSdkVersion 25
 
         //testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -31,18 +36,16 @@ android {
 
 dependencies {
     compile files('libs/indooratlas-android-sdk-2.3.1.jar')
-    //compile 'com.indooratlas.android:indooratlas-android-sdk:2.3.1@aar'
-    compile 'com.android.support:appcompat-v7:25.1.1'
+    //compile 'com.android.support:support-v4:23.4.0'
+    //compile 'com.android.support:appcompat-v7:25.1.1'
+    //compile 'com.google.android.gms:play-services-location:10.0.1'
+    //compile 'com.google.android.gms:play-services-analytics:10.0.1'
     compile 'com.google.android.gms:play-services:8.1.0'
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testCompile 'junit:junit:4.12'
     provided files('libs/classes.jar')
-    //provided files('./libs/classes.jar')
-    //releaseJars 'com.indooratlas.android:indooratlas-android-sdk:2.3.1@aar'
-    //configurations.compile.extendsFrom(configurations.releaseJars)
-    //compile { extendsFrom releaseJars }
 }
 
 repositories {
@@ -51,62 +54,31 @@ repositories {
     }
 }
 
-/* Export Jar Option 1 */
-//task deleteOldJar(type: Delete) {
-//    delete 'release/IAPlugin.jar'
-//}
-//
-//task exportJar(type: Copy) {
-//    from('build/intermediates/bundles/release/')
-//    into('release/')
-//    include('classes.jar')
-//    rename('classes.jar', 'IAPlugin.jar')
-//}
-//
-//exportJar.dependsOn(deleteOldJar, build)
+/*
+ * Builds and Exports an iaplugin-debug.arr or iaplugin-release.aar under <Project>/iaplugin/build/outputs/aar/
+ * Also copies the .aar to the corresponding Unity project folder (~/Unity/IndoorAtlas/Assets/Plugins/Android/).
+ * To execute this task,
+ * Gradle projects >> :iaplugin >> Tasks >> plugin >> deployDebug/ReleasePluginArchive
+ */
+android.libraryVariants.all { variant ->
 
-/* Export Jar Option 2 */
-//task jarTask(type: Jar) {
-//    baseName="IAPlugin"
-//    //from 'src/main/java'
-//    //from 'build/intermediates/classes/release'
-//    from 'build/classes/main'
-//}
-//
-//task createJarWithDependencies(type: Jar) {
-//    baseName="IAPlugin-with-dependencies"
-//    from {
-//        configurations.compile.collect {
-//
-//            print 'it: ' + it + '\n'
-//            it.isDirectory() ? it : zipTree(it)
-////            if (it.toString().equals("/Users/liayoo/IndoorAtlas/IAPlugin/iaplugin/libs/iaclasses.jar")) // ||
-////            {
-////                print 'it is : ' + it + '\n'
-////                zipTree(it)
-////            } //else {
-//          //      ""
-//          //  }
-//            //it.isDirectory() ? it : zipTree(it)
-////                   it.equals("/Users/liayoo/.gradle/caches/modules-2/files-2.1/com.indooratlas.android/indooratlas-android-sdk/2.3.1/7e2415f20f58660d37405856a7f0c8cde8f9d096/indooratlas-android-sdk-2.3.1.aar")) {
-//            //    print 'it is: ' + it + '\n'
-//            //    zipTree(it)
-//            //}
-//        }
-//    }
-//    with jarTask
-//}
-//
-//configurations {
-//    jarConfiguration
-//}
-//
-////configurations {
-////    releaseJars {
-////        extendsFrom compile
-////    }
-////}
-//
-//artifacts {
-//    jarConfiguration jarTask
-//}
+    String variantName = "${variant.name.capitalize()}"; // Like 'Debug'
+    String deployTaskGroup = "plugin";
+    String deployTaskName = "deploy${variantName}PluginArchive"; // Like 'deployDebugPluginArchive'
+    String dependencyTaskName = "assemble${variantName}"; // Like 'assembleDebug'
+    // Source.
+    String sourceAARFolder = "${buildDir.getPath()}/outputs/aar/";
+    String sourceAARName = "${project.name}-${variant.name}.aar";
+    // Target.
+    String targetAssetFolder = "Assets/Plugins/Android";
+    String targetAARFolder = "${rootDir.getPath()}/../../Unity/IndoorAtlas/${targetAssetFolder}"; // Navigate into 'Assets'
+    String targetAARName = "IA Plugin Android.aar"; // The form you ship your plugin
+    // Create task.
+    task(deployTaskName, dependsOn: dependencyTaskName, type: Copy) {
+        from(sourceAARFolder)
+        into(targetAARFolder)
+        include(sourceAARName)
+        rename(sourceAARName, targetAARName)
+    }.group = deployTaskGroup;
+
+}

@@ -6,25 +6,20 @@
 
 \f0\fs24 \cf0 **Instructions on how to build the Android plugin and use it in Unity**\
 \
-If anyone wants to experiment with the Android plugin, please feel free to do so!\
-After any modifications in Android, you should follow these steps:\
+1. If you would like to just run the demo unity app on your phone, download the Android.apk in Android Plugin folder or open the unity project and do build & run.\
 \
 \
-1. Run gradlew build\
+2. Or, if you want to experiment with the Android plugin, please feel free to do so, and you should follow these steps after you modify the android project (just build and run in unity if you only made changes in unity):\
 \
-2. Find 
-\b iaplugin-release.aar
-\b0  file in 
-\b iaplugin/build/outputs/aar/
-\b0  and move it to Unity project\'92s 
-\b Assets/Plugins/Android/ 
-\b0 (you should only have one .aar file in the folder)\
+	a. Open IAPlugin Android Studio project and change the source and target folder names in the plugin module\'92s build.gradle (You will see two build.gradle\'92s \'96 you want to modify the inner one.)\
 \
-3. Build and run the Unity project!\
-	-You may need to change the minSDK in Unity Player Setting to the highest version (I believe it\'92s 23).\
+	b. Build the project and export .aar to the Unity project (explained on the bottom the build.gradle file you just opened)\
+\
+	c. Build and run the Unity project!\
 \
 \
-And ask me (Youngseo) anytime should you encounter bugs/errors!\
+And please do not hesitate to ask me (Youngseo) anytime should you encounter bugs/errors!\
+Thanks for reading :)\
 \
 \
-***Current status and latest logs/errors I got are explained in the logs.rtf file within this Android Plugin folder***}
+***Current status and latest logs/errors I got are explained in IA_Plugin.java as comments***}

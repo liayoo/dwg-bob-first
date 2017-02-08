@@ -1,45 +1,40 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
 
-public class IAPlugin : MonoBehaviour {
+namespace IA.Plugin 
+{
+	// Virtual class for the plugin.
+	public class IAPlugin 
+	{
 
-	#if UNITY_ANDROID
+		#region Native setup
+		protected string gameObjectName;
 
-	public Text someText;
-	public Button someButton;
-	AndroidJavaObject _activity;
-	AndroidJavaClass jc;
+		// Static factory method that deals with runtime platforms.
+		public static IAPlugin pluginWithGameObjectName(string gameObjectName)
+		{
+			IAPlugin plugin;
+			// Only considers the case of being Android for now.
+			// Can run on a device AND in Editor without getting "JNI: Init'd AndroidJavaObject with null ptr!".
+			#if UNITY_ANDROID
+			plugin = (Application.isEditor) 
+				? (IAPlugin)new IAPlugin_Editor(gameObjectName) 
+				: (IAPlugin)new IAPlugin_Android(gameObjectName);
+			#endif
+			return plugin;
+		}
 
+		// Base constructor for the plugin.
+		public IAPlugin(string gameObjectName)
+		{
+			this.gameObjectName = gameObjectName;
+			Setup ();
+		}
 
-	// Use this for initialization
-	void Start () {
-		AndroidJavaClass unity = new AndroidJavaClass ("com.unity3d.player.UnityPlayer");
-		_activity = unity.GetStatic<AndroidJavaObject> ("currentActivity");
-		//_activity.Call ("Launch");
-		//jc = new AndroidJavaClass ("com.ylyoo.iaplugin.IA_Plugin");
-		//jc.Call ("Launch");
-		Button btn = someButton.GetComponent<Button> ();
-		btn.onClick.AddListener (requestTextFromAndroid);
-		/*_activity.Call ("updateText");*/
-		//AndroidJavaClass androidClass = new AndroidJavaClass ("com.ylyoo.iaplugin.IA_Plugin");
-		//androidClass.Call ("updateText");
-	}
+		virtual protected void Setup() { }
+		#endregion
 
-	#endif
-	
-	// Update is called once per frame
-	void Update () {
-
-	}
-
-	// calls java function 'updateText' in IA_Plugin class
-	public void requestTextFromAndroid() {
-		_activity.Call ("updateText");
-	}
-
-	// java function (updateText) calls this function using UnitySendMessage
-	public void getTextFromAndroid(string text) {
-		someText.text = text;
+		virtual public void requestTextFromAndroid() { }
+		virtual public string updateLocation() { return ""; }
 	}
 }

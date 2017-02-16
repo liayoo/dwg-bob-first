@@ -8,6 +8,7 @@ public class TreasureSetupController : MonoBehaviour
 {
 	public static TreasureSetupController instance = null;
 	public static string userGameTreasureData = "";
+	public static string currTargetName = "";
 
 	void Awake()
 	{
@@ -87,7 +88,8 @@ public class TreasureSetupController : MonoBehaviour
 				var curT = treasures [j];
 				string treasure_id = curT ["treasure_id"];
 				MakeNewTreasure (newGame, curT["treasure_id"], curT["treasure_name"], curT["destination"],
-					curT["game_id"], curT["location"], curT["point"].AsInt, curT["catchgame_cat"].AsInt, curT["target_img_url"]);
+					curT["game_id"], curT["location"], curT["point"].AsInt, curT["catchgame_cat"].AsInt,
+					curT["target_img_name"], curT["treasure_img_name"]);
 			}
 		}
 
@@ -97,11 +99,11 @@ public class TreasureSetupController : MonoBehaviour
 
 
 	GameObject MakeNewTreasure(GameObject parent, string trId, string trName, string trDes, 
-		string gameId, string trLoc, int trPoint, int trCatchGame, string trTargetImg){
+		string gameId, string trLoc, int trPoint, int trCatchGame, string targetImg, string treasureImg){
 		GameObject newTreasure = (GameObject) Instantiate (treasure, StringToVector3(trLoc), Quaternion.identity);
 		newTreasure.transform.localScale = Vector3.one;
 		TreasureAttributes tr = newTreasure.GetComponent<TreasureAttributes> ();
-		tr.setAttributes (trId, trName, trDes, gameId, StringToVector3(trLoc), trPoint, trCatchGame, trTargetImg);
+		tr.setAttributes (trId, trName, trDes, gameId, StringToVector3(trLoc), trPoint, trCatchGame, targetImg, treasureImg);
 		tr.setAsChildOf (parent);
 		newTreasure.name = trId;
 		newTreasure.tag = "Treasures";

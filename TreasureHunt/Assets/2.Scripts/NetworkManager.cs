@@ -75,6 +75,14 @@ public class NetworkManager : MonoBehaviour {
 		Debug.Log("데이터 보냈어요!");
 		ws.Send(message);
 
+		// wait until RecieveData completes
+		StartCoroutine("WaitData");
+
+	}
+
+	IEnumerator WaitData()
+	{
+		yield return null;
 	}
 
 	IEnumerator RecieveData()
@@ -114,6 +122,9 @@ public class NetworkManager : MonoBehaviour {
 					// save data at static variable
 					TreasureSetupController.userGameTreasureData = data;
 					break;
+				case 6:
+					LoginButtonCtrl.instance.SaveGetDataNMove (data);
+					break;
 				case 7:
 					SearchButtonController.instance.SetupScrollBar (data);
 					// save data at static variable
@@ -121,6 +132,7 @@ public class NetworkManager : MonoBehaviour {
 					break;
 				}
 				data = "";
+				StopCoroutine ("WaitData");
 			}
 			yield return null;
 		}

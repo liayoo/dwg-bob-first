@@ -67,24 +67,27 @@ public class TreasureSetupController : MonoBehaviour
 			//make new game panel
 			GameObject newGame = (GameObject) Instantiate (game);
 			GameAttributes ga = newGame.GetComponent<GameAttributes> ();
+			var cur = games [i];
 			// attach game attributes
 			ga.SetAsChildOf(gameTreasurePanel);
-			ga.SetAttributes(games[i]["game_id"], games[i]["game_name"], games[i]["treasure_count"].AsInt, games[i]["maker_id"], games[i]["status"].AsInt);
-			newGame.name = games [i] ["game_id"];
+			ga.SetAttributes(cur["game_id"], cur["game_name"], cur["treasure_count"].AsInt, cur["maker_id"], cur["status"].AsInt);
+			newGame.name = cur ["game_id"];
 			newGame.tag = "Games";
 			// parse treasures
-			var treasures = games [i] ["Treasures"];
+			var treasures = cur ["Treasures"];
 			// check if there is an error
-			if (games[i]["treasure_count"].AsInt != treasures.Count) {
+			if (cur["treasure_count"].AsInt != treasures.Count) 
+			{
 				Debug.Log ("something wrong with treasure_count");
 				return gameTreasurePanel;
 			}
 			// make treasure objects 
 			for (int j = 0; j < treasures.Count; j++) 
 			{
-				string treasure_id = treasures [j] ["treasure_id"];
-				MakeNewTreasure (newGame, treasures[j]["treasure_id"], treasures[j]["treasure_name"], treasures[j]["destination"],
-					treasures[j]["game_id"], treasures[j]["location"], treasures[j]["point"].AsInt, treasures[j]["catchgame_cat"].AsInt, treasures[j]["target_img_url"]);
+				var curT = treasures [j];
+				string treasure_id = curT ["treasure_id"];
+				MakeNewTreasure (newGame, curT["treasure_id"], curT["treasure_name"], curT["destination"],
+					curT["game_id"], curT["location"], curT["point"].AsInt, curT["catchgame_cat"].AsInt, curT["target_img_url"]);
 			}
 		}
 
@@ -102,11 +105,11 @@ public class TreasureSetupController : MonoBehaviour
 		tr.setAsChildOf (parent);
 		newTreasure.name = trId;
 		newTreasure.tag = "Treasures";
-		DontDestroyOnLoad (newTreasure);
 		return newTreasure; 
 	}
 
-	Vector3 StringToVector3 (string str){
+	Vector3 StringToVector3 (string str)
+	{
 		// need to include System.Globalization;
 
 		// define where to splict string
@@ -116,7 +119,8 @@ public class TreasureSetupController : MonoBehaviour
 		str.Replace(" ", "");
 
 		// get rid of parentheses
-		if (str [0] == '(' && str [str.Length - 1] == ')') {
+		if (str [0] == '(' && str [str.Length - 1] == ')') 
+		{
 			str = str.Substring (1, str.Length - 2);
 		}
 
@@ -124,7 +128,8 @@ public class TreasureSetupController : MonoBehaviour
 		string[] words = str.Split (delimiterChars);
 
 		//check if it's parse properly
-		if (words.Length != 3) {
+		if (words.Length != 3) 
+		{
 			Debug.Log ("incorrect treasue location format in StringToVector3");
 		}
 

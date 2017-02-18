@@ -30,7 +30,7 @@ public class NetworkManager : MonoBehaviour {
 		StartCoroutine(RecieveData());
 		//초기 불러올 디비들
 
-		TreasureSetupController.instance.GetGameTreasure ("ab");
+//		TreasureSetupController.instance.GetGameTreasure ("ab");
 	}
 	void OnApplicationQuit()
 	{

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
@@ -32,8 +33,10 @@ public class TreasureSetupController : MonoBehaviour
 	{
 		if (!gameObject.GetComponent<NetworkManager> ().enabled) 
 		{
-			TextAsset jsonData = Resources.Load<TextAsset> ("TestForTreasureSetup");
+/*			TextAsset jsonData = Resources.Load<TextAsset> ("TestForTreasureSetup");
 			var strJsonData = jsonData.text;
+*/
+			var strJsonData = "{\"Games\":[{\"game_name\":\"game_alpha\",\"treasure_count\":2,\"maker_id\":73,\"Treasures\":[{\"treasure_name\":\"1_1\",\"description\":\"1_1\",\"location\":\"(30,0,30)\",\"point\":1,\"catchgame_cat\":0,\"target_img_name\":\"_10000_\",\"treasure_img_name\":\"1_1\"},{\"treasure_name\":\"1_2\",\"description\":\"1_2\",\"location\":\"(-30,0,30)\",\"point\":2,\"catchgame_cat\":0,\"target_img_name\":\"_1000_\",\"treasure_img_name\":\"1_1\"}]}]}";
 			Debug.Log (strJsonData);
 			ForEachGame (strJsonData);
 		}
@@ -71,7 +74,8 @@ public class TreasureSetupController : MonoBehaviour
 			var cur = games [i];
 			// attach game attributes
 			ga.SetAsChildOf(gameTreasurePanel);
-			ga.SetAttributes(cur["game_id"], cur["game_name"], cur["treasure_count"].AsInt, cur["maker_id"], cur["status"].AsInt);
+			ga.SetAttributes(cur["game_id"], cur["game_name"], cur["treasure_count"].AsInt,
+							 cur["maker_id"], cur["status"].AsInt);
 			newGame.name = cur ["game_id"];
 			newGame.tag = "Games";
 			// parse treasures
@@ -87,8 +91,8 @@ public class TreasureSetupController : MonoBehaviour
 			{
 				var curT = treasures [j];
 				string treasure_id = curT ["treasure_id"];
-				MakeNewTreasure (newGame, curT["treasure_id"], curT["treasure_name"], curT["destination"],
-					curT["game_id"], curT["location"], curT["point"].AsInt, curT["catchgame_cat"].AsInt,
+				MakeNewTreasure (newGame, curT ["treasure_id"], curT ["treasure_name"], curT ["destination"],
+					curT ["game_id"], curT ["location"], curT ["point"].AsInt, curT ["catchgame_cat"].AsInt,
 					curT["target_img_name"], curT["treasure_img_name"]);
 			}
 		}
@@ -98,18 +102,19 @@ public class TreasureSetupController : MonoBehaviour
 	}
 
 
-	GameObject MakeNewTreasure(GameObject parent, string trId, string trName, string trDes, 
+	GameObject MakeNewTreasure (GameObject parent, string trId, string trName, string trDes, 
 		string gameId, string trLoc, int trPoint, int trCatchGame, string targetImg, string treasureImg){
 		GameObject newTreasure = (GameObject) Instantiate (treasure, StringToVector3(trLoc), Quaternion.identity);
 		newTreasure.transform.localScale = Vector3.one;
 		TreasureAttributes tr = newTreasure.GetComponent<TreasureAttributes> ();
-		tr.setAttributes (trId, trName, trDes, gameId, StringToVector3(trLoc), trPoint, trCatchGame, targetImg, treasureImg);
+		tr.setAttributes (trId, trName, trDes, gameId, StringToVector3 (trLoc), trPoint, trCatchGame, targetImg, treasureImg);
 		tr.setAsChildOf (parent);
 		newTreasure.name = trId;
 		newTreasure.tag = "Treasures";
+
 		return newTreasure; 
 	}
-
+		
 	Vector3 StringToVector3 (string str)
 	{
 		// need to include System.Globalization;

@@ -31,6 +31,7 @@ namespace Vuforia
 			{
 				mTrackableBehaviour.RegisterTrackableEventHandler(this);
 			}
+			Debug.Log ("Tracker is finding " + TreasureSetupController.currTargetName);
 		}
 
 		#endregion // UNTIY_MONOBEHAVIOUR_METHODS
@@ -62,7 +63,6 @@ namespace Vuforia
 		#endregion // PUBLIC_METHODS
 
 
-
 		#region PRIVATE_METHODS
 
 
@@ -71,17 +71,18 @@ namespace Vuforia
 			Renderer[] rendererComponents = GetComponentsInChildren<Renderer>(true);
 			Collider[] colliderComponents = GetComponentsInChildren<Collider>(true);
 
+			Debug.Log ("Target is " + TreasureSetupController.currTargetName);
+			Debug.Log ("This is " + mTrackableBehaviour.TrackableName);
 			// Enable rendering:
 			foreach (Renderer component in rendererComponents)
 			{
 				if (mTrackableBehaviour.TrackableName == TreasureSetupController.currTargetName) 
 				{
-					component.enabled = false;
-					Debug.Log ("Trackable " + mTrackableBehaviour.TrackableName + " false");
+					component.enabled = true;
 				} 
 				else 
 				{
-					component.enabled = true;
+					component.enabled = false;
 				}
 			}
 
@@ -90,16 +91,13 @@ namespace Vuforia
 			{
 				if (mTrackableBehaviour.TrackableName == TreasureSetupController.currTargetName) 
 				{
-					component.enabled = false;
-					Debug.Log ("Trackable " + mTrackableBehaviour.TrackableName + " false");
+					component.enabled = true;
 				}
 				else 
 				{
-					component.enabled = true;
+					component.enabled = false;
 				}
 			}
-
-			Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
 		}
 
 
@@ -119,8 +117,6 @@ namespace Vuforia
 			{
 				component.enabled = false;
 			}
-
-			Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
 		}
 
 		#endregion // PRIVATE_METHODS

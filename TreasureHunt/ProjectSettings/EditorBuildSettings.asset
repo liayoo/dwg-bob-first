@@ -24,6 +24,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/1.Scenes/Hunter/H_CatchView.unity
   - enabled: 1
-    path: Assets/1.Scenes/MakerCamera.unity
+    path: Assets/1.Scenes/Maker/MakerCamera.unity
   - enabled: 1
     path: Assets/1.Scenes/Maker/M_MakeNew.unity
+  - enabled: 1
+    path: Assets/1.Scenes/LocationTest.unity

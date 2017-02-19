@@ -10,14 +10,15 @@ public class TreasureAttributes : MonoBehaviour {
 	Vector3 treasureLocation;
 	int treasurePoint;
 	int catchGameFlag;
-	string targetImageURL;
+	string treasureImageName;
+	string targetImageName;
 
 	public void setAsChildOf(GameObject parent){
 		this.transform.parent = parent.transform;
 	}
 
-	public void setAttributes(string trId, string trName, string trDes, 
-		string gameId, Vector3 trLoc, int trPoint, int trCatchGame, string trTargetImg){
+	public void setAttributes(string trId, string trName, string trDes, string gameId, 
+		Vector3 trLoc, int trPoint, int trCatchGame, string trImg, string targetImg){
 		treasureID = trId;
 		treasureName = trName;
 		treasureDescription = trDes;
@@ -25,7 +26,8 @@ public class TreasureAttributes : MonoBehaviour {
 		treasureLocation = trLoc;
 		treasurePoint = trPoint;
 		catchGameFlag = trCatchGame;
-		targetImageURL = trTargetImg;
+		treasureImageName = trImg;
+		targetImageName = targetImg;
 	}
 
 }

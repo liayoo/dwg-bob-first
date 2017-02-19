@@ -244,7 +244,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1852684039}
+      - m_Target: {fileID: 0}
         m_MethodName: Click
         m_Mode: 1
         m_Arguments:
@@ -988,10 +988,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1852684036}
-  - 114: {fileID: 1852684035}
   - 114: {fileID: 1852684037}
-  - 114: {fileID: 1852684038}
-  - 114: {fileID: 1852684039}
   - 114: {fileID: 1852684041}
   - 114: {fileID: 1852684040}
   m_Layer: 0
@@ -1001,20 +998,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1852684035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1852684034}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37db77c89c0537d40a00b65932d06b72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myGameButton: {fileID: 2014518060}
-  scrollbar: {fileID: 485562224}
-  gameList: {fileID: 140968, guid: d2e618e5421e4684486b6029fad4c8cd, type: 2}
 --- !u!4 &1852684036
 Transform:
   m_ObjectHideFlags: 0
@@ -1040,29 +1023,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WSAddress: ws://ec2-52-79-169-112.ap-northeast-2.compute.amazonaws.com:8081
---- !u!114 &1852684038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1852684034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d8c3d309ada3e74d9bb74446760adcf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1852684039
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1852684034}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4902f6cdd1b700d4b80e5deacc4e138c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  searchButton: {fileID: 603448188}
 --- !u!114 &1852684040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1167,7 +1127,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1852684039}
+      - m_Target: {fileID: 0}
         m_MethodName: Click
         m_Mode: 1
         m_Arguments:

@@ -210,7 +210,7 @@ public class GameListSetup : MonoBehaviour
 		TurnDownPopup();
 	}
 
-	public void OnGamePopup(string data){
-		// todo:
+	public void OnGamePopup(string data, string gameID){
+		
 	}
 }

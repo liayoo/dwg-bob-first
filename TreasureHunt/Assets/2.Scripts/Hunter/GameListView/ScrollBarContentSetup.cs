@@ -25,9 +25,8 @@ public class ScrollBarContentSetup : MonoBehaviour
 	{
 		// assign onClick event to myGameButton
 		Button myGameB = myGameButton.GetComponent<Button> ();
-		myGameB.onClick.AddListener (() => GetContent ("gg"));
-		// Todo: get user id and pass it as an argument, instead of gg
-		GetContent ("gg");		
+		myGameB.onClick.AddListener (() => GetContent (LoginButtonCtrl.userID));
+		GetContent (LoginButtonCtrl.userID);	
 	}
 		
 	public void GetContent(string userName)

@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class MenuButtonController : MonoBehaviour {
 
-	bool flag = false;
 	public GameObject target;
 
 	Button myButton;
@@ -19,13 +18,7 @@ public class MenuButtonController : MonoBehaviour {
 	}
 
 	void GotIt(){
-		if (flag) {
-			target.SetActive (false);
-			flag = false;
-		} else {
-			target.SetActive (true);
-			flag = true;
-		}
+		target.SetActive (!target.activeSelf);
 	}
 
 }

@@ -23,10 +23,11 @@ public class TreasureSetupController : MonoBehaviour
 
 	void Start()
 	{
-		// Todo: get user id and pass it as an argument, instead of gg
-		GetGameTreasure ("gg");
+		CacheController.instance.GetContent ("FieldTreasures", "");
+		//GetGameTreasure (LoginButtonCtrl.userID);
 	}
 
+	/*
 	public void GetGameTreasure(string userName)
 	{
 		if (!gameObject.GetComponent<NetworkManager> ().enabled) 
@@ -42,20 +43,21 @@ public class TreasureSetupController : MonoBehaviour
 			NetworkManager.instance.SendData (str);
 		}
 	}
+	*/
 
 	//infos included in json:
 	//	flag,
 	//	game_id, game_name, treasure_count, maker_id, status, participant
-	//	treasure_id, treasure_name, description, game_id, location, point, catchgame_cat, target_img_url
+	//	treasure_id, treasure_name, description, game_id, location, point, catchgame_cat, target_img_name
 	public GameObject game;
 	public GameObject treasure;
-	public static List<string> m_Data = new List<string>();
+	public static string currTargetName;
 
 	public GameObject ForEachGame(string data)
 	{
 		// parsing json data using SimpleJSON
 		var jsonData = JSON.Parse (data);
-		var games = jsonData ["Games"];
+		var games = jsonData ["user_game_list"];
 
 		// Make the root object to save all game & treasure objects
 		GameObject gameTreasurePanel = new GameObject();
@@ -67,24 +69,29 @@ public class TreasureSetupController : MonoBehaviour
 			//make new game panel
 			GameObject newGame = (GameObject) Instantiate (game);
 			GameAttributes ga = newGame.GetComponent<GameAttributes> ();
+			var cur = games [i];
 			// attach game attributes
 			ga.SetAsChildOf(gameTreasurePanel);
-			ga.SetAttributes(games[i]["game_id"], games[i]["game_name"], games[i]["treasure_count"].AsInt, games[i]["maker_id"], games[i]["status"].AsInt);
-			newGame.name = games [i] ["game_id"];
+			ga.SetAttributes(cur["game_id"].AsInt.ToString(), cur["game_name"], cur["treasure_count"].AsInt, cur["maker_id"], cur["status"].AsInt);
+			newGame.name = cur ["game_id"].AsInt.ToString();
 			newGame.tag = "Games";
 			// parse treasures
-			var treasures = games [i] ["Treasures"];
+			var treasures = cur ["treasures"];
+			/*
 			// check if there is an error
-			if (games[i]["treasure_count"].AsInt != treasures.Count) {
+			if (cur["treasure_count"].AsInt != treasures.Count) 
+			{
 				Debug.Log ("something wrong with treasure_count");
 				return gameTreasurePanel;
 			}
+			*/
 			// make treasure objects 
 			for (int j = 0; j < treasures.Count; j++) 
 			{
-				string treasure_id = treasures [j] ["treasure_id"];
-				MakeNewTreasure (newGame, treasures[j]["treasure_id"], treasures[j]["treasure_name"], treasures[j]["destination"],
-					treasures[j]["game_id"], treasures[j]["location"], treasures[j]["point"].AsInt, treasures[j]["catchgame_cat"].AsInt, treasures[j]["target_img_url"]);
+				var curT = treasures [j];
+				string treasure_id = curT ["treasure_id"];
+				MakeNewTreasure (newGame, curT["treasure_id"].AsInt.ToString(), curT["treasure_name"], curT["destination"], curT["game_id"].AsInt.ToString(), 
+					curT["location"], curT["point"].AsInt, curT["catchgame_cat"].AsInt, curT["treausre_img_name"], curT["target_img_name"]);
 			}
 		}
 
@@ -94,19 +101,21 @@ public class TreasureSetupController : MonoBehaviour
 
 
 	GameObject MakeNewTreasure(GameObject parent, string trId, string trName, string trDes, 
-		string gameId, string trLoc, int trPoint, int trCatchGame, string trTargetImg){
+		string gameId, string trLoc, int trPoint, int trCatchGame, string treasureImg, string targetImg){
 		GameObject newTreasure = (GameObject) Instantiate (treasure, StringToVector3(trLoc), Quaternion.identity);
 		newTreasure.transform.localScale = Vector3.one;
 		TreasureAttributes tr = newTreasure.GetComponent<TreasureAttributes> ();
-		tr.setAttributes (trId, trName, trDes, gameId, StringToVector3(trLoc), trPoint, trCatchGame, trTargetImg);
+		tr.setAttributes (trId, trName, trDes, gameId, StringToVector3(trLoc), trPoint, trCatchGame, treasureImg, targetImg);
 		tr.setAsChildOf (parent);
 		newTreasure.name = trId;
 		newTreasure.tag = "Treasures";
-		DontDestroyOnLoad (newTreasure);
+		// attach onclick event
+		// todo:
 		return newTreasure; 
 	}
 
-	Vector3 StringToVector3 (string str){
+	Vector3 StringToVector3 (string str)
+	{
 		// need to include System.Globalization;
 
 		// define where to splict string
@@ -116,7 +125,8 @@ public class TreasureSetupController : MonoBehaviour
 		str.Replace(" ", "");
 
 		// get rid of parentheses
-		if (str [0] == '(' && str [str.Length - 1] == ')') {
+		if (str [0] == '(' && str [str.Length - 1] == ')') 
+		{
 			str = str.Substring (1, str.Length - 2);
 		}
 
@@ -124,7 +134,8 @@ public class TreasureSetupController : MonoBehaviour
 		string[] words = str.Split (delimiterChars);
 
 		//check if it's parse properly
-		if (words.Length != 3) {
+		if (words.Length != 3) 
+		{
 			Debug.Log ("incorrect treasue location format in StringToVector3");
 		}
 

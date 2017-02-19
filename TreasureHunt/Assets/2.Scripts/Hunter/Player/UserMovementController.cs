@@ -2,11 +2,12 @@
 using System.Collections;
 using System.Globalization;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UserMovementController : MonoBehaviour {
 
 	public UserController uc;
-
+	
 	public Vector3 newLocation;
 
 	float moveSpeed = 50f;
@@ -25,11 +26,13 @@ public class UserMovementController : MonoBehaviour {
 	}
 
 	public void ToNewSpot(Vector3 newLoc){
-		newLoc = (newLoc - new Vector3(127.036f, 0.0f, 37.500f))*500000;
+
+		// add a line to scale up the location 
+		newLoc = (newLoc - new Vector3(127.036f, 0.0f, 37.500f)) * 500000;
 		GameObject.Find ("Canvas/Text").GetComponent<Text> ().text = newLoc.ToString();
+		// start a coroutine to move player smoothly
 		newLocation = newLoc;
 		StartCoroutine ("ToNewSpotRoutine");
-	
 	}
 
 	IEnumerator ToNewSpotRoutine()

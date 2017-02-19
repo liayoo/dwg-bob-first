@@ -1,0 +1,23 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{23D975C5-12C6-40E4-E562-E9316439EB09}") = "IndoorAtlas", "Assembly-CSharp-firstpass.csproj", "{85E846BD-5E5D-96AA-728F-44584E3CDAE3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{85E846BD-5E5D-96AA-728F-44584E3CDAE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85E846BD-5E5D-96AA-728F-44584E3CDAE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85E846BD-5E5D-96AA-728F-44584E3CDAE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85E846BD-5E5D-96AA-728F-44584E3CDAE3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal

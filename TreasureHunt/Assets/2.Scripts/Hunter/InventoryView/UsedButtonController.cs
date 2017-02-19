@@ -28,7 +28,7 @@ public class UsedButtonController : MonoBehaviour {
 	public void SetupScrollBar(string userName)
 	{
 		// make new ones, that is, search game lists
-		InventorySetupController.instance.ForEachItem (userName, true);
+//		InventorySetupController.instance.ForEachItem (userName, true);
 	}
 
 }

@@ -21,62 +21,32 @@ public class InventorySetupController : MonoBehaviour
 	}
 
 	public GameObject unusedButton;
-	public static string inventoryData = "";
 
 	void Start()
 	{
 		// assign onClick event to myGameButton
 		Button unusedB = unusedButton.GetComponent<Button> ();
-		unusedB.onClick.AddListener (() => ForEachItem ("gg", false));
-		// Todo: get user id and pass it as an argument, instead of gg
-		ForEachItem ("gg", false);		
-	}
-
-	public void GetContent(string userName)
-	{
-		if (!gameObject.GetComponent<NetworkManager> ().enabled) 
-		{
-			TextAsset jsonData = Resources.Load<TextAsset> ("TestForInventory");
-			var strJsonData = jsonData.text;
-			inventoryData = strJsonData;
-			Debug.Log ("GetContent: "+strJsonData);
-			//ForEachItem (strJsonData, false);
-		}
-		else 
-		{
-			if (inventoryData != "") 
-			{
-				//ForEachItem (inventoryData, false);
-			} 
-			else
-			{
-				string str = "{\"flag\":1, \"usn\":\"" + userName + "\"}";
-				NetworkManager.instance.SendData (str);
-			}
-		}
+		unusedB.onClick.AddListener (() => CacheController.instance.GetContent("UnusedInventory", ""));
+		CacheController.instance.GetContent("UnusedInventory", "");		
 	}
 
 	public GameObject scrollbar;
 	public GameObject treasureList;
 
-	public void ForEachItem (string userName, bool isUsed)
+	public void ForEachItem (string data, int isUsed)
 	{
 		// Destroy old treasure lists, that is, usedLists or old unusedists
 		GameObject content = GameObject.Find ("Canvas/Scroll View/Viewport/Content");
 		for (int i = 0; i < content.transform.childCount; i++) {
 			Destroy (content.transform.GetChild (i).gameObject);
 		}
-		// get data
-		GetContent(userName);
-		string data = inventoryData;
-		Debug.Log ("came back: "+data);
 		// make new treasure lists, that is, myGameLists
 		var jsonData = JSON.Parse (data);
-		var treasures = jsonData ["Treasures"];
-
+		var treasures = jsonData ["user_info"];
+		// for each treasure
 		for (int i = 0; i < treasures.Count; i++) {
 			var curr = treasures [i];
-			if (curr ["used"].AsBool == isUsed) 
+			if (curr ["used"].AsInt == isUsed) 
 			{
 				// make new treasure list
 				GameObject newTreasure = (GameObject)Instantiate (treasureList, new Vector3 (0, 0, 0), Quaternion.identity);
@@ -84,19 +54,19 @@ public class InventorySetupController : MonoBehaviour
 				newTreasure.transform.localScale = Vector3.one;
 				newTreasure.tag = "TreasureList";
 				// attach attributes
-				newTreasure.name = curr ["treasure_id"];
+				newTreasure.name = curr ["treasure_id"].AsInt.ToString();
 				newTreasure.transform.FindChild ("TreasureName").GetComponent<Text> ().text = curr ["treasure_name"];
 				newTreasure.transform.FindChild ("Description").GetComponent<Text> ().text = curr ["description"];
-				newTreasure.transform.FindChild ("Point").GetComponent<Text> ().text += curr ["point"];
+				newTreasure.transform.FindChild ("Point").GetComponent<Text> ().text += curr ["point"].AsInt.ToString();
 				newTreasure.transform.FindChild ("DateTime").GetComponent<Text> ().text = curr ["date_time"];
 				// attach onclick event
-				if (!isUsed) 
+				if (isUsed == 0) 
 				{
 					Button btn = newTreasure.GetComponent<Button> ();
 					btn.onClick.AddListener
 					(
 						delegate {
-							InventoryPopupSetup.instance.SetupPopup (data, newTreasure.name, isUsed);
+							CacheController.instance.GetContent("UnusedInventoryPopup", curr["treasure_id"].AsInt.ToString());
 						}
 					);
 				}

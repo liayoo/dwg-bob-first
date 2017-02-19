@@ -28,7 +28,7 @@ public class LoginButtonCtrl : MonoBehaviour {
 	}
 
 	public static string userName;
-	public static int userID;
+	public static string userID;
 	public static int totPoint;
 
 	void AskServer()
@@ -50,11 +50,11 @@ public class LoginButtonCtrl : MonoBehaviour {
 	{
 		// parse data
 		var jsonData = JSON.Parse(data);
-		var userInfo = jsonData ["user_info"];
+		var userInfo = jsonData ["user_info"][0];
 
 		// save Data
-		userID = userInfo ["usn"].AsInt;
-		totPoint = userInfo ["totPoint"].AsInt;
+		userID = userInfo ["usn"].AsInt.ToString();
+		totPoint = userInfo ["tot_point"].AsInt;
 
 		// move scene
 		SceneManager.LoadScene ("H_Field");

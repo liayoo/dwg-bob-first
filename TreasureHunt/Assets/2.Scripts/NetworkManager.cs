@@ -29,8 +29,8 @@ public class NetworkManager : MonoBehaviour {
 		Connect();
 		StartCoroutine(RecieveData());
 		//초기 불러올 디비들
-
-		TreasureSetupController.instance.GetGameTreasure ("ab");
+		SendData("{\"flag\":3,\"usn\":1}");
+		//TreasureSetupController.instance.GetGameTreasure ("ab");
 	}
 	void OnApplicationQuit()
 	{

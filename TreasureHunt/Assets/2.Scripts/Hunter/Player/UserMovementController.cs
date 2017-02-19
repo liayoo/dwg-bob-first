@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Globalization;
+using UnityEngine.UI;
 
 public class UserMovementController : MonoBehaviour {
 
@@ -24,7 +25,8 @@ public class UserMovementController : MonoBehaviour {
 	}
 
 	public void ToNewSpot(Vector3 newLoc){
-
+		newLoc = (newLoc - new Vector3(127.036f, 0.0f, 37.500f))*500000;
+		GameObject.Find ("Canvas/Text").GetComponent<Text> ().text = newLoc.ToString();
 		newLocation = newLoc;
 		StartCoroutine ("ToNewSpotRoutine");
 	

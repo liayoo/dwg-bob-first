@@ -9,13 +9,15 @@ public class CameraController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		offsetPos = transform.position - player.transform.position;
+		offsetPos = new Vector3 (0, 50, -70); // - player.transform.position;
 		offsetRot = transform.rotation;
 	}
 	
 	// Update is called once per frame
 	void LateUpdate () {
+		
 		transform.position = player.transform.position + offsetPos;
+
 		//todo : rotation
 		//transform.LookAt(player.transform);
 	}

@@ -25,7 +25,7 @@ namespace IA.Plugin
 
 			// Button for testing Unity–Android communication.
 			// When user clicks on the button, an empty string text ("") in Canvas should be changed.
-			startLocationUpdatesButton.onClick.AddListener (plugin.startLocationUpdates);
+//			startLocationUpdatesButton.onClick.AddListener (plugin.startLocationUpdates);
 			Debug.Log ("exiting UserLocation.Start");
 		}
 

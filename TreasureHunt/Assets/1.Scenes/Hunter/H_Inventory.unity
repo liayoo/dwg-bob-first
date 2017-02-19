@@ -569,7 +569,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09b17de3abc08804a8b0d7a5b224d0e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unusedButton: {fileID: 1509655211}
   scrollbar: {fileID: 1199570983}
   treasureList: {fileID: 171764, guid: 41247a6a62918f74e821dc3900f4e830, type: 2}
 --- !u!114 &692858339
@@ -1412,7 +1411,7 @@ Prefab:
       objectReference: {fileID: 1253594612}
     - target: {fileID: 11467434, guid: 99fee5e8a3e5754409e3468cdcc11609, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: moveSene
+      value: moveScene
       objectReference: {fileID: 0}
     - target: {fileID: 11467434, guid: 99fee5e8a3e5754409e3468cdcc11609, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName

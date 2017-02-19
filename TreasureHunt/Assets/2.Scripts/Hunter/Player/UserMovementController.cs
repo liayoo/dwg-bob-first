@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Globalization;
-using UnityEngine.SceneManagement;
 
 public class UserMovementController : MonoBehaviour {
 

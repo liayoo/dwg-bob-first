@@ -37,10 +37,12 @@ public class TreasureSetupController : MonoBehaviour
 
 	public GameObject ForEachGame(string data)
 	{
+		Debug.Log ("foreachgame of treasuresetup called");
+		// for bulletproof design, delete what were made before
+		Destroy(GameObject.Find("New Game Object"));
 		// parsing json data using SimpleJSON
 		var jsonData = JSON.Parse (data);
 		var games = jsonData ["user_game_list"];
-
 		// Make the root object to save all game & treasure objects
 		GameObject gameTreasurePanel = new GameObject();
 		gameTreasurePanel.tag = "GameTreasurePanel";

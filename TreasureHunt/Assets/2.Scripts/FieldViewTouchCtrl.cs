@@ -22,7 +22,7 @@ public class FieldViewTouchCtrl : MonoBehaviour {
 				TreasureAttributes tr = hit.collider.gameObject.GetComponent<TreasureAttributes> ();
 				TreasureSetupController.currTargetName = tr.getTargetImg ();
 				Debug.Log("The target image is" + TreasureSetupController.currTargetName);
-				SceneManager.LoadScene ("HunterCamera");
+				SceneManager.LoadScene ("H_CatchView");
 			}
 		}
 	}

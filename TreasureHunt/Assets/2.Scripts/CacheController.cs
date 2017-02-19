@@ -21,7 +21,7 @@ public class CacheController : MonoBehaviour {
 	void Start(){
 		StartCoroutine ("FlushCache");
 	}
-
+		
 	public static string userGameTreasureCache = "";
 	public static string searchNewGamesCache = "";
 	public static string inventoryCache = "";
@@ -75,6 +75,10 @@ public class CacheController : MonoBehaviour {
 
 		switch (whichModule) 
 		{
+		// for login
+		case "UserInfo":
+			jsonToServer = "{\"flag\":6, \"nickname\":\"" + temp + "\"}";
+			break;
 		// these are for M_GameList View
 		case "OnGamesIMade":
 		case "OffGamesIMade":
@@ -128,6 +132,17 @@ public class CacheController : MonoBehaviour {
 
 		switch (moduleName) 
 		{
+		// for login
+		case "UserInfo":
+			// check if flag is right
+			if (flag != 6) 
+			{
+				Debug.Log ("wrong response from server");
+				return;
+			}
+			// call according function
+			LoginButtonCtrl.instance.SaveGetDataNMove(data);
+			break;
 		// These are for M_GameList View
 		case "OnGamesIMade":
 		case "OffGamesIMade":

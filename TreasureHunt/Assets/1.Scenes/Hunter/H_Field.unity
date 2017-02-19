@@ -190,7 +190,7 @@ Prefab:
       objectReference: {fileID: 683775209}
     - target: {fileID: 11467156, guid: 8d22a6abd8527764eaeb5df05b028040, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: moveSene
+      value: moveScene
       objectReference: {fileID: 0}
     - target: {fileID: 11467156, guid: 8d22a6abd8527764eaeb5df05b028040, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -321,7 +321,7 @@ Prefab:
       objectReference: {fileID: 683775209}
     - target: {fileID: 11467156, guid: 8d22a6abd8527764eaeb5df05b028040, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: moveSene
+      value: moveScene
       objectReference: {fileID: 0}
     - target: {fileID: 11467156, guid: 8d22a6abd8527764eaeb5df05b028040, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -552,7 +552,7 @@ Prefab:
       objectReference: {fileID: 683775209}
     - target: {fileID: 11467156, guid: 8d22a6abd8527764eaeb5df05b028040, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: moveSene
+      value: moveScene
       objectReference: {fileID: 0}
     - target: {fileID: 11467156, guid: 8d22a6abd8527764eaeb5df05b028040, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName

@@ -1130,7 +1130,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 127601108}
-        m_MethodName: moveSene
+        m_MethodName: moveScene
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

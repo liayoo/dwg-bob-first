@@ -693,6 +693,7 @@ GameObject:
   - 114: {fileID: 716606901}
   - 114: {fileID: 716606902}
   - 114: {fileID: 716606903}
+  - 114: {fileID: 716606904}
   m_Layer: 0
   m_Name: Network Manager
   m_TagString: Untagged
@@ -719,12 +720,12 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 716606899}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1128054ec628dc24dbee819036c1d7b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WSAddress: ws://104.132.152.98:8081
+  WSAddress: ws://ec2-52-79-169-112.ap-northeast-2.compute.amazonaws.com:8081
 --- !u!114 &716606902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -750,6 +751,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 324506499}
+--- !u!114 &716606904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 716606899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 260cb340ebd1e5746919eea2e6405546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &903468386
 GameObject:
   m_ObjectHideFlags: 0

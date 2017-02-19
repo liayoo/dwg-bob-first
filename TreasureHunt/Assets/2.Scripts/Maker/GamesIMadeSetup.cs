@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
-using SimpleJSON;
 using UnityEngine.UI;
+using SimpleJSON;
 
-public class ScrollBarContentSetup : MonoBehaviour 
-{
-	public static ScrollBarContentSetup instance = null;
+public class GamesIMadeSetup : MonoBehaviour {
+	/*
+	public static GamesIMadeSetup instance = null;
 
 	void Awake()
 	{
@@ -19,40 +19,16 @@ public class ScrollBarContentSetup : MonoBehaviour
 		}
 	}
 
-	public GameObject myGameButton;
+	public GameObject currGameButton;
 
 	void Start()
 	{
 		// assign onClick event to myGameButton
-		Button myGameB = myGameButton.GetComponent<Button> ();
-		myGameB.onClick.AddListener (() => GetContent (LoginButtonCtrl.userID));
-		GetContent (LoginButtonCtrl.userID);	
+		Button currGameB = currGameButton.GetComponent<Button> ();
+		currGameB.onClick.AddListener (() => CacheController.GetContent ("GamesIMade"));
+		CacheController.GetContent ("GamesIMade");	
 	}
 		
-	public void GetContent(string userName)
-	{
-		if (!gameObject.GetComponent<NetworkManager> ().enabled) 
-		{
-			TextAsset jsonData = Resources.Load<TextAsset> ("TestForTreasureSetup");
-			var strJsonData = jsonData.text;
-			Debug.Log (strJsonData);
-			ForEachGame (strJsonData, true);
-		}
-		else 
-		{
-			if (TreasureSetupController.userGameTreasureData != "") 
-			{
-				ForEachGame (TreasureSetupController.userGameTreasureData, true);
-			} 
-			else
-			{
-				Debug.Log ("userGameTreasureData not initiated in TreasureSetupController. error.");
-				// or, if want to flush cache at some interval,
-				// connect to server again at this condition
-			}
-		}
-	}
-
 	public GameObject scrollbar;
 	public GameObject gameList;
 
@@ -104,5 +80,5 @@ public class ScrollBarContentSetup : MonoBehaviour
 			);
 		}
 	}
-
+	*/
 }

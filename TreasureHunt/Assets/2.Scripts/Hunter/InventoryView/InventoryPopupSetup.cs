@@ -47,15 +47,15 @@ public class InventoryPopupSetup : MonoBehaviour {
 		Debug.Log ("yes");
 		// parse data
 		var jsonData = JSON.Parse (data);
-		var treasures = jsonData ["Treasures"];
+		var treasures = jsonData ["user_info"];
 		for (int i = 0; i < treasures.Count; i++) {
 			var curr = treasures [i];
-			if (String.Compare(curr ["treasure_id"], treasureID)==0) {
+			if (String.Compare(curr ["treasure_id"].AsInt.ToString(), treasureID)==0) {
 				Debug.Log ("I'm in if");
 				// attach popup attributes
 				newPopup.transform.FindChild ("Changing Objects/TreasureName").GetComponent<Text>().text = curr ["treasure_name"];
 				newPopup.transform.FindChild ("Changing Objects/Description").GetComponent<Text>().text = curr ["description"];
-				newPopup.transform.FindChild ("Changing Objects/HowManyPoint").GetComponent<Text>().text = curr ["point"];
+				newPopup.transform.FindChild ("Changing Objects/HowManyPoint").GetComponent<Text>().text = curr ["point"].AsInt.ToString();
 				newPopup.transform.FindChild ("Changing Objects/DateTime").GetComponent<Text>().text = curr ["date_time"];
 				// todo: TreasureImage & TargetImage
 				// assign onClick event to BackButton
@@ -65,7 +65,7 @@ public class InventoryPopupSetup : MonoBehaviour {
 				// assign onClick event to UseButton
 				Transform dropOutButton = newPopup.transform.FindChild("UseButton");
 				Button dropB = dropOutButton.GetComponent<Button> ();
-				dropB.onClick.AddListener (() => UseIt("gg", curr["treasure_id"])); // todo: put valid usn instead of "gg"				
+				dropB.onClick.AddListener (() => UseIt(curr["treasure_id"].AsInt.ToString())); // todo: put valid usn instead of "gg"				
 			}
 		}
 	}
@@ -76,7 +76,7 @@ public class InventoryPopupSetup : MonoBehaviour {
 		Debug.Log ("turned down popup");
 	}
 
-	public void UseIt(string userName, string treasureID){
+	public void UseIt(string treasureID){
 		// inform server that this user drops out of the game
 		if (!gameObject.GetComponent<NetworkManager> ().enabled) 
 		{
@@ -84,21 +84,11 @@ public class InventoryPopupSetup : MonoBehaviour {
 		}
 		else 
 		{
-			string str = "{\"flag\":18, \"usn\":\"" + userName + "\", \"treasure_id\":" + treasureID + "\"}";
-			NetworkManager.instance.SendData (str);
+			string [] temp = {treasureID};
+			CacheController.instance.SendSignal ("UseTreasure", temp);
 		}
-		// reset data
-		// todo: or, just change used flag of that treasure on data
-		InventorySetupController.inventoryData = ""; // needed if we use cache flush
 		// close popup and delete this gamelist from scroll view
 		Destroy(GameObject.Find("Canvas/Scroll View/Viewport/Content/" + treasureID));
 		TurnDownPopup();
 	}
-
-	/*
-	void PutAttribute(GameObject newPopup, string child, string gameText, string jsonID){
-		var thisGame = JSON.Parse(gameText);
-		newPopup.transform.FindChild (child).GetComponent<Text> ().text = thisGame [jsonID];
-	}
-	*/
 }

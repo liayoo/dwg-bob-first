@@ -23,10 +23,11 @@ public class TreasureSetupController : MonoBehaviour
 
 	void Start()
 	{
-		// Todo: get user id and pass it as an argument, instead of gg
-		GetGameTreasure ("gg");
+		CacheController.instance.GetContent ("FieldTreasures", "");
+		//GetGameTreasure (LoginButtonCtrl.userID);
 	}
 
+	/*
 	public void GetGameTreasure(string userName)
 	{
 		if (!gameObject.GetComponent<NetworkManager> ().enabled) 
@@ -42,20 +43,21 @@ public class TreasureSetupController : MonoBehaviour
 			NetworkManager.instance.SendData (str);
 		}
 	}
+	*/
 
 	//infos included in json:
 	//	flag,
 	//	game_id, game_name, treasure_count, maker_id, status, participant
-	//	treasure_id, treasure_name, description, game_id, location, point, catchgame_cat, target_img_url
+	//	treasure_id, treasure_name, description, game_id, location, point, catchgame_cat, target_img_name
 	public GameObject game;
 	public GameObject treasure;
-	public static List<string> m_Data = new List<string>();
+	public static string currTargetName;
 
 	public GameObject ForEachGame(string data)
 	{
 		// parsing json data using SimpleJSON
 		var jsonData = JSON.Parse (data);
-		var games = jsonData ["Games"];
+		var games = jsonData ["user_game_list"];
 
 		// Make the root object to save all game & treasure objects
 		GameObject gameTreasurePanel = new GameObject();
@@ -70,24 +72,26 @@ public class TreasureSetupController : MonoBehaviour
 			var cur = games [i];
 			// attach game attributes
 			ga.SetAsChildOf(gameTreasurePanel);
-			ga.SetAttributes(cur["game_id"], cur["game_name"], cur["treasure_count"].AsInt, cur["maker_id"], cur["status"].AsInt);
-			newGame.name = cur ["game_id"];
+			ga.SetAttributes(cur["game_id"].AsInt.ToString(), cur["game_name"], cur["treasure_count"].AsInt, cur["maker_id"], cur["status"].AsInt);
+			newGame.name = cur ["game_id"].AsInt.ToString();
 			newGame.tag = "Games";
 			// parse treasures
-			var treasures = cur ["Treasures"];
+			var treasures = cur ["treasures"];
+			/*
 			// check if there is an error
 			if (cur["treasure_count"].AsInt != treasures.Count) 
 			{
 				Debug.Log ("something wrong with treasure_count");
 				return gameTreasurePanel;
 			}
+			*/
 			// make treasure objects 
 			for (int j = 0; j < treasures.Count; j++) 
 			{
 				var curT = treasures [j];
 				string treasure_id = curT ["treasure_id"];
-				MakeNewTreasure (newGame, curT["treasure_id"], curT["treasure_name"], curT["destination"],
-					curT["game_id"], curT["location"], curT["point"].AsInt, curT["catchgame_cat"].AsInt, curT["target_img_url"]);
+				MakeNewTreasure (newGame, curT["treasure_id"].AsInt.ToString(), curT["treasure_name"], curT["destination"], curT["game_id"].AsInt.ToString(), 
+					curT["location"], curT["point"].AsInt, curT["catchgame_cat"].AsInt, curT["treausre_img_name"], curT["target_img_name"]);
 			}
 		}
 
@@ -97,14 +101,16 @@ public class TreasureSetupController : MonoBehaviour
 
 
 	GameObject MakeNewTreasure(GameObject parent, string trId, string trName, string trDes, 
-		string gameId, string trLoc, int trPoint, int trCatchGame, string trTargetImg){
+		string gameId, string trLoc, int trPoint, int trCatchGame, string treasureImg, string targetImg){
 		GameObject newTreasure = (GameObject) Instantiate (treasure, StringToVector3(trLoc), Quaternion.identity);
 		newTreasure.transform.localScale = Vector3.one;
 		TreasureAttributes tr = newTreasure.GetComponent<TreasureAttributes> ();
-		tr.setAttributes (trId, trName, trDes, gameId, StringToVector3(trLoc), trPoint, trCatchGame, trTargetImg);
+		tr.setAttributes (trId, trName, trDes, gameId, StringToVector3(trLoc), trPoint, trCatchGame, treasureImg, targetImg);
 		tr.setAsChildOf (parent);
 		newTreasure.name = trId;
 		newTreasure.tag = "Treasures";
+		// attach onclick event
+		// todo:
 		return newTreasure; 
 	}
 

@@ -29,8 +29,6 @@ public class NetworkManager : MonoBehaviour {
 		Connect();
 		StartCoroutine(RecieveData());
 		//초기 불러올 디비들
-
-		TreasureSetupController.instance.GetGameTreasure ("ab");
 	}
 	void OnApplicationQuit()
 	{
@@ -75,15 +73,17 @@ public class NetworkManager : MonoBehaviour {
 		Debug.Log("데이터 보냈어요!");
 		ws.Send(message);
 
+		/*
 		// wait until RecieveData completes
 		StartCoroutine("WaitData");
-
+		*/
 	}
-
+	/*
 	IEnumerator WaitData()
 	{
 		yield return null;
 	}
+	*/
 
 	IEnumerator RecieveData()
 	{
@@ -104,14 +104,23 @@ public class NetworkManager : MonoBehaviour {
 
 			if (data.Length != 0)
 			{
+
+				Debug.Log (data);
+
 				var jsonData = JSON.Parse(data);
 				int flag = jsonData["flag"].AsInt;
 				//Debug.Log(flag);
 				switch (flag)
 				{
+				case 6:
+					LoginButtonCtrl.instance.SaveGetDataNMove (data);
+					break;
+				/*
 				case 1:
 					//InventorySetupController.instance.ForEachItem (data, false);
 					InventorySetupController.inventoryData = data;
+					break;
+				case 2:
 					break;
 				case 3:
 					//The other way to do it:
@@ -122,17 +131,18 @@ public class NetworkManager : MonoBehaviour {
 					// save data at static variable
 					TreasureSetupController.userGameTreasureData = data;
 					break;
-				case 6:
-					LoginButtonCtrl.instance.SaveGetDataNMove (data);
-					break;
 				case 7:
 					SearchButtonController.instance.SetupScrollBar (data);
 					// save data at static variable
 					SearchButtonController.searchGameData = data;
 					break;
+				*/
+				default:
+					CacheController.instance.DoIt (data);
+					break;
 				}
 				data = "";
-				StopCoroutine ("WaitData");
+				//StopCoroutine ("WaitData");
 			}
 			yield return null;
 		}

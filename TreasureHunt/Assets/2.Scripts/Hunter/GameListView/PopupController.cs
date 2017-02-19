@@ -69,8 +69,7 @@ public class PopupController : MonoBehaviour {
 		// get data
 		if (!gameObject.GetComponent<NetworkManager> ().enabled)
 		{
-			// Todo: get user id and pass it as an argument, instead of gg
-			GetContent ("gg", isMyGame);		
+			GetContent (LoginButtonCtrl.userID, isMyGame);		
 		}
 		// make popup
 		GameObject popup = null;
@@ -93,10 +92,12 @@ public class PopupController : MonoBehaviour {
 		// find the right match for the game popup is called for
 		// parse data
 		var jsonData = JSON.Parse (data);
-		var games = jsonData ["Games"];
-		for (int i = 0; i < games.Count; i++) {
+		var games = jsonData ["user_game_list"];
+		for (int i = 0; i < games.Count; i++) 
+		{
 			var curr = games [i];
-			if (String.Compare(curr ["game_id"], gameID)==0) {
+			if (String.Compare(curr ["game_id"], gameID)==0) 
+			{
 				Debug.Log ("I'm in if");
 				// attach popup attributes
 				newPopup.transform.FindChild ("Changing Objects/GameName").GetComponent<Text>().text = curr ["game_name"];
@@ -122,9 +123,10 @@ public class PopupController : MonoBehaviour {
 				}
 				// attach treasure list
 				// parse treasures
-				var treasures = curr ["Treasures"];
+				var treasures = curr ["treasures"];
 				// check if there is an error
-				if (curr["treasure_count"].AsInt != treasures.Count) {
+				if (curr["treasure_count"].AsInt != treasures.Count) 
+				{
 					Debug.Log ("something wrong with treasure_count");
 				}
 				// make treasure objects 
@@ -136,13 +138,15 @@ public class PopupController : MonoBehaviour {
 		}
 	}
 
-	public void TurnDownPopup(){
+	public void TurnDownPopup()
+	{
 		Debug.Log ("called");
 		Destroy(GameObject.FindWithTag("Popup"));
 		Debug.Log ("turned down popup");
 	}
 
-	public void DropOrJoin(bool isDrop, string userName, string gameID){
+	public void DropOrJoin(bool isDrop, string userName, string gameID)
+	{
 		// inform server that this user drops out of the game
 		if (!gameObject.GetComponent<NetworkManager> ().enabled) 
 		{
@@ -167,11 +171,5 @@ public class PopupController : MonoBehaviour {
 		Destroy(GameObject.Find("Canvas/Scroll View/Viewport/Content/" + gameID));
 		TurnDownPopup();
 	}
-
-	/*
-	void PutAttribute(GameObject newPopup, string child, string gameText, string jsonID){
-		var thisGame = JSON.Parse(gameText);
-		newPopup.transform.FindChild (child).GetComponent<Text> ().text = thisGame [jsonID];
-	}
-	*/
+		
 }

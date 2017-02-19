@@ -20,16 +20,6 @@ public class InventorySetupController : MonoBehaviour
 		}
 	}
 
-	public GameObject unusedButton;
-
-	void Start()
-	{
-		// assign onClick event to myGameButton
-		Button unusedB = unusedButton.GetComponent<Button> ();
-		unusedB.onClick.AddListener (() => CacheController.instance.GetContent("UnusedInventory", ""));
-		CacheController.instance.GetContent("UnusedInventory", "");		
-	}
-
 	public GameObject scrollbar;
 	public GameObject treasureList;
 

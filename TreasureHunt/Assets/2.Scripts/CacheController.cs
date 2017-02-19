@@ -152,7 +152,7 @@ public class CacheController : MonoBehaviour {
 			// save at cache
 			myGamesCache = data;
 			// call according function
-			GameListSetup.instance.OnGamePopup (data);
+			GameListSetup.instance.OnGamePopup (data, variable);
 			break;
 		// This is for H_Field View
 		case "FieldTreasures":

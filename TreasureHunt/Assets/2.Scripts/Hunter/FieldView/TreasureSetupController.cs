@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
@@ -8,6 +9,7 @@ public class TreasureSetupController : MonoBehaviour
 {
 	public static TreasureSetupController instance = null;
 	public static string userGameTreasureData = "";
+	public static string currTargetName = "";
 
 	void Awake()
 	{
@@ -24,26 +26,7 @@ public class TreasureSetupController : MonoBehaviour
 	void Start()
 	{
 		CacheController.instance.GetContent ("FieldTreasures", "");
-		//GetGameTreasure (LoginButtonCtrl.userID);
 	}
-
-	/*
-	public void GetGameTreasure(string userName)
-	{
-		if (!gameObject.GetComponent<NetworkManager> ().enabled) 
-		{
-			TextAsset jsonData = Resources.Load<TextAsset> ("TestForTreasureSetup");
-			var strJsonData = jsonData.text;
-			Debug.Log (strJsonData);
-			ForEachGame (strJsonData);
-		}
-		else 
-		{
-			string str = "{\"flag\":3, \"usn\":\"" + userName + "\"}";
-			NetworkManager.instance.SendData (str);
-		}
-	}
-	*/
 
 	//infos included in json:
 	//	flag,
@@ -51,7 +34,6 @@ public class TreasureSetupController : MonoBehaviour
 	//	treasure_id, treasure_name, description, game_id, location, point, catchgame_cat, target_img_name
 	public GameObject game;
 	public GameObject treasure;
-	public static string currTargetName;
 
 	public GameObject ForEachGame(string data)
 	{
@@ -72,26 +54,27 @@ public class TreasureSetupController : MonoBehaviour
 			var cur = games [i];
 			// attach game attributes
 			ga.SetAsChildOf(gameTreasurePanel);
-			ga.SetAttributes(cur["game_id"].AsInt.ToString(), cur["game_name"], cur["treasure_count"].AsInt, cur["maker_id"], cur["status"].AsInt);
+			ga.SetAttributes(cur["game_id"].AsInt.ToString(), cur["game_name"], 
+                       cur["treasure_count"].AsInt, cur["maker_id"], cur["status"].AsInt);
 			newGame.name = cur ["game_id"].AsInt.ToString();
 			newGame.tag = "Games";
 			// parse treasures
 			var treasures = cur ["treasures"];
-			/*
 			// check if there is an error
 			if (cur["treasure_count"].AsInt != treasures.Count) 
 			{
 				Debug.Log ("something wrong with treasure_count");
 				return gameTreasurePanel;
 			}
-			*/
 			// make treasure objects 
 			for (int j = 0; j < treasures.Count; j++) 
 			{
 				var curT = treasures [j];
 				string treasure_id = curT ["treasure_id"];
-				MakeNewTreasure (newGame, curT["treasure_id"].AsInt.ToString(), curT["treasure_name"], curT["destination"], curT["game_id"].AsInt.ToString(), 
-					curT["location"], curT["point"].AsInt, curT["catchgame_cat"].AsInt, curT["treausre_img_name"], curT["target_img_name"]);
+				MakeNewTreasure (newGame, curT["treasure_id"].AsInt.ToString(), curT["treasure_name"], 
+                         curT["destination"], curT["game_id"].AsInt.ToString(), curT["location"], 
+                         curT["point"].AsInt, curT["catchgame_cat"].AsInt, curT["target_img_name"], 
+                         curT["treasure_img_name"]);
 			}
 		}
 
@@ -100,20 +83,19 @@ public class TreasureSetupController : MonoBehaviour
 	}
 
 
-	GameObject MakeNewTreasure(GameObject parent, string trId, string trName, string trDes, 
-		string gameId, string trLoc, int trPoint, int trCatchGame, string treasureImg, string targetImg){
+	GameObject MakeNewTreasure (GameObject parent, string trId, string trName, string trDes, 
+		string gameId, string trLoc, int trPoint, int trCatchGame, string targetImg, string treasureImg){
 		GameObject newTreasure = (GameObject) Instantiate (treasure, StringToVector3(trLoc), Quaternion.identity);
 		newTreasure.transform.localScale = Vector3.one;
 		TreasureAttributes tr = newTreasure.GetComponent<TreasureAttributes> ();
-		tr.setAttributes (trId, trName, trDes, gameId, StringToVector3(trLoc), trPoint, trCatchGame, treasureImg, targetImg);
+		tr.setAttributes (trId, trName, trDes, gameId, StringToVector3 (trLoc), trPoint, trCatchGame, targetImg, treasureImg);
 		tr.setAsChildOf (parent);
 		newTreasure.name = trId;
 		newTreasure.tag = "Treasures";
-		// attach onclick event
-		// todo:
+
 		return newTreasure; 
 	}
-
+		
 	Vector3 StringToVector3 (string str)
 	{
 		// need to include System.Globalization;

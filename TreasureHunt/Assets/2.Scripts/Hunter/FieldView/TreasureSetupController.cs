@@ -26,28 +26,7 @@ public class TreasureSetupController : MonoBehaviour
 	void Start()
 	{
 		CacheController.instance.GetContent ("FieldTreasures", "");
-		//GetGameTreasure (LoginButtonCtrl.userID);
 	}
-
-	/*
-	public void GetGameTreasure(string userName)
-	{
-		if (!gameObject.GetComponent<NetworkManager> ().enabled) 
-		{
-/*			TextAsset jsonData = Resources.Load<TextAsset> ("TestForTreasureSetup");
-			var strJsonData = jsonData.text;
-*/
-			var strJsonData = "{\"Games\":[{\"game_name\":\"game_alpha\",\"treasure_count\":2,\"maker_id\":73,\"Treasures\":[{\"treasure_name\":\"1_1\",\"description\":\"1_1\",\"location\":\"(30,0,30)\",\"point\":1,\"catchgame_cat\":0,\"target_img_name\":\"_10000_\",\"treasure_img_name\":\"1_1\"},{\"treasure_name\":\"1_2\",\"description\":\"1_2\",\"location\":\"(-30,0,30)\",\"point\":2,\"catchgame_cat\":0,\"target_img_name\":\"_1000_\",\"treasure_img_name\":\"1_1\"}]}]}";
-			Debug.Log (strJsonData);
-			ForEachGame (strJsonData);
-		}
-		else 
-		{
-			string str = "{\"flag\":3, \"usn\":\"" + userName + "\"}";
-			NetworkManager.instance.SendData (str);
-		}
-	}
-	*/
 
 	//infos included in json:
 	//	flag,
@@ -55,7 +34,6 @@ public class TreasureSetupController : MonoBehaviour
 	//	treasure_id, treasure_name, description, game_id, location, point, catchgame_cat, target_img_name
 	public GameObject game;
 	public GameObject treasure;
-	public static string currTargetName;
 
 	public GameObject ForEachGame(string data)
 	{
@@ -82,14 +60,12 @@ public class TreasureSetupController : MonoBehaviour
 			newGame.tag = "Games";
 			// parse treasures
 			var treasures = cur ["treasures"];
-			/*
 			// check if there is an error
 			if (cur["treasure_count"].AsInt != treasures.Count) 
 			{
 				Debug.Log ("something wrong with treasure_count");
 				return gameTreasurePanel;
 			}
-			*/
 			// make treasure objects 
 			for (int j = 0; j < treasures.Count; j++) 
 			{

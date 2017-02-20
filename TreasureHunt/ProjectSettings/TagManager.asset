@@ -11,6 +11,9 @@ TagManager:
   - GameList
   - Popup
   - TreasureList
+  - Slime
+  - ImageTarget
+  - GameOver
   layers:
   - Default
   - TransparentFX

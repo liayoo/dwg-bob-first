@@ -17,12 +17,14 @@ public class FieldViewTouchCtrl : MonoBehaviour {
 			Debug.Log(" you clicked on " + hit.collider.gameObject.name);
 
 			if (hit.collider.gameObject.tag == "Treasures")
-			{
-				hit.collider.gameObject.GetComponent<Animator>().SetTrigger("open");
+			{				
 				TreasureAttributes tr = hit.collider.gameObject.GetComponent<TreasureAttributes> ();
 				TreasureSetupController.currTargetName = tr.getTargetImg ();
-				Debug.Log("The target image is" + TreasureSetupController.currTargetName);
-				SceneManager.LoadScene ("HunterCamera");
+                GameManager.instance.treasure_id = int.Parse(tr.treasureID);
+                GameManager.instance.point = tr.treasurePoint;
+                GameManager.instance.minigameCat = tr.catchGameFlag;                
+                Debug.Log("The target image is" + TreasureSetupController.currTargetName);
+                GameManager.instance.MoveScene("H_CatchView");
 			}
 		}
 	}

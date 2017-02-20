@@ -16,11 +16,16 @@ public class TouchCtrl : MonoBehaviour {
         if (Physics.Raycast(ray, out hit))
         {
             Debug.Log(" you clicked on " + hit.collider.gameObject.name);
-
-            if (hit.collider.gameObject.tag == "TreasureBox")
+            if (hit.collider.gameObject.tag == "Treasures")
             {
-                hit.collider.gameObject.GetComponent<Animator>().SetTrigger("open");
+                //hit.collider.gameObject.GetComponent<Animator>().SetTrigger("open");
+                GameObject.Find("MiniGameManger").GetComponent<MiniGame2Manager>().enabled = true;
+            }
+            if (hit.collider.gameObject.tag == "Slime")
+            {
+                hit.collider.gameObject.GetComponent<SlimeCtrl>().Die();
             }
         }
     }
+    
 }

@@ -103,5 +103,6 @@ public class CloudUpLoadManager : MonoBehaviour
 		{
 			Debug.Log("<color=green>REQUEST SUCCESS:" + request.text + "</color>");
 		}
+        S3Manager.instance.PostObject(texture, targetName);
 	}
 }

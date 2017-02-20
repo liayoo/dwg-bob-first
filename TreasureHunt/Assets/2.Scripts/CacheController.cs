@@ -36,6 +36,13 @@ public class CacheController : MonoBehaviour {
 
 		switch (whichModule)
 		{
+		case "GetTreasure":
+			if (temp.Length != 1) {
+				Debug.Log ("wrong number of variables for temp in sendsignal, drop out of game");
+			}
+			str = "{\"flag\":19, \"usn\":" + LoginButtonCtrl.userID + ", \"treasure_id\":" + temp [0] + "}";
+			inventoryCache = ""; // flush cache
+			break;
 		case "DropOutOfGame":
 			if (temp.Length != 1) 
 			{
@@ -78,6 +85,10 @@ public class CacheController : MonoBehaviour {
 		// for login
 		case "UserInfo":
 			jsonToServer = "{\"flag\":6, \"nickname\":\"" + temp + "\"}";
+			break;
+		// for quiz game setup
+		case "QuizSetup":
+			jsonToServer = "{\"flag\":8, \"nickname\":\"" + temp + "\"}";
 			break;
 		// these are for M_GameList View
 		case "OnGamesIMade":
@@ -143,6 +154,18 @@ public class CacheController : MonoBehaviour {
 			// call according function
 			LoginButtonCtrl.instance.SaveGetDataNMove(data);
 			break;
+		// for quiz game setup
+		case "QuizSetup":
+			// check if flag is right
+			if (flag != 8) 
+			{
+				Debug.Log ("wrong response from server");
+				return;
+			}
+			// no cache saving needed
+			// call according function
+			QuizGameSetup.instance.QuizSetup (data);
+			break;
 		// These are for M_GameList View
 		case "OnGamesIMade":
 		case "OffGamesIMade":
@@ -167,7 +190,7 @@ public class CacheController : MonoBehaviour {
 			// save at cache
 			myGamesCache = data;
 			// call according function
-			GameListSetup.instance.OnGamePopup (data, variable);
+			MakerPopupController.instance.OnGamePopup (data, variable);
 			break;
 		// This is for H_Field View
 		case "FieldTreasures":

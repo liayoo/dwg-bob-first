@@ -34,4 +34,8 @@ public class TreasureAttributes : MonoBehaviour {
 	public string getTargetImg(){
 		return targetImg;
 	}
+
+	public int getCatchGameFlag(){
+		return catchGameFlag;
+	}
 }

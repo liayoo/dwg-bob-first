@@ -22,7 +22,21 @@ public class FieldViewTouchCtrl : MonoBehaviour {
 				TreasureAttributes tr = hit.collider.gameObject.GetComponent<TreasureAttributes> ();
 				TreasureSetupController.currTargetName = tr.getTargetImg ();
 				Debug.Log("The target image is" + TreasureSetupController.currTargetName);
-				SceneManager.LoadScene ("H_CatchView");
+				// Load appropriate scene accroding to the catchGameFlag
+				int catchGameFlag = tr.getCatchGameFlag ();
+				SceneManager.LoadScene ("H_CatchView2D");////////////
+				/*
+				// catchGameFlag 1, 2, 3 = slime pang (easy, normal, hard)
+				if (catchGameFlag < 3) 
+				{
+					SceneManager.LoadScene ("H_CatchView");
+				} 
+				// catchGameFlag 4 = Quiz
+				else 
+				{
+					SceneManager.LoadScene ("H_CatchView2D");
+				}
+				*/
 			}
 		}
 	}

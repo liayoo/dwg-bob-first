@@ -17,7 +17,7 @@ public class TouchCtrl : MonoBehaviour {
         {
             Debug.Log(" you clicked on " + hit.collider.gameObject.name);
 
-            if (hit.collider.gameObject.tag == "TreasureBox")
+            if (hit.collider.gameObject.tag == "Treasures")
             {
                 hit.collider.gameObject.GetComponent<Animator>().SetTrigger("open");
             }

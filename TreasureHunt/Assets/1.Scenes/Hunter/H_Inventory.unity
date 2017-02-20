@@ -191,6 +191,7 @@ GameObject:
   - 224: {fileID: 119504583}
   - 222: {fileID: 119504585}
   - 114: {fileID: 119504584}
+  - 114: {fileID: 119504586}
   m_Layer: 5
   m_Name: Point
   m_TagString: Untagged
@@ -255,6 +256,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 119504582}
+--- !u!114 &119504586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 119504582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14f2776d928e4a746b4eba88d82b65f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &175545901
 GameObject:
   m_ObjectHideFlags: 0

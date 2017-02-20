@@ -8,8 +8,9 @@ using SimpleJSON;
 public class TreasureSetupController : MonoBehaviour 
 {
 	public static TreasureSetupController instance = null;
-	public static string userGameTreasureData = "";
 	public static string currTargetName = "";
+	public static int currPoint = -1;
+	public static int currTreasureID = -1;
 
 	void Awake()
 	{
@@ -40,6 +41,7 @@ public class TreasureSetupController : MonoBehaviour
 		Debug.Log ("foreachgame of treasuresetup called");
 		// for bulletproof design, delete what were made before
 		Destroy(GameObject.Find("New Game Object"));
+
 		// parsing json data using SimpleJSON
 		var jsonData = JSON.Parse (data);
 		var games = jsonData ["user_game_list"];

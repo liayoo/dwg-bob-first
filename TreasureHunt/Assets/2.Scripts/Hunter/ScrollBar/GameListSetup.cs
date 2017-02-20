@@ -37,6 +37,7 @@ public class GameListSetup : MonoBehaviour
 		
 	public GameObject scrollbar;
 	public GameObject gameList;
+	public GameObject miniTreasureList;
 
 	public void ForEachGame(string data, string whichModule)
 	{
@@ -172,10 +173,28 @@ public class GameListSetup : MonoBehaviour
 				// make treasure objects 
 				for (int j = 0; j < treasures.Count; j++) 
 				{
-					// todo: 
+					GameObject treasureText = (GameObject) Instantiate (miniTreasureList);
+					treasureText.transform.SetParent (GameObject.Find ("Canvas/MyGamePopup(Clone)/Treasures/Viewport/Content").transform);
+					treasureText.transform.localScale = Vector3.one;
+					treasureText.name = treasures [j] ["treasure_id"].AsInt.ToString();
+					treasureText.transform.FindChild ("TreasureName").GetComponent<Text>().text = treasures [j] ["treasure_name"];
+					treasureText.transform.FindChild ("Point").GetComponent<Text>().text = treasures [j] ["point"].AsInt.ToString();
+					// todo: treasure img and target img
+					// attach onclick listener
+					treasureText.GetComponent<Button>().onClick.AddListener(() => TreasureDetailPopup(data, treasureText.name));
 				}
 			}
 		}
+	}
+
+	public GameObject treasureDetailPopup;
+
+	public void TreasureDetailPopup(string data, string treasureID){
+		GameObject popup = (GameObject) Instantiate (treasureDetailPopup);
+		popup.transform.SetParent(GameObject.Find("Canvas").transform);
+		popup.transform.localScale = Vector3.one;
+		popup.transform.localPosition = new Vector3(0, 0, 0); 
+		//todo:
 	}
 
 	public void TurnDownPopup()
@@ -210,7 +229,5 @@ public class GameListSetup : MonoBehaviour
 		TurnDownPopup();
 	}
 
-	public void OnGamePopup(string data, string gameID){
-		
-	}
+
 }

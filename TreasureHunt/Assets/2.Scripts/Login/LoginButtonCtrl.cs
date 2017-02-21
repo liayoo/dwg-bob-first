@@ -26,10 +26,12 @@ public class LoginButtonCtrl : MonoBehaviour {
 		Button but = goButt.GetComponent<Button> ();
 		but.onClick.AddListener (AskServer);
 	}
-
+		
 	public static string userName;
 	public static string userID;
 	public static int totPoint;
+	public static string[] treasuresIGot = new string[400]; // 400 an arbitrary number of max number of treasures
+	public static int treasuresIGotNextIndex;
 
 	void AskServer()
 	{
@@ -44,7 +46,7 @@ public class LoginButtonCtrl : MonoBehaviour {
 			CacheController.instance.GetContent ("UserInfo", userName);
 		}
 	}
-
+		
 	public void SaveGetDataNMove(string data)
 	{
 		// parse data
@@ -55,9 +57,38 @@ public class LoginButtonCtrl : MonoBehaviour {
 		userID = userInfo ["usn"].AsInt.ToString();
 		totPoint = userInfo ["tot_point"].AsInt;
 
+		// call ConstructTreasuresIGot
+		CacheController.instance.GetContent ("TreasuresIGot", userID);
+
+	}
+
+	public void ConstructTreasuresIGot(string data)
+	{
+		// parse data
+		var jsonData = JSON.Parse (data);
+		var treasures = jsonData ["user_info"];
+
+		// for each treasure
+		for (int i = 0; i < treasures.Count; i++) 
+		{
+			treasuresIGot [i] = treasures [i] ["treasure_id"];
+		}
+		treasuresIGotNextIndex = treasures.Count;
+
+		DebugTreasuresIGot ();
+
 		// move scene
 		SceneManager.LoadScene ("H_Field");
 	}
 
-
+	void DebugTreasuresIGot()
+	{
+		string str = "";
+		for (int i = 0; i < 400; i++) 
+		{
+			str += treasuresIGot [i];
+			str += " ";
+		}
+		Debug.Log (str);
+	}
 }

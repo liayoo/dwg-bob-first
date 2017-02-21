@@ -74,7 +74,11 @@ public class TreasureSetupController : MonoBehaviour
 			for (int j = 0; j < treasures.Count; j++) 
 			{
 				var curT = treasures [j];
-				string treasure_id = curT ["treasure_id"];
+				if (FindFrom (curT ["treasure_id"].AsInt.ToString ())) 
+				{
+					// skip what user already has
+					continue;
+				}
 				MakeNewTreasure (newGame, curT["treasure_id"].AsInt.ToString(), curT["treasure_name"], 
                          curT["destination"], curT["game_id"].AsInt.ToString(), curT["location"], 
                          curT["point"].AsInt, curT["catchgame_cat"].AsInt, curT["target_img_name"], 
@@ -88,7 +92,8 @@ public class TreasureSetupController : MonoBehaviour
 
 
 	GameObject MakeNewTreasure (GameObject parent, string trId, string trName, string trDes, 
-		string gameId, string trLoc, int trPoint, int trCatchGame, string targetImg, string treasureImg){
+		string gameId, string trLoc, int trPoint, int trCatchGame, string targetImg, string treasureImg)
+	{
 		GameObject newTreasure = (GameObject) Instantiate (treasure, StringToVector3(trLoc), Quaternion.identity);
 		newTreasure.transform.localScale = Vector3.one;
 		TreasureAttributes tr = newTreasure.GetComponent<TreasureAttributes> ();
@@ -100,6 +105,18 @@ public class TreasureSetupController : MonoBehaviour
 		return newTreasure; 
 	}
 		
+	bool FindFrom (string treasureID)
+	{
+		for (int i = 0; i < LoginButtonCtrl.treasuresIGotNextIndex; i++) 
+		{
+			if (LoginButtonCtrl.treasuresIGot [i].Equals (treasureID)) 
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 	Vector3 StringToVector3 (string str)
 	{
 		// need to include System.Globalization;

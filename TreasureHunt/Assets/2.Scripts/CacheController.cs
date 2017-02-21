@@ -86,9 +86,13 @@ public class CacheController : MonoBehaviour {
 		case "UserInfo":
 			jsonToServer = "{\"flag\":6, \"nickname\":\"" + temp + "\"}";
 			break;
+		// for constructing treasuresIGot list
+		case "TreasuresIGot":
+			jsonToServer = "{\"flag\":1, \"usn\":\"" + temp + "\"}";
+			break;
 		// for quiz game setup
 		case "QuizSetup":
-			jsonToServer = "{\"flag\":8, \"nickname\":\"" + temp + "\"}";
+			jsonToServer = "{\"flag\":8, \"treasure_id\":\"" + temp + "\"}";
 			break;
 		// these are for M_GameList View
 		case "OnGamesIMade":
@@ -132,6 +136,7 @@ public class CacheController : MonoBehaviour {
 		else 
 		{
 			// pass on cache data
+			Debug.Log("cache data is: "+ cacheData);
 			DoIt(cacheData);
 		}
 	}
@@ -153,6 +158,17 @@ public class CacheController : MonoBehaviour {
 			}
 			// call according function
 			LoginButtonCtrl.instance.SaveGetDataNMove(data);
+			break;
+		// for constructing treasuresIGot list
+		case "TreasuresIGot":
+			// check if flag is right
+			if (flag != 1) 
+			{
+				Debug.Log ("wrong response from server");
+				return;
+			}
+			// call according function
+			LoginButtonCtrl.instance.ConstructTreasuresIGot(data);
 			break;
 		// for quiz game setup
 		case "QuizSetup":

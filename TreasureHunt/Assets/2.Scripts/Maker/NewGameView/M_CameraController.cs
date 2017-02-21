@@ -8,8 +8,6 @@ namespace IA.Plugin
     {
 
         public Button captureButton;
-        public GameObject CameraPanel;
-        public GameObject MakerCamera;
         public GameObject MainPanel;
         public GameObject PopupPanel;
 
@@ -21,8 +19,7 @@ namespace IA.Plugin
         void OnCaptureButton()
         {
             StartCoroutine(MakerSceneManager.instance.uploadToCloud());
-            CameraPanel.SetActive(false);
-            MakerCamera.SetActive(false);
+            
             MainPanel.SetActive(true);
             PopupPanel.SetActive(true);
         }

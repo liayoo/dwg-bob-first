@@ -95,9 +95,7 @@ namespace IA.Plugin
             Debug.Log("Signature: " + signature);
 
             WWW request = new WWW(serviceURI, System.Text.Encoding.UTF8.GetBytes(JsonWriter.Serialize(model)), headers);
-            //S3Manager.instance.PostObject(texture, targetName);
-            S3Manager.instance.SetData(targetName, image);
-            Debug.Log("s3");
+			TargetImageController.instance.targetImage = targetName;
             yield return request;
 
             if (request.error != null)

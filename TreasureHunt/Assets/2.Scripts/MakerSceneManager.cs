@@ -17,6 +17,9 @@ namespace IA.Plugin
         IAPlugin plugin;
         public bool callback;
 
+		public GameObject CameraPanel;
+		public GameObject MakerCamera;
+
         public static MakerSceneManager instance = null;
 
         void Awake()
@@ -73,15 +76,16 @@ namespace IA.Plugin
                 targetName = System.DateTime.Now.ToString("yyMMdd_hhmmss");
                 Debug.Log("<color=red>Uploading Image</color>");
                 StartCoroutine(CloudUpLoadManager.PostNewTarget(tex, targetName));
+				CameraPanel.SetActive(false);
+				MakerCamera.SetActive(false);
             }
 
             while (!callback)
             {
                 yield return null;
             }
-
-
-            GameObject.Find("Canvas").GetComponent<TargetImageController>().targetImage = targetName;
+				
+            //GameObject.Find("Canvas").GetComponent<TargetImageController>().targetImage = targetName;
             GameObject.Find("Canvas").GetComponent<TargetImageController>().locationUpdates = location;
         }
 

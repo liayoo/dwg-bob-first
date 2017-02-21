@@ -38,6 +38,7 @@ public class MiniGame2Manager : MonoBehaviour {
         mainCanvas.SetActive(false);     
         gameCanvas.SetActive(true);
         int cat = GameManager.instance.minigameCat;
+        Debug.Log("minigame: "+cat);
         switch (cat)
         {
             case 1:
@@ -84,6 +85,7 @@ public class MiniGame2Manager : MonoBehaviour {
             slimeTr.FindChild("ModelSlime").GetComponent<SkinnedMeshRenderer>().material.mainTexture = color[Random.Range(0, color.Length)];
             NavMeshAgent nav = slime.GetComponent<NavMeshAgent>();
             nav.destination = targetTr.position;
+            Debug.Log(targetTr.gameObject.name);
             nav.speed = monsterSpeed;
             yield return new WaitForSeconds(1f);
             

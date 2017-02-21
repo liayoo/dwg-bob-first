@@ -41,8 +41,7 @@ public class LoginButtonCtrl : MonoBehaviour {
 		{
 			// get user data from server
 			userName = GameObject.Find ("Canvas/Panel/IDField/InputField/Text").GetComponent<Text> ().text;
-			string str = "{\"flag\":6, \"nickname\":\"" + userName + "\"}";
-			NetworkManager.instance.SendData (str);
+			CacheController.instance.GetContent ("UserInfo", userName);
 		}
 	}
 

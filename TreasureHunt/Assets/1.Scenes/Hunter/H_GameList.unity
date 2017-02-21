@@ -1040,6 +1040,8 @@ MonoBehaviour:
   secondTabModule: SearchGames
   scrollbar: {fileID: 485562224}
   gameList: {fileID: 140968, guid: d2e618e5421e4684486b6029fad4c8cd, type: 2}
+  miniTreasureList: {fileID: 123932, guid: 811d70dca68c65b4eaae43a2355423a8, type: 2}
+  treasureDetailPopup: {fileID: 190618, guid: 750586bd164e27b4aafc65a5fd5339a0, type: 2}
 --- !u!114 &1852684041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1270,7 +1272,7 @@ Prefab:
       objectReference: {fileID: 1116101544}
     - target: {fileID: 11467434, guid: 99fee5e8a3e5754409e3468cdcc11609, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: moveSene
+      value: moveScene
       objectReference: {fileID: 0}
     - target: {fileID: 11467434, guid: 99fee5e8a3e5754409e3468cdcc11609, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName

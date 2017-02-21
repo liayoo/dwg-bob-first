@@ -26,7 +26,7 @@ public class M_PopupController : MonoBehaviour {
 	Slider points; 
 	Dropdown catchGame; 
 	string location;
-
+    public GameObject popupPanel;
 	void Awake()
 	{
 		Debug.Log ("Awake");
@@ -43,7 +43,7 @@ public class M_PopupController : MonoBehaviour {
 	void Start()
 	{
 		Debug.Log ("Start");
-		GameObject.Find ("Panel").gameObject.GetComponent<Button> ().onClick.AddListener (ClosePopup);
+        popupPanel.gameObject.GetComponent<Button> ().onClick.AddListener (ClosePopup);
 		foreach (GameObject popup in GameObject.FindGameObjectsWithTag ("Popup")) 
 		{
 			if (popup.name == "Popup1") 
@@ -102,9 +102,9 @@ public class M_PopupController : MonoBehaviour {
 		points.value = 0;
 		catchGame.value = 0;
 		location = "";
-		if (GameObject.Find ("Panel").activeInHierarchy) 
+		if (popupPanel.activeInHierarchy) 
 		{
-			GameObject.Find ("Panel").SetActive (false);
+            popupPanel.SetActive (false);
 		}
 		scrollSnapRect.Init (0);
 		scrollSnapRect.LerpToPage (0);

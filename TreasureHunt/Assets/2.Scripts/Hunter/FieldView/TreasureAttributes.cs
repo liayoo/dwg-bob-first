@@ -38,4 +38,12 @@ public class TreasureAttributes : MonoBehaviour {
 	public int getCatchGameFlag(){
 		return catchGameFlag;
 	}
+
+	public int getPoint(){
+		return treasurePoint;
+	}
+
+	public string getTreasureID(){
+		return treasureID;
+	}
 }

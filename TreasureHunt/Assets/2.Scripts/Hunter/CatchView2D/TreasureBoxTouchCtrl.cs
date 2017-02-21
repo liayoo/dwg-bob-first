@@ -20,7 +20,7 @@ public class TreasureBoxTouchCtrl : MonoBehaviour {
 			if (hit.collider.gameObject.tag == "Treasures")
 			{
 				hit.collider.gameObject.GetComponent<Animator>().SetTrigger("open");
-				CacheController.instance.GetContent ("QuizSetup", TreasureSetupController.currTreasureID);
+				CacheController.instance.GetContent ("QuizSetup", TreasureSetupController.currTreasureID.ToString());
 			}
 		}
 	}

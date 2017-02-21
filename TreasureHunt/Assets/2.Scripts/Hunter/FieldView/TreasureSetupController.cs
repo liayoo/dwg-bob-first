@@ -10,7 +10,7 @@ public class TreasureSetupController : MonoBehaviour
 	public static TreasureSetupController instance = null;
 	public static string currTargetName = "";
 	public static int currPoint = -1;
-	public static int currTreasureID = -1;
+	public static string currTreasureID = "";
 
 	void Awake()
 	{

@@ -52,7 +52,7 @@ public class QuizGameSetup : MonoBehaviour {
 
 			// to server:
 			// inform server that the user got the treasure
-			string[] temp = {TreasureSetupController.currTreasureID.ToString()};
+			string[] temp = {TreasureSetupController.currTreasureID};
 			CacheController.instance.SendSignal("GetTreasure", temp);
 
 			// client UI:

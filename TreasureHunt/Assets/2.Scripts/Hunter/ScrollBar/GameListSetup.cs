@@ -174,7 +174,7 @@ public class GameListSetup : MonoBehaviour
 				for (int j = 0; j < treasures.Count; j++) 
 				{
 					GameObject treasureText = (GameObject) Instantiate (miniTreasureList);
-					treasureText.transform.SetParent (GameObject.Find ("Canvas/MyGamePopup(Clone)/Treasures/Viewport/Content").transform);
+					treasureText.transform.SetParent (GameObject.Find ("SmallTreasureList(Clone)").transform);
 					treasureText.transform.localScale = Vector3.one;
 					treasureText.name = treasures [j] ["treasure_id"].AsInt.ToString();
 					treasureText.transform.FindChild ("TreasureName").GetComponent<Text>().text = treasures [j] ["treasure_name"];

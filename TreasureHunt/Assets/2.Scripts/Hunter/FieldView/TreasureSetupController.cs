@@ -32,7 +32,7 @@ public class TreasureSetupController : MonoBehaviour
 	//infos included in json:
 	//	flag,
 	//	game_id, game_name, treasure_count, maker_id, status, participant
-	//	treasure_id, treasure_name, description, game_id, location, point, catchgame_cat, target_img_name
+	//	treasure_id, treasure_name, description, game_id, location, treasure_point, catchgame_cat, target_img_name
 	public GameObject game;
 	public GameObject treasure;
 
@@ -81,7 +81,7 @@ public class TreasureSetupController : MonoBehaviour
 				}
 				MakeNewTreasure (newGame, curT["treasure_id"].AsInt.ToString(), curT["treasure_name"], 
                          curT["destination"], curT["game_id"].AsInt.ToString(), curT["location"], 
-                         curT["point"].AsInt, curT["catchgame_cat"].AsInt, curT["target_img_name"], 
+                         curT["treasure_point"].AsInt, curT["catchgame_cat"].AsInt, curT["target_img_name"], 
                          curT["treasure_img_name"]);
 			}
 		}

@@ -95,9 +95,10 @@ namespace IA.Plugin
             Debug.Log("Signature: " + signature);
 
             WWW request = new WWW(serviceURI, System.Text.Encoding.UTF8.GetBytes(JsonWriter.Serialize(model)), headers);
+            Utility.SaveImage(targetName+".jpg", image);
             //S3Manager.instance.PostObject(texture, targetName);
-            S3Manager.instance.SetData(targetName, image);
-            Debug.Log("s3");
+            //S3Manager.instance.SetData(targetName, image);
+            //Debug.Log("s3");
             yield return request;
 
             if (request.error != null)
@@ -111,5 +112,7 @@ namespace IA.Plugin
             
             MakerSceneManager.instance.callback = true;
         }
+        
     }
+    
 }

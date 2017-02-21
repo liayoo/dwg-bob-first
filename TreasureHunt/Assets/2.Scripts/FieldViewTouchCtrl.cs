@@ -6,7 +6,7 @@ using System.Collections;
 public class FieldViewTouchCtrl : MonoBehaviour {
 	RaycastHit hit;
 	Ray ray;
-
+    int count = 0;
 	void Update()
 	{
 		ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -24,7 +24,11 @@ public class FieldViewTouchCtrl : MonoBehaviour {
                 GameManager.instance.point = tr.treasurePoint;
                 GameManager.instance.minigameCat = tr.catchGameFlag;                
                 Debug.Log("The target image is" + TreasureSetupController.currTargetName);
-                GameManager.instance.MoveScene("H_CatchView");
+                if (count == 0)
+                {
+                    GameManager.instance.MoveScene("H_CatchView");
+                    count++;
+                }
 			}
 		}
 	}

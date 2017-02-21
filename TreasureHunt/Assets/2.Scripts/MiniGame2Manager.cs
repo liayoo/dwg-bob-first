@@ -123,7 +123,7 @@ public class MiniGame2Manager : MonoBehaviour {
     }
     public void GetReward()
     {
-        string str = "{\"flag\":19,\"usn\":" + LoginButtonCtrl.userID + ",\"treasure_id\":" + GameManager.instance.treasure_id + "\"point\":" + GameManager.instance.point+"}";
+        string str = "{\"flag\":19,\"usn\":" + LoginButtonCtrl.userID + ",\"treasure_id\":" + GameManager.instance.treasure_id + ",\"point\":" + GameManager.instance.point+"}";
         NetworkManager.instance.SendData(str);        
     }
    

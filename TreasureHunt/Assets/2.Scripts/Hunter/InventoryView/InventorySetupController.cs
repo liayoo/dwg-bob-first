@@ -8,7 +8,7 @@ using System;
 public class InventorySetupController : MonoBehaviour
 {
     public static InventorySetupController instance = null;
-
+    public Sprite targetImg;
     void Awake()
     {
         if (instance == null)
@@ -52,6 +52,10 @@ public class InventorySetupController : MonoBehaviour
                 newTreasure.transform.FindChild("Description").GetComponent<Text>().text = curr["description"];
                 newTreasure.transform.FindChild("Point").GetComponent<Text>().text += curr["point"].AsInt.ToString();
                 newTreasure.transform.FindChild("DateTime").GetComponent<Text>().text = curr["date_time"];
+                
+                Resources.Load<Sprite>(curr["target_img_name"] + ".jpg");
+                targetImg = Utility.CreateSprite(curr["target_img_name"]);
+                newTreasure.transform.FindChild("Image").GetComponent<Image>().sprite = targetImg;
                 // attach onclick event
                 if (isUsed == 0)
                 {
@@ -66,5 +70,4 @@ public class InventorySetupController : MonoBehaviour
             }
         }
     }
-
 }

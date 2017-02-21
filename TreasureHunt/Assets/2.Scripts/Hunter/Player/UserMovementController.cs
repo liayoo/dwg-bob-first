@@ -7,10 +7,16 @@ public class UserMovementController : MonoBehaviour {
 
 	public UserController uc;
 
+
 	public Vector3 newLocation;
 
-	float moveSpeed = 50f;
-	float turnSpeed = 540f;
+	public Vector3 sendTo;
+	public Vector3 anchorPoint;
+
+	public float moveSpeed;
+	public float turnSpeed;
+
+	public int CONVERSION;
 
 	void Awake() {
 	
@@ -24,8 +30,18 @@ public class UserMovementController : MonoBehaviour {
 	
 	}
 
+	public void ForTest(){
+		ToNewSpot (sendTo);
+	}
+
 	public void ToNewSpot(Vector3 newLoc){
+
 		newLoc = (newLoc - new Vector3(127.036f, 0.0f, 37.500f))*500000;
+
+
+		// add a line to scale up the location 
+		newLoc = (newLoc - anchorPoint) * CONVERSION;
+  
 		GameObject.Find ("Canvas/Text").GetComponent<Text> ().text = newLoc.ToString();
 		newLocation = newLoc;
 		StartCoroutine ("ToNewSpotRoutine");

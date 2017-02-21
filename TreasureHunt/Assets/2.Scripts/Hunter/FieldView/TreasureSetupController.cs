@@ -7,9 +7,11 @@ using SimpleJSON;
 public class TreasureSetupController : MonoBehaviour 
 {
 	public static TreasureSetupController instance = null;
-	public static string userGameTreasureData = "";
-
-	void Awake()
+    //public static string userGameTreasureData = "";
+    public static string currTargetName = "";
+ 	public static int currPoint = -1;
+ 	public static int currTreasureID = -1;
+    void Awake()
 	{
 		if (instance == null) 
 		{
@@ -51,7 +53,7 @@ public class TreasureSetupController : MonoBehaviour
 	//	treasure_id, treasure_name, description, game_id, location, point, catchgame_cat, target_img_name
 	public GameObject game;
 	public GameObject treasure;
-	public static string currTargetName;
+	
 
 	public GameObject ForEachGame(string data)
 	{

@@ -1828,7 +1828,7 @@ Transform:
   - {fileID: 735508179}
   - {fileID: 2092486110}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
 --- !u!1 &720167675
 GameObject:
   m_ObjectHideFlags: 0
@@ -2332,12 +2332,6 @@ CanvasRenderer:
 GameObject:
   m_PrefabParentObject: {fileID: 192382, guid: dfafd38d9f11a534a9d4993a5d7ac89a, type: 2}
   m_PrefabInternal: {fileID: 1976565178}
---- !u!114 &962379692 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11419692, guid: dfafd38d9f11a534a9d4993a5d7ac89a,
-    type: 2}
-  m_PrefabInternal: {fileID: 1976565178}
-  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &974734453
 GameObject:
   m_ObjectHideFlags: 0
@@ -4897,7 +4891,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
 --- !u!1 &1737017289
 GameObject:
   m_ObjectHideFlags: 0
@@ -5010,64 +5004,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1746459122}
---- !u!1 &1773643094
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1773643098}
-  - 114: {fileID: 1773643096}
-  - 114: {fileID: 1773643095}
-  m_Layer: 0
-  m_Name: NetworkManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1773643095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1773643094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e1065107ec59da4faf72fc642cb4f25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  url: https://s3.ap-northeast-2.amazonaws.com/treasures1/
-  img: {fileID: 962379692}
-  IDENTITY_POOL_ID: ap-northeast-2:66448e5f-1ce6-48c3-9eb6-5955312f282f
-  ANALYTICS_APP_ID: 
-  testTex: {fileID: 0}
---- !u!114 &1773643096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1773643094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1128054ec628dc24dbee819036c1d7b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WSAddress: ws://ec2-52-79-169-112.ap-northeast-2.compute.amazonaws.com:8081
---- !u!4 &1773643098
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1773643094}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 166.15105, y: 103.1174, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
 --- !u!1 &1793406882
 GameObject:
   m_ObjectHideFlags: 0

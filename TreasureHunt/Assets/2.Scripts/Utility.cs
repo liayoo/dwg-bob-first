@@ -10,6 +10,7 @@ public class Utility : MonoBehaviour {
         var binary = new BinaryWriter(file);
         binary.Write(bytes);
         file.Close();
+		Debug.Log ("image saved");
     }
     public static Sprite CreateSprite(string imageName)
     {

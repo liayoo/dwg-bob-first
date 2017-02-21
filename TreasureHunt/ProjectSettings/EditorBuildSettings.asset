@@ -7,10 +7,14 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/1.Scenes/Logo.unity
+  - enabled: 0
+    path: Assets/1.Scenes/Main.unity
   - enabled: 1
     path: Assets/1.Scenes/Login.unity
   - enabled: 1
-    path: Assets/1.Scenes/Main.unity
+    path: Assets/1.Scenes/UserLogin.unity
+  - enabled: 1
+    path: Assets/1.Scenes/UserJoin.unity
   - enabled: 1
     path: Assets/1.Scenes/VuforiaTest.unity
   - enabled: 1

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using SimpleJSON;
+using UnityEngine.SceneManagement;
 
 public class CacheController : MonoBehaviour {
 
@@ -82,6 +83,10 @@ public class CacheController : MonoBehaviour {
 
 		switch (whichModule) 
 		{
+		//for join
+		case "UserJoin":
+			jsonToServer = "{\"flag\":11, \"nickname\":\"" + temp + "\"}";
+			break;
 		// for login
 		case "UserInfo":
 			jsonToServer = "{\"flag\":6, \"nickname\":\"" + temp + "\"}";
@@ -143,6 +148,18 @@ public class CacheController : MonoBehaviour {
 
 		switch (moduleName) 
 		{
+		// for join
+		case "UserJoin":
+			// check if flag is right
+			var message = jsonData ["message"].ToString();
+			Debug.Log (message);
+			if (flag != 11) {
+				Debug.Log ("wrong response from server");
+				return;
+			} else {
+				GameManager.instance.MoveScene("UserLogin");
+			}
+			break;
 		// for login
 		case "UserInfo":
 			// check if flag is right

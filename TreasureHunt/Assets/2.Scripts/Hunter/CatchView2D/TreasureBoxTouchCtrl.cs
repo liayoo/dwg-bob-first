@@ -1,5 +1,7 @@
 ﻿using Vuforia;
 using UnityEngine;
+using Vuforia;
+
 using System.Collections;
 
 public class TreasureBoxTouchCtrl : MonoBehaviour {
@@ -17,9 +19,8 @@ public class TreasureBoxTouchCtrl : MonoBehaviour {
 		{
 			Debug.Log(" you clicked on " + hit.collider.gameObject.name);
 
-			if (hit.collider.gameObject.tag == "Treasures")
-			{
-				hit.collider.gameObject.GetComponent<Animator>().SetTrigger("open");
+			if (hit.collider.gameObject.tag == "Treasures") {
+				hit.collider.gameObject.GetComponent<Animator> ().SetTrigger ("open");
 				CacheController.instance.GetContent ("QuizSetup", TreasureSetupController.currTargetName);
 			}
 		}

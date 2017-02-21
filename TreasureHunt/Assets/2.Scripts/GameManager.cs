@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour {
 
     public void MoveScene(string sceneName)
     {
+		Debug.Log (sceneName);
         SceneManager.UnloadScene(SceneManager.GetActiveScene().buildIndex);
         SceneManager.LoadSceneAsync(sceneName);
     }

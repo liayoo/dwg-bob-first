@@ -22,6 +22,7 @@ public class NetworkManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        
     }
 
     void Start()

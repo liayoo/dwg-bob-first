@@ -2646,7 +2646,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 38377f22d7f3f9e4280c3b62f0ee483a, type: 3}
   monsterCount: 10
   dieCount: 0
-  mainCanvas: {fileID: 0}
+  mainCanvas: {fileID: 142948830}
   gameCanvas: {fileID: 513940067}
   rewardCanvas: {fileID: 984792882}
   monsterSpeed: 0

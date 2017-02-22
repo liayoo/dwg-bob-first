@@ -1373,6 +1373,8 @@ MonoBehaviour:
   catchGameFlag: 0
   targetImg: 
   treasureImg: 
+  question: 
+  answer: 
 --- !u!65 &1266730202
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -33,7 +33,7 @@ public class MiniGame2Manager : MonoBehaviour {
 
     void Start()
     {
-        parentTr = GameObject.Find("ImageTarget").transform;
+        parentTr = GameObject.Find("ImageTarget(Clone)").transform;
         targetTr = parentTr.FindChild("TreasureBox").transform;
         mainCanvas.SetActive(false);     
         gameCanvas.SetActive(true);
@@ -126,7 +126,18 @@ public class MiniGame2Manager : MonoBehaviour {
     public void GetReward()
     {
         string str = "{\"flag\":19,\"usn\":" + LoginButtonCtrl.userID + ",\"treasure_id\":" + GameManager.instance.treasure_id + ",\"point\":" + GameManager.instance.point+"}";
-        NetworkManager.instance.SendData(str);        
+        NetworkManager.instance.SendData(str);
+        // client side: 
+        //add up treasure point 
+        LoginButtonCtrl.totPoint += TreasureSetupController.currPoint;
+        //get rid of treasure box of THIS treasure on field view
+        LoginButtonCtrl.treasuresIGot[LoginButtonCtrl.treasuresIGotNextIndex++] = TreasureSetupController.currTreasureID.ToString();
+
+        // to server:
+        // inform server that the user got the treasure
+        //string[] temp = { TreasureSetupController.currTreasureID.ToString() };
+        //CacheController.instance.SendSignal("GetTreasure", temp);
+        GameManager.instance.MoveScene("H_Field");       
     }
    
 }

@@ -14,6 +14,8 @@ public class TreasureAttributes : MonoBehaviour
     public int catchGameFlag;
     public string targetImg;
     public string treasureImg;
+    public string question;
+    public string answer;
 
     public void setAsChildOf(GameObject parent)
     {
@@ -21,7 +23,7 @@ public class TreasureAttributes : MonoBehaviour
     }
 
     public void setAttributes(string trId, string trName, string trDes, string gameId,
-       Vector3 trLoc, int trPoint, int trCatchGame, string trTargetImg, string trTreasureImg)
+       Vector3 trLoc, int trPoint, int trCatchGame, string trTargetImg, string trTreasureImg, string question, string answer)
     {
         treasureID = trId;
         treasureName = trName;
@@ -32,6 +34,8 @@ public class TreasureAttributes : MonoBehaviour
         catchGameFlag = trCatchGame;
         targetImg = trTargetImg;
         treasureImg = trTreasureImg;
+        this.question = question;
+        this.answer = answer;
     }
 
     public string getTargetImg()

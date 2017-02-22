@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class QuizGameSetup : MonoBehaviour {
 
 	public static QuizGameSetup instance = null;
-
+    public GameObject canvas;
 	void Awake()
 	{
 		if (instance == null) 
@@ -22,19 +22,23 @@ public class QuizGameSetup : MonoBehaviour {
 
 	public GameObject quizPopup;
 
-	public void QuizSetup(string data)
+	public void QuizSetup()
 	{
 		// parsing json data using SimpleJSON
-		var jsonData = JSON.Parse (data);
-		var quizInfo = jsonData ["treasure_info"];
+		//var jsonData = JSON.Parse (data);
+		//var quizInfo = jsonData ["treasure_info"];
 		// make popup
 		GameObject popup = (GameObject) Instantiate (quizPopup);
-		// give question
-		popup.transform.FindChild("Panel/ScrollView/Content/Text").GetComponent<Text>().text = quizInfo ["question"];
-		// attach button listener
-		popup.transform.FindChild("Panel/Button").GetComponent<Button>().onClick.AddListener(() => CheckRightOrWrong(popup, quizInfo ["answer"]));
+        popup.transform.SetParent(canvas.transform);
+        popup.transform.localScale = Vector3.one;
+        popup.transform.localPosition = new Vector3(0, 0, 0);
+        // give question
+        Debug.Log(GameManager.instance.question);
+        popup.transform.FindChild("Panel/Scroll View/Viewport/Content/Text").GetComponent<Text>().text = GameManager.instance.question;
+        // attach button listener
+        popup.transform.FindChild("Panel/Button").GetComponent<Button>().onClick.AddListener(() => CheckRightOrWrong(popup, GameManager.instance.answer));
 
-	}
+    }
 
 	public void CheckRightOrWrong(GameObject popup, string answer)
 	{
@@ -48,18 +52,17 @@ public class QuizGameSetup : MonoBehaviour {
 			//add up treasure point 
 			LoginButtonCtrl.totPoint += TreasureSetupController.currPoint;
 			//get rid of treasure box of THIS treasure on field view
-			LoginButtonCtrl.treasuresIGot [LoginButtonCtrl.treasuresIGotNextIndex++] = TreasureSetupController.currTreasureID;
+			LoginButtonCtrl.treasuresIGot [LoginButtonCtrl.treasuresIGotNextIndex++] = TreasureSetupController.currTreasureID.ToString();
 
-			// to server:
-			// inform server that the user got the treasure
-			string[] temp = {TreasureSetupController.currTreasureID};
-			CacheController.instance.SendSignal("GetTreasure", temp);
-
-			// client UI:
-			// turn down popup
-			Destroy (popup);
+            // to server:
+            // inform server that the user got the treasure
+            string str = "{\"flag\":19,\"usn\":" + LoginButtonCtrl.userID + ",\"treasure_id\":" + GameManager.instance.treasure_id + ",\"point\":" + GameManager.instance.point + "}";
+            NetworkManager.instance.SendData(str);
+            // client UI:
+            // turn down popup
+            Destroy (popup);
 			// move back to Field View
-			SceneManager.LoadScene("H_FieldView");
+			SceneManager.LoadScene("H_Field");
 		} 
 		// if answer is wrong
 		else 

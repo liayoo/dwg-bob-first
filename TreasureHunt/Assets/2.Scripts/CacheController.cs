@@ -132,18 +132,14 @@ public class CacheController : MonoBehaviour {
 			break;
 		}
 
-		if (cacheData == "") 
-		{
+		
 			// communicate with server to fetch needed data
 			NetworkManager.instance.SendData (jsonToServer);
 			// now networkManager would call DoIt
-		} 
-		else 
-		{
+		
 			// pass on cache data
-			Debug.Log("cache data is: "+ cacheData);
-			DoIt(cacheData);
-		}
+			
+		
 	}
 
 	public void DoIt(string data)
@@ -197,7 +193,7 @@ public class CacheController : MonoBehaviour {
 			}
 			// no cache saving needed
 			// call according function
-			QuizGameSetup.instance.QuizSetup (data);
+			//QuizGameSetup.instance.QuizSetup (data);
 			break;
 		// These are for M_GameList View
 		case "OnGamesIMade":

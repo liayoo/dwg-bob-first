@@ -57,10 +57,10 @@ public class InventoryPopupSetup : MonoBehaviour {
 				newPopup.transform.FindChild ("Changing Objects/Description").GetComponent<Text>().text = curr ["description"];
 				newPopup.transform.FindChild ("Changing Objects/HowManyPoint").GetComponent<Text>().text = curr ["point"].AsInt.ToString();
 				newPopup.transform.FindChild ("Changing Objects/DateTime").GetComponent<Text>().text = curr ["date_time"];
-                newPopup.transform.FindChild("Changing Objects/TargetImage").GetComponent<Image>().sprite = InventorySetupController.instance.targetImg;
-
-				// assign onClick event to UseButton
-				Transform dropOutButton = newPopup.transform.FindChild("UseButton");
+                newPopup.transform.FindChild("Changing Objects/TargetImage").GetComponent<Image>().sprite = Utility.CreateSprite(curr["treasure_id"] + "_");
+                newPopup.transform.FindChild("Changing Objects/ItemImage").GetComponent<Image>().sprite =Utility.CreateSprite(curr["treasure_img_name"]);
+                // assign onClick event to UseButton
+                Transform dropOutButton = newPopup.transform.FindChild("UseButton");
 				Button dropB = dropOutButton.GetComponent<Button> ();
 				dropB.onClick.AddListener (() => UseIt(curr["treasure_id"].AsInt.ToString()));
 			}

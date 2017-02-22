@@ -4,32 +4,32 @@ using System.Collections.Generic;
 using System.Globalization;
 using SimpleJSON;
 
-public class TreasureSetupController : MonoBehaviour 
+public class TreasureSetupController : MonoBehaviour
 {
-	public static TreasureSetupController instance = null;
-	public static string currTargetName = "";
-	public static int currPoint = -1;
-	public static string currTreasureID = "";
+    public static TreasureSetupController instance = null;
+    //public static string userGameTreasureData = "";
+    public static string currTargetName = "";
+    public static int currPoint = -1;
+    public static int currTreasureID = -1;
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
 
-	void Awake()
-	{
-		if (instance == null) 
-		{
-			instance = this;
-		} 
-		else if (instance != this) 
-		{
-			Destroy (gameObject);
-		}
-	}
+    void Start()
+    {
+        CacheController.instance.GetContent("FieldTreasures", "");
+        //GetGameTreasure (LoginButtonCtrl.userID);
+    }
 
-	void Start()
-	{
-		CacheController.instance.GetContent ("FieldTreasures", "");
-		//GetGameTreasure (LoginButtonCtrl.userID);
-	}
-
-	/*
+    /*
 	public void GetGameTreasure(string userName)
 	{
 		if (!gameObject.GetComponent<NetworkManager> ().enabled) 
@@ -47,39 +47,39 @@ public class TreasureSetupController : MonoBehaviour
 	}
 	*/
 
-	//infos included in json:
-	//	flag,
-	//	game_id, game_name, treasure_count, maker_id, status, participant
-	//	treasure_id, treasure_name, description, game_id, location, treasure_point, catchgame_cat, target_img_name
-	public GameObject game;
-	public GameObject treasure;
-	
+    //infos included in json:
+    //	flag,
+    //	game_id, game_name, treasure_count, maker_id, status, participant
+    //	treasure_id, treasure_name, description, game_id, location, point, catchgame_cat, target_img_name
+    public GameObject game;
+    public GameObject treasure;
 
-	public GameObject ForEachGame(string data)
-	{
-		// parsing json data using SimpleJSON
-		var jsonData = JSON.Parse (data);
-		var games = jsonData ["user_game_list"];
 
-		// Make the root object to save all game & treasure objects
-		GameObject gameTreasurePanel = new GameObject();
-		gameTreasurePanel.tag = "GameTreasurePanel";
+    public GameObject ForEachGame(string data)
+    {
+        // parsing json data using SimpleJSON
+        var jsonData = JSON.Parse(data);
+        var games = jsonData["user_game_list"];
 
-		// Make game objects
-		for (int i = 0; i < games.Count; i++) 
-		{
-			//make new game panel
-			GameObject newGame = (GameObject) Instantiate (game);
-			GameAttributes ga = newGame.GetComponent<GameAttributes> ();
-			var cur = games [i];
-			// attach game attributes
-			ga.SetAsChildOf(gameTreasurePanel);
-			ga.SetAttributes(cur["game_id"].AsInt.ToString(), cur["game_name"], cur["treasure_count"].AsInt, cur["maker_id"], cur["status"].AsInt);
-			newGame.name = cur ["game_id"].AsInt.ToString();
-			newGame.tag = "Games";
-			// parse treasures
-			var treasures = cur ["treasures"];
-			/*
+        // Make the root object to save all game & treasure objects
+        GameObject gameTreasurePanel = new GameObject();
+        gameTreasurePanel.tag = "GameTreasurePanel";
+
+        // Make game objects
+        for (int i = 0; i < games.Count; i++)
+        {
+            //make new game panel
+            GameObject newGame = (GameObject)Instantiate(game);
+            GameAttributes ga = newGame.GetComponent<GameAttributes>();
+            var cur = games[i];
+            // attach game attributes
+            ga.SetAsChildOf(gameTreasurePanel);
+            ga.SetAttributes(cur["game_id"].AsInt.ToString(), cur["game_name"], cur["treasure_count"].AsInt, cur["maker_id"], cur["status"].AsInt);
+            newGame.name = cur["game_id"].AsInt.ToString();
+            newGame.tag = "Games";
+            // parse treasures
+            var treasures = cur["treasures"];
+            /*
 			// check if there is an error
 			if (cur["treasure_count"].AsInt != treasures.Count) 
 			{
@@ -87,90 +87,71 @@ public class TreasureSetupController : MonoBehaviour
 				return gameTreasurePanel;
 			}
 			*/
-			// make treasure objects 
-			for (int j = 0; j < treasures.Count; j++) 
-			{
-				var curT = treasures [j];
-				if (FindFrom (curT ["treasure_id"].AsInt.ToString ())) 
-				{
-					// skip what user already has
-					continue;
-				}
-				MakeNewTreasure (newGame, curT["treasure_id"].AsInt.ToString(), curT["treasure_name"], 
-                         curT["destination"], curT["game_id"].AsInt.ToString(), curT["location"], 
-                         curT["treasure_point"].AsInt, curT["catchgame_cat"].AsInt, curT["target_img_name"], 
-                         curT["treasure_img_name"]);
-				string treasure_id = curT ["treasure_id"];
-			}
-		}
+            // make treasure objects 
+            for (int j = 0; j < treasures.Count; j++)
+            {
+                var curT = treasures[j];
+                string treasure_id = curT["treasure_id"];
+                MakeNewTreasure(newGame, curT["treasure_id"].AsInt.ToString(), curT["treasure_name"], curT["destination"], curT["game_id"].AsInt.ToString(),
+                    curT["location"], curT["point"].AsInt, curT["catchgame_cat"].AsInt, curT["target_img_name"], curT["treasure_img_name"], curT["question"], curT["answer"]);
+            }
+        }
 
-		return gameTreasurePanel;
+        return gameTreasurePanel;
 
-	}
+    }
 
 
-	GameObject MakeNewTreasure (GameObject parent, string trId, string trName, string trDes, 
-		string gameId, string trLoc, int trPoint, int trCatchGame, string targetImg, string treasureImg)
-	{
-		GameObject newTreasure = (GameObject) Instantiate (treasure, StringToVector3(trLoc), Quaternion.identity);
-		newTreasure.transform.localScale = Vector3.one;
-		TreasureAttributes tr = newTreasure.GetComponent<TreasureAttributes> ();
-		tr.setAttributes (trId, trName, trDes, gameId, StringToVector3(trLoc), trPoint, trCatchGame, targetImg, treasureImg);
-		tr.setAsChildOf (parent);
-		newTreasure.name = trId;
-		newTreasure.tag = "Treasures";
-		// attach onclick event
-		// todo:
-		return newTreasure; 
-	}
-		
-	bool FindFrom (string treasureID)
-	{
-		for (int i = 0; i < LoginButtonCtrl.treasuresIGotNextIndex; i++) 
-		{
-			if (LoginButtonCtrl.treasuresIGot [i].Equals (treasureID)) 
-			{
-				return true;
-			}
-		}
-		return false;
-	}
+    GameObject MakeNewTreasure(GameObject parent, string trId, string trName, string trDes,
+        string gameId, string trLoc, int trPoint, int trCatchGame, string treasureImg, string targetImg, string question, string answer)
+    {
+        GameObject newTreasure = (GameObject)Instantiate(treasure, StringToVector3(trLoc), Quaternion.identity);
+        newTreasure.transform.localScale = Vector3.one;
+        TreasureAttributes tr = newTreasure.GetComponent<TreasureAttributes>();
+        tr.setAttributes(trId, trName, trDes, gameId, StringToVector3(trLoc), trPoint, trCatchGame, treasureImg, targetImg, question, answer);
+        tr.setAsChildOf(parent);
+        newTreasure.name = trId;
+        newTreasure.tag = "Treasures";
+        // attach onclick event
+        // todo:
+        return newTreasure;
+    }
 
-	Vector3 StringToVector3 (string str)
-	{
-		// need to include System.Globalization;
+    Vector3 StringToVector3(string str)
+    {
+        // need to include System.Globalization;
 
-		// define where to splict string
-		char[] delimiterChars = { ',' };
+        // define where to splict string
+        char[] delimiterChars = { ',' };
 
-		// get rid of empty spaces
-		str.Replace(" ", "");
+        // get rid of empty spaces
+        str.Replace(" ", "");
 
-		// get rid of parentheses
-		if (str [0] == '(' && str [str.Length - 1] == ')') 
-		{
-			str = str.Substring (1, str.Length - 2);
-		}
+        // get rid of parentheses
+        if (str[0] == '(' && str[str.Length - 1] == ')')
+        {
+            str = str.Substring(1, str.Length - 2);
+        }
 
-		// divide string
-		string[] words = str.Split (delimiterChars);
+        // divide string
+        string[] words = str.Split(delimiterChars);
 
-		//check if it's parse properly
-		if (words.Length != 3) 
-		{
-			Debug.Log ("incorrect treasue location format in StringToVector3");
-		}
+        //check if it's parse properly
+        if (words.Length != 3)
+        {
+            Debug.Log("incorrect treasue location format in StringToVector3");
+        }
 
-		// get x, y, z of target vector3
-		float x = float.Parse (words[0], CultureInfo.InvariantCulture.NumberFormat);
-		float y = float.Parse (words[1], CultureInfo.InvariantCulture.NumberFormat);
-		float z = float.Parse (words[2], CultureInfo.InvariantCulture.NumberFormat);
+        // get x, y, z of target vector3
+        float x = float.Parse(words[0], CultureInfo.InvariantCulture.NumberFormat);
+        float y = float.Parse(words[1], CultureInfo.InvariantCulture.NumberFormat);
+        float z = float.Parse(words[2], CultureInfo.InvariantCulture.NumberFormat);
 
-		//Todo: if y should be 0, double check and make sure it must be 0
+        //Todo: if y should be 0, double check and make sure it must be 0
 
-		//construct vector3 from x, y, z and return it;
-		Vector3 result = new Vector3 (x, y, z);
-		return result;
-	}
+        //construct vector3 from x, y, z and return it;
+        Vector3 result = new Vector3(x, y, z);
+        return result;
+    }
 
 }

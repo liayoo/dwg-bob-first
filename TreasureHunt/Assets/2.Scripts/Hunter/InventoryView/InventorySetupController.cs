@@ -53,9 +53,10 @@ public class InventorySetupController : MonoBehaviour
                 newTreasure.transform.FindChild("Point").GetComponent<Text>().text += curr["point"].AsInt.ToString();
                 newTreasure.transform.FindChild("DateTime").GetComponent<Text>().text = curr["date_time"];
                 
-                Resources.Load<Sprite>(curr["target_img_name"] + ".jpg");
-                targetImg = Utility.CreateSprite(curr["target_img_name"]);
+                targetImg = Utility.CreateSprite(newTreasure.name + "_");
+                
                 newTreasure.transform.FindChild("Image").GetComponent<Image>().sprite = targetImg;
+                
                 // attach onclick event
                 if (isUsed == 0)
                 {

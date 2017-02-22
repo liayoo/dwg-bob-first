@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour {
     public int treasure_id;
     public int point;
     public int minigameCat;
-
+    public string question;
+    public string answer;
     void Awake()
     {
         if (instance == null)

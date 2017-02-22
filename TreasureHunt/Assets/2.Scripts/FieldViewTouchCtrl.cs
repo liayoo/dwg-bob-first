@@ -21,9 +21,15 @@ public class FieldViewTouchCtrl : MonoBehaviour {
 				TreasureAttributes tr = hit.collider.gameObject.GetComponent<TreasureAttributes> ();
 				TreasureSetupController.currTargetName = tr.getTargetImg ();
 				TreasureSetupController.currPoint = tr.getPoint ();
-				TreasureSetupController.currTreasureID = tr.getTreasureID ();
+				TreasureSetupController.currTreasureID = int.Parse(tr.getTreasureID ());
+                GameManager.instance.treasure_id = int.Parse(tr.treasureID);
+                Debug.Log(GameManager.instance.treasure_id);
 
-				Debug.Log("The target image is" + TreasureSetupController.currTargetName);
+                GameManager.instance.point = tr.treasurePoint;
+                GameManager.instance.minigameCat = tr.catchGameFlag;
+                GameManager.instance.question = tr.question;
+                GameManager.instance.answer = tr.answer;
+                Debug.Log("The target image is" + TreasureSetupController.currTargetName);
 				// Load appropriate scene accroding to the catchGameFlag
 				int catchGameFlag = tr.getCatchGameFlag ();
 
@@ -53,3 +59,4 @@ public class FieldViewTouchCtrl : MonoBehaviour {
 		}
 	}
 }
+

@@ -86,7 +86,7 @@ namespace IA.Plugin
 			string gameData = "{\"flag\":12, \"game_name\":\""+mainPanel.Find("Dynamic Objects/GameNameInput").GetComponent<InputField>().text+
 				"\", \"maker_id\":"+LoginButtonCtrl.userID+", \"Treasures\":[";
 			string treasureData = "";
-			int numTreasures = scrollbar.transform.childCount;
+			int numTreasures = scrollbar.transform.FindChild("Viewport/Content").transform.childCount;
 			Debug.Log ("numTreasures: "+numTreasures);
 			// Gather data stored in each of the treasure scrollbar contents.
 			foreach (Transform treasure in scrollbar.transform.FindChild("Viewport/Content")) 

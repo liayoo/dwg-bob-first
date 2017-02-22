@@ -184,6 +184,7 @@ public class GameListSetup : MonoBehaviour
 					treasureText.name = treasures [j] ["treasure_id"].AsInt.ToString();
 					treasureText.transform.FindChild ("TreasureName").GetComponent<Text>().text = treasures [j] ["treasure_name"];
 					treasureText.transform.FindChild ("Point").GetComponent<Text>().text = treasures [j] ["treasure_point"].AsInt.ToString();
+                    treasureText.transform.FindChild("TreasureImg").GetComponent<Image>().sprite = Resources.Load<Sprite>(treasures[j]["treasure_img_name"]);
 					// todo: treasure img and target img
 					// attach onclick listener
 					string trName = treasures [j] ["treasure_name"];

@@ -352,7 +352,18 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 720167679}
+        m_MethodName: SetValue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &76507807
@@ -1567,7 +1578,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Medium
+  m_Text: Normal
 --- !u!222 &450468592
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2643,6 +2654,7 @@ GameObject:
   - 224: {fileID: 720167676}
   - 222: {fileID: 720167678}
   - 114: {fileID: 720167677}
+  - 114: {fileID: 720167679}
   m_Layer: 5
   m_Name: PointText
   m_TagString: Untagged
@@ -2707,6 +2719,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 720167675}
+--- !u!114 &720167679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 720167675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ed2f6a1c09e1f4cbaee1d60f246fcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 51083814}
 --- !u!1 &735508178
 GameObject:
   m_ObjectHideFlags: 0
@@ -3454,12 +3478,6 @@ CanvasRenderer:
 GameObject:
   m_PrefabParentObject: {fileID: 192382, guid: dfafd38d9f11a534a9d4993a5d7ac89a, type: 2}
   m_PrefabInternal: {fileID: 1976565178}
---- !u!114 &962379692 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11419692, guid: dfafd38d9f11a534a9d4993a5d7ac89a,
-    type: 2}
-  m_PrefabInternal: {fileID: 1976565178}
-  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &974734453
 GameObject:
   m_ObjectHideFlags: 0
@@ -6940,11 +6958,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e1065107ec59da4faf72fc642cb4f25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  url: https://s3.ap-northeast-2.amazonaws.com/treasures1/
-  img: {fileID: 962379692}
-  IDENTITY_POOL_ID: ap-northeast-2:66448e5f-1ce6-48c3-9eb6-5955312f282f
-  ANALYTICS_APP_ID: 
-  testTex: {fileID: 0}
 --- !u!114 &1773643096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7100,7 +7113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
-  m_DragThreshold: 5
+  m_DragThreshold: 20
 --- !u!4 &1801965882
 Transform:
   m_ObjectHideFlags: 0
@@ -7324,7 +7337,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: M_GameList
+          m_StringArgument: H_Field
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -7467,7 +7480,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11467434, guid: 99fee5e8a3e5754409e3468cdcc11609, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: M_GameList
+      value: H_Field
       objectReference: {fileID: 0}
     - target: {fileID: 22484994, guid: 99fee5e8a3e5754409e3468cdcc11609, type: 2}
       propertyPath: m_LocalScale.x
@@ -7905,7 +7918,7 @@ MonoBehaviour:
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Description

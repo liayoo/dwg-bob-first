@@ -68,8 +68,8 @@ namespace IA.Plugin {
 					treasureName = popup.transform.Find ("Dynamic Objects/TreasureNameInput").GetComponent<InputField> ();
 					points = popup.transform.Find ("Dynamic Objects/PointsSlider").GetComponent<Slider> ();
 					catchGame = popup.transform.Find ("Dynamic Objects/CatchGameDropdown").GetComponent<Dropdown> ();
-					question = "";
-					answer = "";
+					question = " ";
+					answer = " ";
 
 				} 
 				else if (popup.name == "Popup2") 
@@ -120,8 +120,9 @@ namespace IA.Plugin {
 			}
 			// Get the target image name
 			targetImage = GameObject.Find ("Canvas").GetComponent<TargetImageController> ().targetImage;
-			// Get the treasure location
-			location = GameObject.Find ("Canvas").GetComponent<TargetImageController> ().locationUpdates;
+            // Get the treasure location
+            //location = GameObject.Find ("Canvas").GetComponent<TargetImageController> ().locationUpdates;
+            location = "(127.0362, 0.0, 37.50005)";
 
 			data = "{\"treasure_name\":\"" + treasureName.text + "\", \"description\":\"" + description.text
 				+ "\", \"location\":\"" + location + "\", \"point\":" + points.value.ToString ()
@@ -145,8 +146,8 @@ namespace IA.Plugin {
 			location = "";
 			targetImage = "";
 			treasureImage = 0;
-			question = "";
-			answer = "";
+			question = " ";
+			answer = " ";
 			if (GameObject.Find ("Canvas/PopupPanel/Panel").activeInHierarchy) 
 			{
 				GameObject.Find ("Canvas/PopupPanel/Panel").SetActive (false);

@@ -85,6 +85,40 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &11833992
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 11833993}
+  m_Layer: 5
+  m_Name: Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &11833993
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 11833992}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children:
+  - {fileID: 2034275941}
+  m_Father: {fileID: 1380070579}
+  m_RootOrder: 2
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &86229353
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,6 +348,94 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57cebb4bbad879d4f84b09175dc2789d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &175463445
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 175463446}
+  - 114: {fileID: 175463447}
+  - 114: {fileID: 175463448}
+  - 114: {fileID: 175463449}
+  - 114: {fileID: 175463450}
+  m_Layer: 0
+  m_Name: NetworkManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &175463446
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 175463445}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 168.5625, y: 322.43747, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+--- !u!114 &175463447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 175463445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1128054ec628dc24dbee819036c1d7b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WSAddress: ws://ec2-52-79-169-112.ap-northeast-2.compute.amazonaws.com:8081
+--- !u!114 &175463448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 175463445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bce6bbb38995d5343b5c68c1d36a44cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstTabButton: {fileID: 523885623}
+  secondTabButton: {fileID: 1823378084}
+  firstTabModule: OnGamesIMade
+  secondTabModule: OffGamesIMade
+  scrollbar: {fileID: 2034275942}
+  gameList: {fileID: 140968, guid: d2e618e5421e4684486b6029fad4c8cd, type: 2}
+  miniTreasureList: {fileID: 0}
+  treasureDetailPopup: {fileID: 0}
+--- !u!114 &175463449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 175463445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 260cb340ebd1e5746919eea2e6405546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &175463450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 175463445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31cf013cca65db64aa98a808793796f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 971605926}
+  scrollSnapRect: {fileID: 392320129}
+  popupPanel: {fileID: 1661299553}
 --- !u!1 &300720949
 GameObject:
   m_ObjectHideFlags: 0
@@ -1333,7 +1455,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollSnapRect: {fileID: 576332303}
-  popupPanel: {fileID: 0}
+  targetImage: 
+  treasureImage: 0
 --- !u!1 &958799637
 GameObject:
   m_ObjectHideFlags: 0
@@ -1625,7 +1748,7 @@ RectTransform:
   m_Children:
   - {fileID: 1176311911}
   m_Father: {fileID: 1380070579}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 172, y: 345}
@@ -2329,8 +2452,8 @@ RectTransform:
   m_Children:
   - {fileID: 505365249}
   - {fileID: 1491446456}
+  - {fileID: 11833993}
   - {fileID: 1014118204}
-  - {fileID: 2034275941}
   - {fileID: 1823378085}
   - {fileID: 523885624}
   - {fileID: 1661299554}
@@ -3120,7 +3243,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1380070579}
+    m_TransformParent: {fileID: 11833993}
     m_Modifications:
     - target: {fileID: 22488516, guid: dfafd38d9f11a534a9d4993a5d7ac89a, type: 2}
       propertyPath: m_LocalPosition.x
@@ -3152,7 +3275,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22488516, guid: dfafd38d9f11a534a9d4993a5d7ac89a, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22488516, guid: dfafd38d9f11a534a9d4993a5d7ac89a, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -3237,4 +3360,8 @@ Prefab:
 RectTransform:
   m_PrefabParentObject: {fileID: 22488516, guid: dfafd38d9f11a534a9d4993a5d7ac89a,
     type: 2}
+  m_PrefabInternal: {fileID: 2034275940}
+--- !u!1 &2034275942 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 192382, guid: dfafd38d9f11a534a9d4993a5d7ac89a, type: 2}
   m_PrefabInternal: {fileID: 2034275940}

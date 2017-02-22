@@ -348,10 +348,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1316787333}
     m_Modifications:
-    - target: {fileID: 11467434, guid: 99fee5e8a3e5754409e3468cdcc11609, type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 22484994, guid: 99fee5e8a3e5754409e3468cdcc11609, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -390,15 +386,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22484994, guid: 99fee5e8a3e5754409e3468cdcc11609, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 347
+      value: 341
       objectReference: {fileID: 0}
     - target: {fileID: 22484994, guid: 99fee5e8a3e5754409e3468cdcc11609, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 60
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 22484994, guid: 99fee5e8a3e5754409e3468cdcc11609, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 60
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 22484994, guid: 99fee5e8a3e5754409e3468cdcc11609, type: 2}
       propertyPath: m_AnchorMin.x
@@ -425,28 +421,12 @@ Prefab:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 11467434, guid: 99fee5e8a3e5754409e3468cdcc11609, type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 11467434, guid: 99fee5e8a3e5754409e3468cdcc11609, type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 11467434, guid: 99fee5e8a3e5754409e3468cdcc11609, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1341167925}
-    - target: {fileID: 11467434, guid: 99fee5e8a3e5754409e3468cdcc11609, type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: moveScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 11467434, guid: 99fee5e8a3e5754409e3468cdcc11609, type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 11467434, guid: 99fee5e8a3e5754409e3468cdcc11609, type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: H_Field
+    - target: {fileID: 11444204, guid: 99fee5e8a3e5754409e3468cdcc11609, type: 2}
+      propertyPath: m_Text
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 99fee5e8a3e5754409e3468cdcc11609, type: 2}
@@ -640,15 +620,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 1730124490282284ea33db4a61469c67, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

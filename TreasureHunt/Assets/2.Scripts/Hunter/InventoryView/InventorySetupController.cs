@@ -27,7 +27,7 @@ public class InventorySetupController : MonoBehaviour
     public void ForEachItem(string data, int isUsed)
     {
         // Destroy old treasure lists, that is, usedLists or old unusedists
-        GameObject content = GameObject.Find("Canvas/Scroll View/Viewport/Content");
+        GameObject content = GameObject.Find("Canvas/Panel/Scroll View/Viewport/Content");
         for (int i = 0; i < content.transform.childCount; i++)
         {
             Destroy(content.transform.GetChild(i).gameObject);

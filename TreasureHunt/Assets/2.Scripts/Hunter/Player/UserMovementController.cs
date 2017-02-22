@@ -42,7 +42,7 @@ public class UserMovementController : MonoBehaviour {
 		// add a line to scale up the location 
 		newLoc = (newLoc - anchorPoint) * CONVERSION;
   
-		GameObject.Find ("Canvas/Text").GetComponent<Text> ().text = newLoc.ToString();
+		//GameObject.Find ("Canvas/Text").GetComponent<Text> ().text = newLoc.ToString();
 		newLocation = newLoc;
 		StartCoroutine ("ToNewSpotRoutine");
 	

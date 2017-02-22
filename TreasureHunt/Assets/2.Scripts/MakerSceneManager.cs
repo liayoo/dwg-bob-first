@@ -82,11 +82,13 @@ namespace IA.Plugin
 
             while (!callback)
             {
+                Debug.Log("targetimagecontroller location update_while: " + location);
                 yield return null;
             }
-				
+			Debug.Log("targetimagecontroller location update: " + location);	
             //GameObject.Find("Canvas").GetComponent<TargetImageController>().targetImage = targetName;
             GameObject.Find("Canvas").GetComponent<TargetImageController>().locationUpdates = location;
+            
         }
 
         public void getLocationChangeNotification(string text)

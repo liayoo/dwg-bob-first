@@ -112,8 +112,7 @@ public class TreasureSetupController : MonoBehaviour
         tr.setAsChildOf(parent);
         newTreasure.name = trId;
         newTreasure.tag = "Treasures";
-        // attach onclick event
-        // todo:
+        tr.transform.localScale = new Vector3(10, 10, 10);
         return newTreasure;
     }
 

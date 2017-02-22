@@ -44,7 +44,7 @@ public class GameListSetup : MonoBehaviour
 	{
 		Debug.Log ("gamelist foreachgame called "+whichModule);
 		// Destroy old game lists
-		GameObject content = GameObject.Find("Canvas/Scroll View/Viewport/Content");
+		GameObject content = GameObject.Find("Canvas/Panel/Scroll View/Viewport/Content");
 		for (int i = 0; i < content.transform.childCount; i++) 
 		{
 			Destroy (content.transform.GetChild (i).gameObject);

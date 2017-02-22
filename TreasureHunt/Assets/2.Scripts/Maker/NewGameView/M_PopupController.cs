@@ -70,6 +70,7 @@ namespace IA.Plugin {
 					catchGame = popup.transform.Find ("Dynamic Objects/CatchGameDropdown").GetComponent<Dropdown> ();
 					question = " ";
 					answer = " ";
+					location = " ";
 
 				} 
 				else if (popup.name == "Popup2") 
@@ -77,7 +78,6 @@ namespace IA.Plugin {
 					popup2 = popup;
 					description = popup.transform.Find ("TreasureDesc/DescriptionInput").GetComponent<InputField> ();
 					targetImage = "";
-					location = "";
 				} 
 				else 
 				{
@@ -87,6 +87,7 @@ namespace IA.Plugin {
 					treasureImage = 0;
 				}
 			}
+        
 		}
 
 		// Called when a treasure is added to gather user's input.
@@ -122,7 +123,8 @@ namespace IA.Plugin {
 			targetImage = GameObject.Find ("Canvas").GetComponent<TargetImageController> ().targetImage;
             // Get the treasure location
             //location = GameObject.Find ("Canvas").GetComponent<TargetImageController> ().locationUpdates;
-            location = "(127.0362, 0.0, 37.50005)";
+            //location = LocationCtrl.instance.location;
+            location = "("+UnityEngine.Random.Range(-20.0f, 20.0f)+", 0, " + UnityEngine.Random.Range(0.0f, 200.0f)+")";
 
 			data = "{\"treasure_name\":\"" + treasureName.text + "\", \"description\":\"" + description.text
 				+ "\", \"location\":\"" + location + "\", \"point\":" + points.value.ToString ()
@@ -143,7 +145,7 @@ namespace IA.Plugin {
 			description.text = "";
 			points.value = 0;
 			catchGame.value = 0;
-			location = "";
+			location = " ";
 			targetImage = "";
 			treasureImage = 0;
 			question = " ";

@@ -184,7 +184,7 @@ GameObject:
   - 114: {fileID: 441940578}
   - 114: {fileID: 441940577}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: MakerCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -280,7 +280,7 @@ GameObject:
   - 222: {fileID: 591775160}
   - 114: {fileID: 591775159}
   m_Layer: 5
-  m_Name: BottomHelpPanel
+  m_Name: MakerCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -348,7 +348,7 @@ GameObject:
   - 114: {fileID: 641145828}
   - 114: {fileID: 641145827}
   m_Layer: 0
-  m_Name: EventSystem
+  m_Name: MakerCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -399,49 +399,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!1001 &642994685
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 470224, guid: c475d78375bc840319b80e4941782745, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -246.02603
-      objectReference: {fileID: 0}
-    - target: {fileID: 470224, guid: c475d78375bc840319b80e4941782745, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 337.16983
-      objectReference: {fileID: 0}
-    - target: {fileID: 470224, guid: c475d78375bc840319b80e4941782745, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 470224, guid: c475d78375bc840319b80e4941782745, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 470224, guid: c475d78375bc840319b80e4941782745, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 470224, guid: c475d78375bc840319b80e4941782745, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 470224, guid: c475d78375bc840319b80e4941782745, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 470224, guid: c475d78375bc840319b80e4941782745, type: 2}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: c475d78375bc840319b80e4941782745, type: 2}
-  m_RootGameObject: {fileID: 0}
-  m_IsPrefabParent: 0
 --- !u!1 &650217808
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,7 +411,7 @@ GameObject:
   - 114: {fileID: 650217811}
   - 114: {fileID: 650217810}
   m_Layer: 5
-  m_Name: CaptureButton
+  m_Name: MakerCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -569,13 +526,18 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11435228, guid: c475d78375bc840319b80e4941782745,
     type: 2}
-  m_PrefabInternal: {fileID: 642994685}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1814c45b259c943b7b38cadf6884cc25, type: 3}
-  m_Name: 
+  m_Name: MakerCamera
   m_EditorClassIdentifier: 
+  targetName: 
+  location: 
+  callback: 0
+  CameraPanel: {fileID: 0}
+  MakerCamera: {fileID: 0}
 --- !u!1 &1187300434
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,7 +549,7 @@ GameObject:
   - 222: {fileID: 1187300437}
   - 114: {fileID: 1187300436}
   m_Layer: 5
-  m_Name: CapturePannel
+  m_Name: MakerCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -799,7 +761,7 @@ GameObject:
   - 222: {fileID: 1257272610}
   - 114: {fileID: 1257272609}
   m_Layer: 5
-  m_Name: BackPanel
+  m_Name: MakerCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -869,7 +831,7 @@ GameObject:
   - 114: {fileID: 1418103913}
   - 114: {fileID: 1418103912}
   m_Layer: 5
-  m_Name: BackButton
+  m_Name: MakerCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -989,7 +951,7 @@ GameObject:
   - 4: {fileID: 439466}
   - 114: {fileID: 1575321761}
   m_Layer: 0
-  m_Name: 
+  m_Name: MakerCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

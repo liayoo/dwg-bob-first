@@ -58,18 +58,17 @@ public class InventoryPopupSetup : MonoBehaviour {
 				newPopup.transform.FindChild ("Changing Objects/HowManyPoint").GetComponent<Text>().text = curr ["point"].AsInt.ToString();
 				newPopup.transform.FindChild ("Changing Objects/DateTime").GetComponent<Text>().text = curr ["date_time"];
                 newPopup.transform.FindChild("Changing Objects/TargetImage").GetComponent<Image>().sprite = InventorySetupController.instance.targetImg;
-                
-                // todo: TreasureImage
-                // assign onClick event to BackButton
-                Transform backButton = newPopup.transform.FindChild("BackButton");
-				Button backB = backButton.GetComponent<Button> ();
-				backB.onClick.AddListener (TurnDownPopup);
+
 				// assign onClick event to UseButton
 				Transform dropOutButton = newPopup.transform.FindChild("UseButton");
 				Button dropB = dropOutButton.GetComponent<Button> ();
-				dropB.onClick.AddListener (() => UseIt(curr["treasure_id"].AsInt.ToString())); // todo: put valid usn instead of "gg"				
+				dropB.onClick.AddListener (() => UseIt(curr["treasure_id"].AsInt.ToString()));
 			}
 		}
+		// attach onClick event to BackButton
+		Transform backButton = newPopup.transform.FindChild("BackButton");
+		Button backB = backButton.GetComponent<Button> ();
+		backB.onClick.AddListener (TurnDownPopup);
 	}
 
 	public void TurnDownPopup(){

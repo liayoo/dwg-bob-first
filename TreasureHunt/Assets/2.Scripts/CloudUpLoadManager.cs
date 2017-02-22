@@ -24,8 +24,8 @@ namespace IA.Plugin
         public Texture2D texture;
 
         // server access keys.
-        static string access_key = "cffc0009ae57e196474e5a7dd429ce2c8ac62a62";
-        static string secret_key = "34eec0e6c4969dbae1369e9cc9e9168b43ac3711";
+		static string access_key = "df72ea81a32af560a1949b00a34ea1b58bbdc6bc";
+		static string secret_key = "5796fd7e0ff090d666862bc6256e8b46c77dca9d";
         static string url = @"https://vws.vuforia.com";
         static string targetName = "MyTarget"; // must change when upload another Image Target, avoid same as exist Image on cloud
         private byte[] requestBytesArray;

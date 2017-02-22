@@ -12,6 +12,7 @@ TagManager:
   - Popup
   - TreasureList
   - PopupPanel
+  - TreasureDetailPopup
   layers:
   - Default
   - TransparentFX

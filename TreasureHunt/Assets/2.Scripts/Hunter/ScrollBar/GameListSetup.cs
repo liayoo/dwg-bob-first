@@ -2,6 +2,7 @@
 using System.Collections;
 using SimpleJSON;
 using UnityEngine.UI;
+using System;
 
 public class GameListSetup : MonoBehaviour 
 {
@@ -147,14 +148,17 @@ public class GameListSetup : MonoBehaviour
 				Button backB = backButton.GetComponent<Button> ();
 				backB.onClick.AddListener (TurnDownPopup);
 				// assign onClick event to DropOutButton/JoinButton
+				GameObject parentObject = new GameObject();
 				switch(whichModule)
 				{
 				case "PlayingGamesPopup":
+					parentObject = GameObject.Find ("Canvas/MyGamePopup(Clone)/Treasures/Viewport/Content");
 					Transform dropOutButton = newPopup.transform.FindChild("DropOutButton");
 					Button dropB = dropOutButton.GetComponent<Button> ();
 					dropB.onClick.AddListener (() => DropOrJoin(true, curr["game_id"].AsInt.ToString())); 
 					break;
 				case "SearchGamesPopup":
+					parentObject = GameObject.Find ("Canvas/SearchGamePopup(Clone)/Treasures/Viewport/Content");
 					Transform joinButton = newPopup.transform.FindChild ("JoinButton");
 					Button joinB = joinButton.GetComponent<Button> ();
 					joinB.onClick.AddListener (() => DropOrJoin (false, curr ["game_id"].AsInt.ToString()));
@@ -174,14 +178,19 @@ public class GameListSetup : MonoBehaviour
 				for (int j = 0; j < treasures.Count; j++) 
 				{
 					GameObject treasureText = (GameObject) Instantiate (miniTreasureList);
-					treasureText.transform.SetParent (GameObject.Find ("SmallTreasureList(Clone)").transform);
+					treasureText.transform.SetParent (parentObject.transform);
+//					treasureText.transform.SetParent (GameObject.Find ("SmallTreasureList(Clone)").transform);
 					treasureText.transform.localScale = Vector3.one;
 					treasureText.name = treasures [j] ["treasure_id"].AsInt.ToString();
 					treasureText.transform.FindChild ("TreasureName").GetComponent<Text>().text = treasures [j] ["treasure_name"];
-					treasureText.transform.FindChild ("Point").GetComponent<Text>().text = treasures [j] ["point"].AsInt.ToString();
+					treasureText.transform.FindChild ("Point").GetComponent<Text>().text = treasures [j] ["treasure_point"].AsInt.ToString();
 					// todo: treasure img and target img
 					// attach onclick listener
-					treasureText.GetComponent<Button>().onClick.AddListener(() => TreasureDetailPopup(data, treasureText.name));
+					string trName = treasures [j] ["treasure_name"];
+					string point = treasures [j] ["treasure_point"];
+					string description = treasures [j] ["description"];
+					int catchGame = treasures [j] ["catchgame_cat"].AsInt;
+					treasureText.GetComponent<Button>().onClick.AddListener(() => TreasureDetailPopup(trName, description, point, catchGame));
 				}
 			}
 		}
@@ -189,12 +198,37 @@ public class GameListSetup : MonoBehaviour
 
 	public GameObject treasureDetailPopup;
 
-	public void TreasureDetailPopup(string data, string treasureID){
+	public void TreasureDetailPopup(string trName, string description, string point, int catchGame){
+		Debug.Log ("TreasureDetailPopup for " + trName + description + point);
+		Debug.Log (catchGame);
 		GameObject popup = (GameObject) Instantiate (treasureDetailPopup);
 		popup.transform.SetParent(GameObject.Find("Canvas").transform);
 		popup.transform.localScale = Vector3.one;
 		popup.transform.localPosition = new Vector3(0, 0, 0); 
-		//todo:
+		popup.tag = "TreasureDetailPopup";
+		// attach popup attributes
+		popup.transform.FindChild ("Changing Objects/TreasureName").GetComponent<Text>().text = trName;
+		popup.transform.FindChild ("Changing Objects/Description").GetComponent<Text>().text = description;
+		popup.transform.FindChild ("Changing Objects/HowManyPoint").GetComponent<Text>().text = point;
+		Debug.Log ("done with attaching");
+		if ( catchGame < 3) 
+		{
+			popup.transform.FindChild ("Changing Objects/WhichMiniGame").GetComponent<Text> ().text = "SlimePang";
+		}
+		else 
+		{
+			popup.transform.FindChild ("Changing Objects/WhichMiniGame").GetComponent<Text> ().text = "Quiz";
+		}
+		// todo: TreasureImage & TargetImage
+		// attach onclick event to backButton
+		Transform backButton = popup.transform.FindChild("BackButton");
+		Button backB = backButton.GetComponent<Button> ();
+		backB.onClick.AddListener (TurnDownDetailPopup);
+	}
+
+	public void TurnDownDetailPopup()
+	{
+		Destroy(GameObject.FindWithTag("TreasureDetailPopup"));
 	}
 
 	public void TurnDownPopup()

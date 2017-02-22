@@ -33,7 +33,7 @@ public class MiniGame2Manager : MonoBehaviour {
 
     void Start()
     {
-        parentTr = GameObject.Find("ImageTarget(Clone)").transform;
+        parentTr = GameObject.Find("ImageTarget").transform;
         targetTr = parentTr.FindChild("TreasureBox").transform;
         mainCanvas.SetActive(false);     
         gameCanvas.SetActive(true);

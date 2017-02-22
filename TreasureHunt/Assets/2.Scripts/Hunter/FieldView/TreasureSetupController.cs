@@ -7,11 +7,11 @@ using SimpleJSON;
 public class TreasureSetupController : MonoBehaviour 
 {
 	public static TreasureSetupController instance = null;
-    //public static string userGameTreasureData = "";
-    public static string currTargetName = "";
- 	public static int currPoint = -1;
- 	public static int currTreasureID = -1;
-    void Awake()
+	public static string currTargetName = "";
+	public static int currPoint = -1;
+	public static string currTreasureID = "";
+
+	void Awake()
 	{
 		if (instance == null) 
 		{
@@ -50,7 +50,7 @@ public class TreasureSetupController : MonoBehaviour
 	//infos included in json:
 	//	flag,
 	//	game_id, game_name, treasure_count, maker_id, status, participant
-	//	treasure_id, treasure_name, description, game_id, location, point, catchgame_cat, target_img_name
+	//	treasure_id, treasure_name, description, game_id, location, treasure_point, catchgame_cat, target_img_name
 	public GameObject game;
 	public GameObject treasure;
 	
@@ -91,9 +91,16 @@ public class TreasureSetupController : MonoBehaviour
 			for (int j = 0; j < treasures.Count; j++) 
 			{
 				var curT = treasures [j];
+				if (FindFrom (curT ["treasure_id"].AsInt.ToString ())) 
+				{
+					// skip what user already has
+					continue;
+				}
+				MakeNewTreasure (newGame, curT["treasure_id"].AsInt.ToString(), curT["treasure_name"], 
+                         curT["destination"], curT["game_id"].AsInt.ToString(), curT["location"], 
+                         curT["treasure_point"].AsInt, curT["catchgame_cat"].AsInt, curT["target_img_name"], 
+                         curT["treasure_img_name"]);
 				string treasure_id = curT ["treasure_id"];
-				MakeNewTreasure (newGame, curT["treasure_id"].AsInt.ToString(), curT["treasure_name"], curT["destination"], curT["game_id"].AsInt.ToString(), 
-					curT["location"], curT["point"].AsInt, curT["catchgame_cat"].AsInt, curT["target_img_name"], curT["treasure_img_name"]);
 			}
 		}
 
@@ -102,18 +109,31 @@ public class TreasureSetupController : MonoBehaviour
 	}
 
 
-	GameObject MakeNewTreasure(GameObject parent, string trId, string trName, string trDes, 
-		string gameId, string trLoc, int trPoint, int trCatchGame, string treasureImg, string targetImg){
+	GameObject MakeNewTreasure (GameObject parent, string trId, string trName, string trDes, 
+		string gameId, string trLoc, int trPoint, int trCatchGame, string targetImg, string treasureImg)
+	{
 		GameObject newTreasure = (GameObject) Instantiate (treasure, StringToVector3(trLoc), Quaternion.identity);
 		newTreasure.transform.localScale = Vector3.one;
 		TreasureAttributes tr = newTreasure.GetComponent<TreasureAttributes> ();
-		tr.setAttributes (trId, trName, trDes, gameId, StringToVector3(trLoc), trPoint, trCatchGame, treasureImg, targetImg);
+		tr.setAttributes (trId, trName, trDes, gameId, StringToVector3(trLoc), trPoint, trCatchGame, targetImg, treasureImg);
 		tr.setAsChildOf (parent);
 		newTreasure.name = trId;
 		newTreasure.tag = "Treasures";
 		// attach onclick event
 		// todo:
 		return newTreasure; 
+	}
+		
+	bool FindFrom (string treasureID)
+	{
+		for (int i = 0; i < LoginButtonCtrl.treasuresIGotNextIndex; i++) 
+		{
+			if (LoginButtonCtrl.treasuresIGot [i].Equals (treasureID)) 
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	Vector3 StringToVector3 (string str)

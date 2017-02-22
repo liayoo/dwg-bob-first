@@ -2,6 +2,7 @@
 using System.Collections;
 using SimpleJSON;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class QuizGameSetup : MonoBehaviour {
 
@@ -43,14 +44,22 @@ public class QuizGameSetup : MonoBehaviour {
 		// if answer is right
 		if (response.Equals (answer)) 
 		{
-			// client side: add up treasure point, get rid of treasure box of THIS treasure on field view
+			// client side: 
+			//add up treasure point 
 			LoginButtonCtrl.totPoint += TreasureSetupController.currPoint;
-			// todo: getting rid of the treasure would be done by server 
+			//get rid of treasure box of THIS treasure on field view
+			LoginButtonCtrl.treasuresIGot [LoginButtonCtrl.treasuresIGotNextIndex++] = TreasureSetupController.currTreasureID;
+
+			// to server:
 			// inform server that the user got the treasure
-			string[] temp = {TreasureSetupController.currTreasureID.ToString()};
+			string[] temp = {TreasureSetupController.currTreasureID};
 			CacheController.instance.SendSignal("GetTreasure", temp);
+
+			// client UI:
 			// turn down popup
 			Destroy (popup);
+			// move back to Field View
+			SceneManager.LoadScene("H_FieldView");
 		} 
 		// if answer is wrong
 		else 
